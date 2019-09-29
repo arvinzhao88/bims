@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cummins.bims.dao.CarExtendMapper">
+  <resultMap id="BaseResultMap" type="com.cummins.bims.dto.CarExtend">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="car_id" jdbcType="INTEGER" property="carId" />
+    <result column="car_step" jdbcType="VARCHAR" property="carStep" />
+    <result column="image_name" jdbcType="VARCHAR" property="imageName" />
+    <result column="attach_name" jdbcType="VARCHAR" property="attachName" />
+    <result column="measure" jdbcType="VARCHAR" property="measure" />
+    <result column="third_duty_person" jdbcType="VARCHAR" property="thirdDutyPerson" />
+    <result column="third_execute_date" jdbcType="TIMESTAMP" property="thirdExecuteDate" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="fourth_duty_person" jdbcType="VARCHAR" property="fourthDutyPerson" />
+    <result column="fourth_date" jdbcType="TIMESTAMP" property="fourthDate" />
+    <result column="conclusion" jdbcType="VARCHAR" property="conclusion" />
+    <result column="scheme" jdbcType="VARCHAR" property="scheme" />
+    <result column="scheme_result" jdbcType="VARCHAR" property="schemeResult" />
+    <result column="fifth_date" jdbcType="TIMESTAMP" property="fifthDate" />
+    <result column="action" jdbcType="VARCHAR" property="action" />
+    <result column="last_scheme" jdbcType="VARCHAR" property="lastScheme" />
+    <result column="sixth_duty_person" jdbcType="VARCHAR" property="sixthDutyPerson" />
+    <result column="sixth_date" jdbcType="TIMESTAMP" property="sixthDate" />
+    <result column="sixth_execute_date" jdbcType="TIMESTAMP" property="sixthExecuteDate" />
+    <result column="sixth_attach" jdbcType="VARCHAR" property="sixthAttach" />
+    <result column="sixth_attach_name" jdbcType="VARCHAR" property="sixthAttachName" />
+    <result column="sixth_attach_desc" jdbcType="VARCHAR" property="sixthAttachDesc" />
+    <result column="report_name" jdbcType="VARCHAR" property="reportName" />
+    <result column="report_remark" jdbcType="VARCHAR" property="reportRemark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, car_id, car_step, image_name, attach_name, measure, third_duty_person, third_execute_date, 
+    reason, method, fourth_duty_person, fourth_date, conclusion, scheme, scheme_result, 
+    fifth_date, action, last_scheme, sixth_duty_person, sixth_date, sixth_execute_date, 
+    sixth_attach, sixth_attach_name, sixth_attach_desc, report_name, report_remark
+  </sql>
+  <select id="selectByExample" parameterType="com.cummins.bims.dto.CarExtendCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from car_step_extend
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_step_extend
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from car_step_extend
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cummins.bims.dto.CarExtendCriteria">
+    delete from car_step_extend
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cummins.bims.dto.CarExtend">
+    insert into car_step_extend (id, car_id, car_step, 
+      image_name, attach_name, measure, 
+      third_duty_person, third_execute_date, reason, 
+      method, fourth_duty_person, fourth_date, 
+      conclusion, scheme, scheme_result, 
+      fifth_date, action, last_scheme, 
+      sixth_duty_person, sixth_date, sixth_execute_date, 
+      sixth_attach, sixth_attach_name, sixth_attach_desc, 
+      report_name, report_remark)
+    values (#{id,jdbcType=INTEGER}, #{carId,jdbcType=INTEGER}, #{carStep,jdbcType=VARCHAR}, 
+      #{imageName,jdbcType=VARCHAR}, #{attachName,jdbcType=VARCHAR}, #{measure,jdbcType=VARCHAR}, 
+      #{thirdDutyPerson,jdbcType=VARCHAR}, #{thirdExecuteDate,jdbcType=TIMESTAMP}, #{reason,jdbcType=VARCHAR}, 
+      #{method,jdbcType=VARCHAR}, #{fourthDutyPerson,jdbcType=VARCHAR}, #{fourthDate,jdbcType=TIMESTAMP}, 
+      #{conclusion,jdbcType=VARCHAR}, #{scheme,jdbcType=VARCHAR}, #{schemeResult,jdbcType=VARCHAR}, 
+      #{fifthDate,jdbcType=TIMESTAMP}, #{action,jdbcType=VARCHAR}, #{lastScheme,jdbcType=VARCHAR}, 
+      #{sixthDutyPerson,jdbcType=VARCHAR}, #{sixthDate,jdbcType=TIMESTAMP}, #{sixthExecuteDate,jdbcType=TIMESTAMP}, 
+      #{sixthAttach,jdbcType=VARCHAR}, #{sixthAttachName,jdbcType=VARCHAR}, #{sixthAttachDesc,jdbcType=VARCHAR}, 
+      #{reportName,jdbcType=VARCHAR}, #{reportRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cummins.bims.dto.CarExtend">
+    insert into car_step_extend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="carId != null">
+        car_id,
+      </if>
+      <if test="carStep != null">
+        car_step,
+      </if>
+      <if test="imageName != null">
+        image_name,
+      </if>
+      <if test="attachName != null">
+        attach_name,
+      </if>
+      <if test="measure != null">
+        measure,
+      </if>
+      <if test="thirdDutyPerson != null">
+        third_duty_person,
+      </if>
+      <if test="thirdExecuteDate != null">
+        third_execute_date,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="method != null">
+        method,
+      </if>
+      <if test="fourthDutyPerson != null">
+        fourth_duty_person,
+      </if>
+      <if test="fourthDate != null">
+        fourth_date,
+      </if>
+      <if test="conclusion != null">
+        conclusion,
+      </if>
+      <if test="scheme != null">
+        scheme,
+      </if>
+      <if test="schemeResult != null">
+        scheme_result,
+      </if>
+      <if test="fifthDate != null">
+        fifth_date,
+      </if>
+      <if test="action != null">
+        action,
+      </if>
+      <if test="lastScheme != null">
+        last_scheme,
+      </if>
+      <if test="sixthDutyPerson != null">
+        sixth_duty_person,
+      </if>
+      <if test="sixthDate != null">
+        sixth_date,
+      </if>
+      <if test="sixthExecuteDate != null">
+        sixth_execute_date,
+      </if>
+      <if test="sixthAttach != null">
+        sixth_attach,
+      </if>
+      <if test="sixthAttachName != null">
+        sixth_attach_name,
+      </if>
+      <if test="sixthAttachDesc != null">
+        sixth_attach_desc,
+      </if>
+      <if test="reportName != null">
+        report_name,
+      </if>
+      <if test="reportRemark != null">
+        report_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="carId != null">
+        #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="carStep != null">
+        #{carStep,jdbcType=VARCHAR},
+      </if>
+      <if test="imageName != null">
+        #{imageName,jdbcType=VARCHAR},
+      </if>
+      <if test="attachName != null">
+        #{attachName,jdbcType=VARCHAR},
+      </if>
+      <if test="measure != null">
+        #{measure,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdDutyPerson != null">
+        #{thirdDutyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdExecuteDate != null">
+        #{thirdExecuteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="fourthDutyPerson != null">
+        #{fourthDutyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="fourthDate != null">
+        #{fourthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="conclusion != null">
+        #{conclusion,jdbcType=VARCHAR},
+      </if>
+      <if test="scheme != null">
+        #{scheme,jdbcType=VARCHAR},
+      </if>
+      <if test="schemeResult != null">
+        #{schemeResult,jdbcType=VARCHAR},
+      </if>
+      <if test="fifthDate != null">
+        #{fifthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="action != null">
+        #{action,jdbcType=VARCHAR},
+      </if>
+      <if test="lastScheme != null">
+        #{lastScheme,jdbcType=VARCHAR},
+      </if>
+      <if test="sixthDutyPerson != null">
+        #{sixthDutyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="sixthDate != null">
+        #{sixthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sixthExecuteDate != null">
+        #{sixthExecuteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sixthAttach != null">
+        #{sixthAttach,jdbcType=VARCHAR},
+      </if>
+      <if test="sixthAttachName != null">
+        #{sixthAttachName,jdbcType=VARCHAR},
+      </if>
+      <if test="sixthAttachDesc != null">
+        #{sixthAttachDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="reportName != null">
+        #{reportName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportRemark != null">
+        #{reportRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cummins.bims.dto.CarExtendCriteria" resultType="java.lang.Long">
+    select count(*) from car_step_extend
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update car_step_extend
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.carId != null">
+        car_id = #{record.carId,jdbcType=INTEGER},
+      </if>
+      <if test="record.carStep != null">
+        car_step = #{record.carStep,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageName != null">
+        image_name = #{record.imageName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachName != null">
+        attach_name = #{record.attachName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.measure != null">
+        measure = #{record.measure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thirdDutyPerson != null">
+        third_duty_person = #{record.thirdDutyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thirdExecuteDate != null">
+        third_execute_date = #{record.thirdExecuteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reason != null">
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.method != null">
+        method = #{record.method,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fourthDutyPerson != null">
+        fourth_duty_person = #{record.fourthDutyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fourthDate != null">
+        fourth_date = #{record.fourthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.conclusion != null">
+        conclusion = #{record.conclusion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scheme != null">
+        scheme = #{record.scheme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schemeResult != null">
+        scheme_result = #{record.schemeResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fifthDate != null">
+        fifth_date = #{record.fifthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.action != null">
+        action = #{record.action,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastScheme != null">
+        last_scheme = #{record.lastScheme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sixthDutyPerson != null">
+        sixth_duty_person = #{record.sixthDutyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sixthDate != null">
+        sixth_date = #{record.sixthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sixthExecuteDate != null">
+        sixth_execute_date = #{record.sixthExecuteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sixthAttach != null">
+        sixth_attach = #{record.sixthAttach,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sixthAttachName != null">
+        sixth_attach_name = #{record.sixthAttachName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sixthAttachDesc != null">
+        sixth_attach_desc = #{record.sixthAttachDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportName != null">
+        report_name = #{record.reportName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportRemark != null">
+        report_remark = #{record.reportRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update car_step_extend
+    set id = #{record.id,jdbcType=INTEGER},
+      car_id = #{record.carId,jdbcType=INTEGER},
+      car_step = #{record.carStep,jdbcType=VARCHAR},
+      image_name = #{record.imageName,jdbcType=VARCHAR},
+      attach_name = #{record.attachName,jdbcType=VARCHAR},
+      measure = #{record.measure,jdbcType=VARCHAR},
+      third_duty_person = #{record.thirdDutyPerson,jdbcType=VARCHAR},
+      third_execute_date = #{record.thirdExecuteDate,jdbcType=TIMESTAMP},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      method = #{record.method,jdbcType=VARCHAR},
+      fourth_duty_person = #{record.fourthDutyPerson,jdbcType=VARCHAR},
+      fourth_date = #{record.fourthDate,jdbcType=TIMESTAMP},
+      conclusion = #{record.conclusion,jdbcType=VARCHAR},
+      scheme = #{record.scheme,jdbcType=VARCHAR},
+      scheme_result = #{record.schemeResult,jdbcType=VARCHAR},
+      fifth_date = #{record.fifthDate,jdbcType=TIMESTAMP},
+      action = #{record.action,jdbcType=VARCHAR},
+      last_scheme = #{record.lastScheme,jdbcType=VARCHAR},
+      sixth_duty_person = #{record.sixthDutyPerson,jdbcType=VARCHAR},
+      sixth_date = #{record.sixthDate,jdbcType=TIMESTAMP},
+      sixth_execute_date = #{record.sixthExecuteDate,jdbcType=TIMESTAMP},
+      sixth_attach = #{record.sixthAttach,jdbcType=VARCHAR},
+      sixth_attach_name = #{record.sixthAttachName,jdbcType=VARCHAR},
+      sixth_attach_desc = #{record.sixthAttachDesc,jdbcType=VARCHAR},
+      report_name = #{record.reportName,jdbcType=VARCHAR},
+      report_remark = #{record.reportRemark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cummins.bims.dto.CarExtend">
+    update car_step_extend
+    <set>
+      <if test="carId != null">
+        car_id = #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="carStep != null">
+        car_step = #{carStep,jdbcType=VARCHAR},
+      </if>
+      <if test="imageName != null">
+        image_name = #{imageName,jdbcType=VARCHAR},
+      </if>
+      <if test="attachName != null">
+        attach_name = #{attachName,jdbcType=VARCHAR},
+      </if>
+      <if test="measure != null">
+        measure = #{measure,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdDutyPerson != null">
+        third_duty_person = #{thirdDutyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdExecuteDate != null">
+        third_execute_date = #{thirdExecuteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="fourthDutyPerson != null">
+        fourth_duty_person = #{fourthDutyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="fourthDate != null">
+        fourth_date = #{fourthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="conclusion != null">
+        conclusion = #{conclusion,jdbcType=VARCHAR},
+      </if>
+      <if test="scheme != null">
+        scheme = #{scheme,jdbcType=VARCHAR},
+      </if>
+      <if test="schemeResult != null">
+        scheme_result = #{schemeResult,jdbcType=VARCHAR},
+      </if>
+      <if test="fifthDate != null">
+        fifth_date = #{fifthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="action != null">
+        action = #{action,jdbcType=VARCHAR},
+      </if>
+      <if test="lastScheme != null">
+        last_scheme = #{lastScheme,jdbcType=VARCHAR},
+      </if>
+      <if test="sixthDutyPerson != null">
+        sixth_duty_person = #{sixthDutyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="sixthDate != null">
+        sixth_date = #{sixthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sixthExecuteDate != null">
+        sixth_execute_date = #{sixthExecuteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sixthAttach != null">
+        sixth_attach = #{sixthAttach,jdbcType=VARCHAR},
+      </if>
+      <if test="sixthAttachName != null">
+        sixth_attach_name = #{sixthAttachName,jdbcType=VARCHAR},
+      </if>
+      <if test="sixthAttachDesc != null">
+        sixth_attach_desc = #{sixthAttachDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="reportName != null">
+        report_name = #{reportName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportRemark != null">
+        report_remark = #{reportRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cummins.bims.dto.CarExtend">
+    update car_step_extend
+    set car_id = #{carId,jdbcType=INTEGER},
+      car_step = #{carStep,jdbcType=VARCHAR},
+      image_name = #{imageName,jdbcType=VARCHAR},
+      attach_name = #{attachName,jdbcType=VARCHAR},
+      measure = #{measure,jdbcType=VARCHAR},
+      third_duty_person = #{thirdDutyPerson,jdbcType=VARCHAR},
+      third_execute_date = #{thirdExecuteDate,jdbcType=TIMESTAMP},
+      reason = #{reason,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      fourth_duty_person = #{fourthDutyPerson,jdbcType=VARCHAR},
+      fourth_date = #{fourthDate,jdbcType=TIMESTAMP},
+      conclusion = #{conclusion,jdbcType=VARCHAR},
+      scheme = #{scheme,jdbcType=VARCHAR},
+      scheme_result = #{schemeResult,jdbcType=VARCHAR},
+      fifth_date = #{fifthDate,jdbcType=TIMESTAMP},
+      action = #{action,jdbcType=VARCHAR},
+      last_scheme = #{lastScheme,jdbcType=VARCHAR},
+      sixth_duty_person = #{sixthDutyPerson,jdbcType=VARCHAR},
+      sixth_date = #{sixthDate,jdbcType=TIMESTAMP},
+      sixth_execute_date = #{sixthExecuteDate,jdbcType=TIMESTAMP},
+      sixth_attach = #{sixthAttach,jdbcType=VARCHAR},
+      sixth_attach_name = #{sixthAttachName,jdbcType=VARCHAR},
+      sixth_attach_desc = #{sixthAttachDesc,jdbcType=VARCHAR},
+      report_name = #{reportName,jdbcType=VARCHAR},
+      report_remark = #{reportRemark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

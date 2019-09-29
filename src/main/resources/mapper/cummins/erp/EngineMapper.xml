@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cummins.erp.dao.EngineMapper">
+    <resultMap id="BaseResultMap" type="com.cummins.erp.model.Engine">
+        <result column="engine_esn" jdbcType="VARCHAR" property="esn"/>
+        <result column="project_name" jdbcType="VARCHAR" property="prjectName"/>
+        <result column="assembly_number" jdbcType="VARCHAR" property="so"/>
+        <result column="production_date"  property="productionDate"/>
+    </resultMap>
+
+    <select id="fuzzyQueryEsn" parameterType="string" resultType="string">
+     select engine_esn from v_esn_so_view where engine_esn like concat(concat('%',#{name}),'%')
+    </select>
+
+
+    <select id="queryItemNumberByEsn" parameterType="string" resultMap="BaseResultMap">
+   select engine_esn,project_name,assembly_number,production_date from v_esn_so_view  where engine_esn =#{esn}
+
+    </select>
+
+
+
+</mapper>

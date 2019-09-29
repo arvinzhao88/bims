@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cummins.contact.dao.DepartmentMapper">
+  <resultMap id="BaseResultMap" type="com.cummins.contact.dto.Department">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="parent_id" jdbcType="INTEGER" property="pId" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="qy_id" jdbcType="INTEGER" property="qyId" />
+    <result column="qy_parentId" jdbcType="INTEGER" property="qyParentid" />
+    <result column="paixu" jdbcType="INTEGER" property="paixu" />
+    <result column="full_ids" jdbcType="VARCHAR" property="fullIds" />
+    <result column="full_names" jdbcType="VARCHAR" property="fullNames" />
+    <result column="is_leaf" jdbcType="BIT" property="isLeaf" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, parent_id, company_id, qy_id, qy_parentId, paixu, full_ids, full_names, 
+    is_leaf, status, permission, creator, create_time, update_time, delete_flag
+  </sql>
+  <select id="selectByExample" parameterType="com.cummins.contact.dto.DepartmentCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from department
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from department
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from department
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cummins.contact.dto.DepartmentCriteria">
+    delete from department
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  
+  <insert id="insert" parameterType="com.cummins.contact.dto.Department">
+  		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+  	 insert into department (name, parent_id, company_id,
+        qy_id, qy_parentId, paixu,
+        full_ids, full_names, is_leaf,
+        status, permission, creator,
+        create_time, update_time, delete_flag
+        )
+        values (#{name,jdbcType=VARCHAR}, #{pId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER},
+        #{qyId,jdbcType=INTEGER}, #{qyParentid,jdbcType=INTEGER}, #{paixu,jdbcType=INTEGER},
+        #{fullIds,jdbcType=VARCHAR}, #{fullNames,jdbcType=VARCHAR}, #{isLeaf,jdbcType=BIT},
+        #{status,jdbcType=INTEGER}, #{permission,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=BIT}
+        )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cummins.contact.dto.Department">
+  		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    insert into department
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="pId != null">
+        parent_id,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="qyId != null">
+        qy_id,
+      </if>
+      <if test="qyParentid != null">
+        qy_parentId,
+      </if>
+      <if test="paixu != null">
+        paixu,
+      </if>
+      <if test="fullIds != null">
+        full_ids,
+      </if>
+      <if test="fullNames != null">
+        full_names,
+      </if>
+      <if test="isLeaf != null">
+        is_leaf,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="permission != null">
+        permission,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pId != null">
+        #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="qyId != null">
+        #{qyId,jdbcType=INTEGER},
+      </if>
+      <if test="qyParentid != null">
+        #{qyParentid,jdbcType=INTEGER},
+      </if>
+      <if test="paixu != null">
+        #{paixu,jdbcType=INTEGER},
+      </if>
+      <if test="fullIds != null">
+        #{fullIds,jdbcType=VARCHAR},
+      </if>
+      <if test="fullNames != null">
+        #{fullNames,jdbcType=VARCHAR},
+      </if>
+      <if test="isLeaf != null">
+        #{isLeaf,jdbcType=BIT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="permission != null">
+        #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cummins.contact.dto.DepartmentCriteria" resultType="java.lang.Long">
+    select count(*) from department
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+  <delete id="updateByIds" parameterType="com.cummins.contact.dto.Department">
+    update department
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pId != null">
+        parent_id = #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="qyId != null">
+        qy_id = #{qyId,jdbcType=INTEGER},
+      </if>
+      <if test="qyParentid != null">
+        qy_parentId = #{qyParentid,jdbcType=INTEGER},
+      </if>
+      <if test="paixu != null">
+        paixu = #{paixu,jdbcType=INTEGER},
+      </if>
+      <if test="fullIds != null">
+        full_ids = #{fullIds,jdbcType=VARCHAR},
+      </if>
+      <if test="fullNames != null">
+        full_names = #{fullNames,jdbcType=VARCHAR},
+      </if>
+      <if test="isLeaf != null">
+        is_leaf = #{isLeaf,jdbcType=BIT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="permission != null">
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=BIT},
+      </if>
+    </set>
+    where id in ('${ids}') and delete_flag=0
+  </delete>
+  
+  <update id="updateByExampleSelective" parameterType="map">
+    update department
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pId != null">
+        parent_id = #{record.pId,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyId != null">
+        company_id = #{record.companyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.qyId != null">
+        qy_id = #{record.qyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.qyParentid != null">
+        qy_parentId = #{record.qyParentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.paixu != null">
+        paixu = #{record.paixu,jdbcType=INTEGER},
+      </if>
+      <if test="record.fullIds != null">
+        full_ids = #{record.fullIds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fullNames != null">
+        full_names = #{record.fullNames,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isLeaf != null">
+        is_leaf = #{record.isLeaf,jdbcType=BIT},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.permission != null">
+        permission = #{record.permission,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteFlag != null">
+        delete_flag = #{record.deleteFlag,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update department
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      parent_id = #{record.pId,jdbcType=INTEGER},
+      company_id = #{record.companyId,jdbcType=INTEGER},
+      qy_id = #{record.qyId,jdbcType=INTEGER},
+      qy_parentId = #{record.qyParentid,jdbcType=INTEGER},
+      paixu = #{record.paixu,jdbcType=INTEGER},
+      full_ids = #{record.fullIds,jdbcType=VARCHAR},
+      full_names = #{record.fullNames,jdbcType=VARCHAR},
+      is_leaf = #{record.isLeaf,jdbcType=BIT},
+      status = #{record.status,jdbcType=INTEGER},
+      permission = #{record.permission,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      delete_flag = #{record.deleteFlag,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cummins.contact.dto.Department">
+    update department
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pId != null">
+        parent_id = #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="qyId != null">
+        qy_id = #{qyId,jdbcType=INTEGER},
+      </if>
+      <if test="qyParentid != null">
+        qy_parentId = #{qyParentid,jdbcType=INTEGER},
+      </if>
+      <if test="paixu != null">
+        paixu = #{paixu,jdbcType=INTEGER},
+      </if>
+      <if test="fullIds != null">
+        full_ids = #{fullIds,jdbcType=VARCHAR},
+      </if>
+      <if test="fullNames != null">
+        full_names = #{fullNames,jdbcType=VARCHAR},
+      </if>
+      <if test="isLeaf != null">
+        is_leaf = #{isLeaf,jdbcType=BIT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="permission != null">
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cummins.contact.dto.Department">
+    update department
+    set name = #{name,jdbcType=VARCHAR},
+      parent_id = #{pId,jdbcType=INTEGER},
+      company_id = #{companyId,jdbcType=INTEGER},
+      qy_id = #{qyId,jdbcType=INTEGER},
+      qy_parentId = #{qyParentid,jdbcType=INTEGER},
+      paixu = #{paixu,jdbcType=INTEGER},
+      full_ids = #{fullIds,jdbcType=VARCHAR},
+      full_names = #{fullNames,jdbcType=VARCHAR},
+      is_leaf = #{isLeaf,jdbcType=BIT},
+      status = #{status,jdbcType=INTEGER},
+      permission = #{permission,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

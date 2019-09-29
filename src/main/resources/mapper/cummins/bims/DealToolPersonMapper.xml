@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cummins.bims.dao.DealToolPersonMapper">
+  <resultMap id="BaseResultMap" type="com.cummins.bims.dto.DealToolPerson">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="tool_no" jdbcType="VARCHAR" property="toolNo" />
+    <result column="issue_id" jdbcType="INTEGER" property="issueId" />
+    <result column="issue_area" jdbcType="VARCHAR" property="issueArea" />
+    <result column="process_person_name" jdbcType="VARCHAR" property="processPersonName" />
+    <result column="process_person_account" jdbcType="VARCHAR" property="processPersonAccount" />
+    <result column="process_person_id" jdbcType="INTEGER" property="processPersonId" />
+    <result column="init_person_name" jdbcType="VARCHAR" property="initPersonName" />
+    <result column="int_person_account" jdbcType="VARCHAR" property="intPersonAccount" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="tool_type" jdbcType="TINYINT" property="toolType" />
+    <result column="tool_name" jdbcType="VARCHAR" property="toolName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="need_over_time" jdbcType="TIMESTAMP" property="needOverTime" />
+    <result column="deal_time" jdbcType="TIMESTAMP" property="dealTime" />
+    <result column="back1" jdbcType="VARCHAR" property="back1" />
+    <result column="back2" jdbcType="VARCHAR" property="back2" />
+    <result column="back3" jdbcType="VARCHAR" property="back3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, tool_no, issue_id, issue_area, process_person_name, process_person_account, process_person_id, 
+    init_person_name, int_person_account, status, type, tool_type, tool_name, create_time, 
+    need_over_time, deal_time, back1, back2, back3
+  </sql>
+  <select id="selectByExample" parameterType="com.cummins.bims.dto.DealToolPersonCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from deal_tool_person
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from deal_tool_person
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from deal_tool_person
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cummins.bims.dto.DealToolPersonCriteria">
+    delete from deal_tool_person
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cummins.bims.dto.DealToolPerson">
+    insert into deal_tool_person (id, tool_no, issue_id, 
+      issue_area, process_person_name, process_person_account, 
+      process_person_id, init_person_name, int_person_account, 
+      status, type, tool_type, 
+      tool_name, create_time, need_over_time, 
+      deal_time, back1, back2, 
+      back3)
+    values (#{id,jdbcType=INTEGER}, #{toolNo,jdbcType=VARCHAR}, #{issueId,jdbcType=INTEGER}, 
+      #{issueArea,jdbcType=VARCHAR}, #{processPersonName,jdbcType=VARCHAR}, #{processPersonAccount,jdbcType=VARCHAR}, 
+      #{processPersonId,jdbcType=INTEGER}, #{initPersonName,jdbcType=VARCHAR}, #{intPersonAccount,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}, #{toolType,jdbcType=TINYINT}, 
+      #{toolName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{needOverTime,jdbcType=TIMESTAMP}, 
+      #{dealTime,jdbcType=TIMESTAMP}, #{back1,jdbcType=VARCHAR}, #{back2,jdbcType=VARCHAR}, 
+      #{back3,jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 批量新增 -->
+  <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+    insert into deal_tool_person (id, tool_no, issue_id,
+    issue_area, process_person_name, process_person_account,
+    process_person_id, init_person_name, int_person_account,
+    status, type, tool_type,
+    tool_name, create_time, need_over_time,
+    deal_time, back1, back2,
+    back3)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.toolNo,jdbcType=VARCHAR}, #{item.issueId,jdbcType=INTEGER},
+      #{item.issueArea,jdbcType=VARCHAR}, #{item.processPersonName,jdbcType=VARCHAR}, #{item.processPersonAccount,jdbcType=VARCHAR},
+      #{item.processPersonId,jdbcType=INTEGER}, #{item.initPersonName,jdbcType=VARCHAR}, #{item.intPersonAccount,jdbcType=VARCHAR},
+      #{item.status,jdbcType=TINYINT}, #{item.type,jdbcType=TINYINT}, #{item.toolType,jdbcType=TINYINT},
+      #{item.toolName,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.needOverTime,jdbcType=TIMESTAMP},
+      #{item.dealTime,jdbcType=TIMESTAMP}, #{item.back1,jdbcType=VARCHAR}, #{item.back2,jdbcType=VARCHAR},
+      #{item.back3,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.cummins.bims.dto.DealToolPerson">
+    insert into deal_tool_person
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="toolNo != null">
+        tool_no,
+      </if>
+      <if test="issueId != null">
+        issue_id,
+      </if>
+      <if test="issueArea != null">
+        issue_area,
+      </if>
+      <if test="processPersonName != null">
+        process_person_name,
+      </if>
+      <if test="processPersonAccount != null">
+        process_person_account,
+      </if>
+      <if test="processPersonId != null">
+        process_person_id,
+      </if>
+      <if test="initPersonName != null">
+        init_person_name,
+      </if>
+      <if test="intPersonAccount != null">
+        int_person_account,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="toolType != null">
+        tool_type,
+      </if>
+      <if test="toolName != null">
+        tool_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="needOverTime != null">
+        need_over_time,
+      </if>
+      <if test="dealTime != null">
+        deal_time,
+      </if>
+      <if test="back1 != null">
+        back1,
+      </if>
+      <if test="back2 != null">
+        back2,
+      </if>
+      <if test="back3 != null">
+        back3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="toolNo != null">
+        #{toolNo,jdbcType=VARCHAR},
+      </if>
+      <if test="issueId != null">
+        #{issueId,jdbcType=INTEGER},
+      </if>
+      <if test="issueArea != null">
+        #{issueArea,jdbcType=VARCHAR},
+      </if>
+      <if test="processPersonName != null">
+        #{processPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="processPersonAccount != null">
+        #{processPersonAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="processPersonId != null">
+        #{processPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="initPersonName != null">
+        #{initPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="intPersonAccount != null">
+        #{intPersonAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="toolType != null">
+        #{toolType,jdbcType=TINYINT},
+      </if>
+      <if test="toolName != null">
+        #{toolName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="needOverTime != null">
+        #{needOverTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealTime != null">
+        #{dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="back1 != null">
+        #{back1,jdbcType=VARCHAR},
+      </if>
+      <if test="back2 != null">
+        #{back2,jdbcType=VARCHAR},
+      </if>
+      <if test="back3 != null">
+        #{back3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cummins.bims.dto.DealToolPersonCriteria" resultType="java.lang.Long">
+    select count(*) from deal_tool_person
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update deal_tool_person
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.toolNo != null">
+        tool_no = #{record.toolNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueId != null">
+        issue_id = #{record.issueId,jdbcType=INTEGER},
+      </if>
+      <if test="record.issueArea != null">
+        issue_area = #{record.issueArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processPersonName != null">
+        process_person_name = #{record.processPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processPersonAccount != null">
+        process_person_account = #{record.processPersonAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processPersonId != null">
+        process_person_id = #{record.processPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="record.initPersonName != null">
+        init_person_name = #{record.initPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intPersonAccount != null">
+        int_person_account = #{record.intPersonAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.toolType != null">
+        tool_type = #{record.toolType,jdbcType=TINYINT},
+      </if>
+      <if test="record.toolName != null">
+        tool_name = #{record.toolName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.needOverTime != null">
+        need_over_time = #{record.needOverTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dealTime != null">
+        deal_time = #{record.dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.back1 != null">
+        back1 = #{record.back1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.back2 != null">
+        back2 = #{record.back2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.back3 != null">
+        back3 = #{record.back3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update deal_tool_person
+    set id = #{record.id,jdbcType=INTEGER},
+      tool_no = #{record.toolNo,jdbcType=VARCHAR},
+      issue_id = #{record.issueId,jdbcType=INTEGER},
+      issue_area = #{record.issueArea,jdbcType=VARCHAR},
+      process_person_name = #{record.processPersonName,jdbcType=VARCHAR},
+      process_person_account = #{record.processPersonAccount,jdbcType=VARCHAR},
+      process_person_id = #{record.processPersonId,jdbcType=INTEGER},
+      init_person_name = #{record.initPersonName,jdbcType=VARCHAR},
+      int_person_account = #{record.intPersonAccount,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      type = #{record.type,jdbcType=TINYINT},
+      tool_type = #{record.toolType,jdbcType=TINYINT},
+      tool_name = #{record.toolName,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      need_over_time = #{record.needOverTime,jdbcType=TIMESTAMP},
+      deal_time = #{record.dealTime,jdbcType=TIMESTAMP},
+      back1 = #{record.back1,jdbcType=VARCHAR},
+      back2 = #{record.back2,jdbcType=VARCHAR},
+      back3 = #{record.back3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cummins.bims.dto.DealToolPerson">
+    update deal_tool_person
+    <set>
+      <if test="toolNo != null">
+        tool_no = #{toolNo,jdbcType=VARCHAR},
+      </if>
+      <if test="issueId != null">
+        issue_id = #{issueId,jdbcType=INTEGER},
+      </if>
+      <if test="issueArea != null">
+        issue_area = #{issueArea,jdbcType=VARCHAR},
+      </if>
+      <if test="processPersonName != null">
+        process_person_name = #{processPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="processPersonAccount != null">
+        process_person_account = #{processPersonAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="processPersonId != null">
+        process_person_id = #{processPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="initPersonName != null">
+        init_person_name = #{initPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="intPersonAccount != null">
+        int_person_account = #{intPersonAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="toolType != null">
+        tool_type = #{toolType,jdbcType=TINYINT},
+      </if>
+      <if test="toolName != null">
+        tool_name = #{toolName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="needOverTime != null">
+        need_over_time = #{needOverTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealTime != null">
+        deal_time = #{dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="back1 != null">
+        back1 = #{back1,jdbcType=VARCHAR},
+      </if>
+      <if test="back2 != null">
+        back2 = #{back2,jdbcType=VARCHAR},
+      </if>
+      <if test="back3 != null">
+        back3 = #{back3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cummins.bims.dto.DealToolPerson">
+    update deal_tool_person
+    set tool_no = #{toolNo,jdbcType=VARCHAR},
+      issue_id = #{issueId,jdbcType=INTEGER},
+      issue_area = #{issueArea,jdbcType=VARCHAR},
+      process_person_name = #{processPersonName,jdbcType=VARCHAR},
+      process_person_account = #{processPersonAccount,jdbcType=VARCHAR},
+      process_person_id = #{processPersonId,jdbcType=INTEGER},
+      init_person_name = #{initPersonName,jdbcType=VARCHAR},
+      int_person_account = #{intPersonAccount,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      type = #{type,jdbcType=TINYINT},
+      tool_type = #{toolType,jdbcType=TINYINT},
+      tool_name = #{toolName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      need_over_time = #{needOverTime,jdbcType=TIMESTAMP},
+      deal_time = #{dealTime,jdbcType=TIMESTAMP},
+      back1 = #{back1,jdbcType=VARCHAR},
+      back2 = #{back2,jdbcType=VARCHAR},
+      back3 = #{back3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getToolTabs" parameterType="com.cummins.bims.dto.DealToolPerson" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from deal_tool_person
+    where issue_id = #{record.issueId}
+    and issue_area = #{record.issueArea}
+    <if test="record.processPersonAccount != null">
+    AND process_person_account = #{record.processPersonAccount}
+    ORDER BY id desc
+    </if>
+  </select>
+
+ <update id="updateToolsPersonType" parameterType="map">
+    update deal_tool_person set
+   <!--<if test="params.status !=null and params.status !=''">-->
+     status = #{params.status}
+   <!--</if>-->
+   <if test="params.issueid !=null and params.issueid !=''">
+     where issue_id = #{params.issueid}
+   </if>
+   <if test="params.processaccount !=null and params.processaccount !=''">
+     and  process_person_account = #{params.processaccount}
+   </if>
+   <if test="params.toolstype !=null and params.toolstype !=''">
+     and  tool_type = #{params.toolstype}
+   </if>
+   <if test="params.toolid !=null and params.toolid !=''">
+     and  tool_no = #{params.toolid}
+   </if>
+
+ </update>
+
+  <!-- 查询工具列表 -->
+  <select id="selectByIssueId" parameterType="java.util.List" resultMap="BaseResultMap">
+    SELECT
+		t.id,
+		t.issue_id,
+		t.process_person_name,
+		t.STATUS,
+		t.tool_name,
+		t.type
+	FROM
+		deal_tool_person t
+	WHERE
+		t.type = 1
+	AND t.issue_id IN
+    <foreach item="item" index="index" collection="list" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+  </select>
+
+  <select id="getDTByIssueId" parameterType="com.cummins.bims.dto.DealToolPerson" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from deal_tool_person
+    where type = 1
+    and issue_id = #{record.issueId}
+  </select>
+</mapper>

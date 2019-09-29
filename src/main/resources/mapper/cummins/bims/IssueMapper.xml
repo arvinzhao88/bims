@@ -1,0 +1,1633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cummins.bims.dao.IssueMapper">
+  <resultMap id="BaseResultMap" type="com.cummins.bims.dto.Issue">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="issue_desc" jdbcType="VARCHAR" property="issueDesc" />
+    <result column="plant" jdbcType="VARCHAR" property="plant" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="issue_station" jdbcType="VARCHAR" property="issueStation" />
+    <result column="series_no" jdbcType="VARCHAR" property="seriesNo" />
+    <result column="quality_type" jdbcType="VARCHAR" property="qualityType" />
+    <result column="issue_category_l1_name" jdbcType="VARCHAR" property="issueCategoryL1Name" />
+    <result column="issue_category_l1" jdbcType="VARCHAR" property="issueCategoryL1" />
+    <result column="issue_category_l2_name" jdbcType="VARCHAR" property="issueCategoryL2Name" />
+    <result column="issue_category_l2" jdbcType="VARCHAR" property="issueCategoryL2" />
+    <result column="issue_category_l3_name" jdbcType="VARCHAR" property="issueCategoryL3Name" />
+    <result column="issue_category_l3" jdbcType="VARCHAR" property="issueCategoryL3" />
+    <result column="failure_location" jdbcType="VARCHAR" property="failureLocation" />
+    <result column="esn" jdbcType="VARCHAR" property="esn" />
+    <result column="so" jdbcType="VARCHAR" property="so" />
+    <result column="project_no" jdbcType="VARCHAR" property="projectNo" />
+    <result column="engine_type" jdbcType="VARCHAR" property="engineType" />
+    <result column="engine_series" jdbcType="VARCHAR" property="engineSeries" />
+    <result column="issue_type" jdbcType="VARCHAR" property="issueType" />
+    <result column="part_no" jdbcType="VARCHAR" property="partNo" />
+    <result column="part_name" jdbcType="VARCHAR" property="partName" />
+    <result column="vendor_code" jdbcType="VARCHAR" property="vendorCode" />
+    <result column="vendor_name" jdbcType="VARCHAR" property="vendorName" />
+    <result column="qty" jdbcType="INTEGER" property="qty" />
+    <result column="comments" jdbcType="VARCHAR" property="comments" />
+    <result column="is_rft" jdbcType="VARCHAR" property="isRft" />
+    <result column="is_eqr" jdbcType="VARCHAR" property="isEqr" />
+    <result column="is_carry" jdbcType="VARCHAR" property="isCarry" />
+    <result column="is_claim" jdbcType="VARCHAR" property="isClaim" />
+    <result column="is_countIndex" jdbcType="VARCHAR" property="isCountindex" />
+    <result column="input_time" jdbcType="TIMESTAMP" property="inputTime" />
+    <result column="input_person" jdbcType="VARCHAR" property="inputPerson" />
+    <result column="input_preson_name" jdbcType="VARCHAR" property="inputPresonName" />
+    <result column="input_person_account" jdbcType="VARCHAR" property="inputPersonAccount" />
+    <result column="delflag" jdbcType="VARCHAR" property="delflag" />
+    <result column="sub_source" jdbcType="VARCHAR" property="subSource" />
+    <result column="process_status" jdbcType="VARCHAR" property="processStatus" />
+    <result column="process_person" jdbcType="VARCHAR" property="processPerson" />
+    <result column="process_person_name" jdbcType="VARCHAR" property="processPersonName" />
+    <result column="process_person_account" jdbcType="VARCHAR" property="processPersonAccount" />
+    <result column="process_time" jdbcType="TIMESTAMP" property="processTime" />
+    <result column="process_method" jdbcType="VARCHAR" property="processMethod" />
+    <result column="review_person" jdbcType="VARCHAR" property="reviewPerson" />
+    <result column="review_person_name" jdbcType="VARCHAR" property="reviewPersonName" />
+    <result column="review_person_account" jdbcType="VARCHAR" property="reviewPersonAccount" />
+    <result column="review_time" jdbcType="TIMESTAMP" property="reviewTime" />
+    <result column="close_time" jdbcType="TIMESTAMP" property="closeTime" />
+    <result column="attach" jdbcType="VARCHAR" property="attach" />
+  </resultMap>
+
+  <resultMap id="IssueResultMap" type="com.cummins.bims.dto.IssueParam">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="issue_desc" jdbcType="VARCHAR" property="issueDesc" />
+    <result column="plant" jdbcType="VARCHAR" property="plant" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="issue_station" jdbcType="VARCHAR" property="issueStation" />
+    <result column="series_no" jdbcType="VARCHAR" property="seriesNo" />
+    <result column="quality_type" jdbcType="VARCHAR" property="qualityType" />
+    <result column="issue_category_l1_name" jdbcType="VARCHAR" property="issueCategoryL1Name" />
+    <result column="issue_category_l1" jdbcType="VARCHAR" property="issueCategoryL1" />
+    <result column="issue_category_l2_name" jdbcType="VARCHAR" property="issueCategoryL2Name" />
+    <result column="issue_category_l2" jdbcType="VARCHAR" property="issueCategoryL2" />
+    <result column="issue_category_l3_name" jdbcType="VARCHAR" property="issueCategoryL3Name" />
+    <result column="issue_category_l3" jdbcType="VARCHAR" property="issueCategoryL3" />
+    <result column="failure_location" jdbcType="VARCHAR" property="failureLocation" />
+    <result column="esn" jdbcType="VARCHAR" property="esn" />
+    <result column="so" jdbcType="VARCHAR" property="so" />
+    <result column="project_no" jdbcType="VARCHAR" property="projectNo" />
+    <result column="engine_type" jdbcType="VARCHAR" property="engineType" />
+    <result column="engine_series" jdbcType="VARCHAR" property="engineSeries" />
+    <result column="issue_type" jdbcType="VARCHAR" property="issueType" />
+    <result column="part_no" jdbcType="VARCHAR" property="partNo" />
+    <result column="part_name" jdbcType="VARCHAR" property="partName" />
+    <result column="vendor_code" jdbcType="VARCHAR" property="vendorCode" />
+    <result column="vendor_name" jdbcType="VARCHAR" property="vendorName" />
+    <result column="qty" jdbcType="INTEGER" property="qty" />
+    <result column="comments" jdbcType="VARCHAR" property="comments" />
+    <result column="is_rft" jdbcType="VARCHAR" property="isRft" />
+    <result column="is_eqr" jdbcType="VARCHAR" property="isEqr" />
+    <result column="is_carry" jdbcType="VARCHAR" property="isCarry" />
+    <result column="is_claim" jdbcType="VARCHAR" property="isClaim" />
+    <result column="is_countIndex" jdbcType="VARCHAR" property="isCountindex" />
+    <result column="input_time" jdbcType="TIMESTAMP" property="inputTime" />
+    <result column="input_person" jdbcType="VARCHAR" property="inputPerson" />
+    <result column="input_preson_name" jdbcType="VARCHAR" property="inputPresonName" />
+    <result column="input_person_account" jdbcType="VARCHAR" property="inputPersonAccount" />
+    <result column="delflag" jdbcType="VARCHAR" property="delflag" />
+    <result column="sub_source" jdbcType="VARCHAR" property="subSource" />
+    <result column="process_status" jdbcType="VARCHAR" property="processStatus" />
+    <result column="process_person" jdbcType="VARCHAR" property="processPerson" />
+    <result column="process_person_name" jdbcType="VARCHAR" property="processPersonName" />
+    <result column="process_person_account" jdbcType="VARCHAR" property="processPersonAccount" />
+    <result column="process_time" jdbcType="TIMESTAMP" property="processTime" />
+    <result column="process_method" jdbcType="VARCHAR" property="processMethod" />
+    <result column="review_person" jdbcType="VARCHAR" property="reviewPerson" />
+    <result column="review_person_name" jdbcType="VARCHAR" property="reviewPersonName" />
+    <result column="review_person_account" jdbcType="VARCHAR" property="reviewPersonAccount" />
+    <result column="review_time" jdbcType="TIMESTAMP" property="reviewTime" />
+    <result column="close_time" jdbcType="TIMESTAMP" property="closeTime" />
+    <result column="attach" jdbcType="VARCHAR" property="attach" />
+    <result column="plantname" jdbcType="VARCHAR" property="plantname" />
+    <result column="areaname" jdbcType="VARCHAR" property="areaname" />
+    <result column="l1name" jdbcType="VARCHAR" property="l1name" />
+    <result column="locationname" jdbcType="VARCHAR" property="locationname" />
+    <result column="l2name" jdbcType="VARCHAR" property="l2name" />
+    <result column="l3name" jdbcType="VARCHAR" property="l3name" />
+    <result column="shId" jdbcType="VARCHAR" property="shId" />
+    <!--<collection property="dealToolPerson" ofType="com.cummins.bims.dto.DealToolPerson"  column="id" select="com.cummins.bims.dao.DealToolPersonMapper.getDTByIssueId">
+      &lt;!&ndash; id:唯一标识
+           property：要将订单明细的唯一标识映射到的那个属性
+       &ndash;&gt;
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="tool_no" jdbcType="VARCHAR" property="toolNo" />
+      <result column="issue_id" jdbcType="INTEGER" property="issueId" />
+      <result column="issue_area" jdbcType="VARCHAR" property="issueArea" />
+      <result column="process_person_name" jdbcType="VARCHAR" property="processPersonName" />
+      <result column="process_person_account" jdbcType="VARCHAR" property="processPersonAccount" />
+      <result column="process_person_id" jdbcType="INTEGER" property="processPersonId" />
+      <result column="init_person_name" jdbcType="VARCHAR" property="initPersonName" />
+      <result column="int_person_account" jdbcType="VARCHAR" property="intPersonAccount" />
+      <result column="status" jdbcType="TINYINT" property="status" />
+      <result column="type" jdbcType="TINYINT" property="type" />
+      <result column="tool_type" jdbcType="TINYINT" property="toolType" />
+      <result column="tool_name" jdbcType="VARCHAR" property="toolName" />
+
+    </collection>
+    <collection property="billList" ofType="com.cummins.bims.dto.Bill"  column="id" select="com.cummins.bims.dao.BillMapper.selectByIssueId">
+      &lt;!&ndash; id:唯一标识
+           property：要将订单明细的唯一标识映射到的那个属性
+       &ndash;&gt;
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="receipt_id" jdbcType="INTEGER" property="receiptId" />
+      <result column="measure_no" jdbcType="VARCHAR" property="measureNo" />
+      <result column="issue_id" jdbcType="VARCHAR" property="issueId" />
+      <result column="issue_area" jdbcType="VARCHAR" property="issueArea" />
+      <result column="temp_measures" jdbcType="VARCHAR" property="tempMeasures" />
+      <result column="bill_name" jdbcType="VARCHAR" property="billName" />
+      <result column="bill_type" jdbcType="VARCHAR" property="billType" />
+      <result column="duty_person_name" jdbcType="VARCHAR" property="dutyPersonName" />
+      <result column="duty_person" jdbcType="VARCHAR" property="dutyPerson" />
+
+    </collection>-->
+  </resultMap>
+
+  <resultMap id="MyIssueMap" type="com.cummins.bims.dto.IssueParam">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="issue_desc" jdbcType="VARCHAR" property="issueDesc" />
+    <result column="plant" jdbcType="VARCHAR" property="plant" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="issue_station" jdbcType="VARCHAR" property="issueStation" />
+    <result column="series_no" jdbcType="VARCHAR" property="seriesNo" />
+    <result column="quality_type" jdbcType="VARCHAR" property="qualityType" />
+    <result column="issue_category_l1_name" jdbcType="VARCHAR" property="issueCategoryL1Name" />
+    <result column="issue_category_l1" jdbcType="VARCHAR" property="issueCategoryL1" />
+    <result column="issue_category_l2_name" jdbcType="VARCHAR" property="issueCategoryL2Name" />
+    <result column="issue_category_l2" jdbcType="VARCHAR" property="issueCategoryL2" />
+    <result column="issue_category_l3_name" jdbcType="VARCHAR" property="issueCategoryL3Name" />
+    <result column="issue_category_l3" jdbcType="VARCHAR" property="issueCategoryL3" />
+    <result column="failure_location" jdbcType="VARCHAR" property="failureLocation" />
+    <result column="esn" jdbcType="VARCHAR" property="esn" />
+    <result column="so" jdbcType="VARCHAR" property="so" />
+    <result column="project_no" jdbcType="VARCHAR" property="projectNo" />
+    <result column="engine_type" jdbcType="VARCHAR" property="engineType" />
+    <result column="engine_series" jdbcType="VARCHAR" property="engineSeries" />
+    <result column="issue_type" jdbcType="VARCHAR" property="issueType" />
+    <result column="part_no" jdbcType="VARCHAR" property="partNo" />
+    <result column="part_name" jdbcType="VARCHAR" property="partName" />
+    <result column="vendor_code" jdbcType="VARCHAR" property="vendorCode" />
+    <result column="vendor_name" jdbcType="VARCHAR" property="vendorName" />
+    <result column="qty" jdbcType="INTEGER" property="qty" />
+    <result column="comments" jdbcType="VARCHAR" property="comments" />
+    <result column="is_rft" jdbcType="VARCHAR" property="isRft" />
+    <result column="is_eqr" jdbcType="VARCHAR" property="isEqr" />
+    <result column="is_carry" jdbcType="VARCHAR" property="isCarry" />
+    <result column="is_claim" jdbcType="VARCHAR" property="isClaim" />
+    <result column="is_countIndex" jdbcType="VARCHAR" property="isCountindex" />
+    <result column="input_time" jdbcType="TIMESTAMP" property="inputTime" />
+    <result column="input_person" jdbcType="VARCHAR" property="inputPerson" />
+    <result column="input_preson_name" jdbcType="VARCHAR" property="inputPresonName" />
+    <result column="input_person_account" jdbcType="VARCHAR" property="inputPersonAccount" />
+    <result column="delflag" jdbcType="VARCHAR" property="delflag" />
+    <result column="sub_source" jdbcType="VARCHAR" property="subSource" />
+    <result column="process_status" jdbcType="VARCHAR" property="processStatus" />
+    <result column="process_person" jdbcType="VARCHAR" property="processPerson" />
+    <result column="process_person_name" jdbcType="VARCHAR" property="processPersonName" />
+    <result column="process_person_account" jdbcType="VARCHAR" property="processPersonAccount" />
+    <result column="process_time" jdbcType="TIMESTAMP" property="processTime" />
+    <result column="process_method" jdbcType="VARCHAR" property="processMethod" />
+    <result column="review_person" jdbcType="VARCHAR" property="reviewPerson" />
+    <result column="review_person_name" jdbcType="VARCHAR" property="reviewPersonName" />
+    <result column="review_person_account" jdbcType="VARCHAR" property="reviewPersonAccount" />
+    <result column="review_time" jdbcType="TIMESTAMP" property="reviewTime" />
+    <result column="close_time" jdbcType="TIMESTAMP" property="closeTime" />
+    <result column="attach" jdbcType="VARCHAR" property="attach" />
+    <result column="plantname" jdbcType="VARCHAR" property="plantname" />
+    <result column="areaname" jdbcType="VARCHAR" property="areaname" />
+    <result column="l1name" jdbcType="VARCHAR" property="l1name" />
+    <result column="locationname" jdbcType="VARCHAR" property="locationname" />
+    <result column="l2name" jdbcType="VARCHAR" property="l2name" />
+    <result column="l3name" jdbcType="VARCHAR" property="l3name" />
+  </resultMap>
+
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, number, issue_desc, plant, area, issue_station, series_no, quality_type, issue_category_l1_name, 
+    issue_category_l1, issue_category_l2_name, issue_category_l2, issue_category_l3_name, 
+    issue_category_l3, failure_location, esn, so, project_no, engine_type, engine_series, 
+    issue_type, part_no, part_name, vendor_code, vendor_name, qty, comments, is_rft, 
+    is_eqr, is_carry, is_claim, is_countIndex, input_time, input_person, input_preson_name, 
+    input_person_account, delflag, sub_source, process_status, process_person, process_person_name, 
+    process_person_account, process_time, process_method, review_person, review_person_name, 
+    review_person_account, review_time, close_time, attach
+  </sql>
+  <select id="selectByExample" parameterType="com.cummins.bims.dto.IssueCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_issue
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_issue
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_issue
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cummins.bims.dto.IssueCriteria">
+    delete from t_issue
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cummins.bims.dto.Issue" useGeneratedKeys="true" keyProperty="id">
+    insert into t_issue (id, number, issue_desc, 
+      plant, area, issue_station, 
+      series_no, quality_type, issue_category_l1_name, 
+      issue_category_l1, issue_category_l2_name, issue_category_l2, 
+      issue_category_l3_name, issue_category_l3, failure_location, 
+      esn, so, project_no, 
+      engine_type, engine_series, issue_type, 
+      part_no, part_name, vendor_code, 
+      vendor_name, qty, comments, 
+      is_rft, is_eqr, is_carry, 
+      is_claim, is_countIndex, input_time, 
+      input_person, input_preson_name, input_person_account, 
+      delflag, sub_source, process_status, 
+      process_person, process_person_name, process_person_account, 
+      process_time, process_method, review_person, 
+      review_person_name, review_person_account, 
+      review_time, close_time, attach
+      )
+    values (#{id,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, #{issueDesc,jdbcType=VARCHAR}, 
+      #{plant,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{issueStation,jdbcType=VARCHAR}, 
+      #{seriesNo,jdbcType=VARCHAR}, #{qualityType,jdbcType=VARCHAR}, #{issueCategoryL1Name,jdbcType=VARCHAR}, 
+      #{issueCategoryL1,jdbcType=VARCHAR}, #{issueCategoryL2Name,jdbcType=VARCHAR}, #{issueCategoryL2,jdbcType=VARCHAR}, 
+      #{issueCategoryL3Name,jdbcType=VARCHAR}, #{issueCategoryL3,jdbcType=VARCHAR}, #{failureLocation,jdbcType=VARCHAR}, 
+      #{esn,jdbcType=VARCHAR}, #{so,jdbcType=VARCHAR}, #{projectNo,jdbcType=VARCHAR}, 
+      #{engineType,jdbcType=VARCHAR}, #{engineSeries,jdbcType=VARCHAR}, #{issueType,jdbcType=VARCHAR}, 
+      #{partNo,jdbcType=VARCHAR}, #{partName,jdbcType=VARCHAR}, #{vendorCode,jdbcType=VARCHAR}, 
+      #{vendorName,jdbcType=VARCHAR}, #{qty,jdbcType=INTEGER}, #{comments,jdbcType=VARCHAR}, 
+      #{isRft,jdbcType=VARCHAR}, #{isEqr,jdbcType=VARCHAR}, #{isCarry,jdbcType=VARCHAR}, 
+      #{isClaim,jdbcType=VARCHAR}, #{isCountindex,jdbcType=VARCHAR}, #{inputTime,jdbcType=TIMESTAMP}, 
+      #{inputPerson,jdbcType=VARCHAR}, #{inputPresonName,jdbcType=VARCHAR}, #{inputPersonAccount,jdbcType=VARCHAR}, 
+      #{delflag,jdbcType=VARCHAR}, #{subSource,jdbcType=VARCHAR}, #{processStatus,jdbcType=VARCHAR}, 
+      #{processPerson,jdbcType=VARCHAR}, #{processPersonName,jdbcType=VARCHAR}, #{processPersonAccount,jdbcType=VARCHAR}, 
+      #{processTime,jdbcType=TIMESTAMP}, #{processMethod,jdbcType=VARCHAR}, #{reviewPerson,jdbcType=VARCHAR}, 
+      #{reviewPersonName,jdbcType=VARCHAR}, #{reviewPersonAccount,jdbcType=VARCHAR}, 
+      #{reviewTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, #{attach,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cummins.bims.dto.Issue" useGeneratedKeys="true" keyProperty="id">
+    insert into t_issue
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="issueDesc != null">
+        issue_desc,
+      </if>
+      <if test="plant != null">
+        plant,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="issueStation != null">
+        issue_station,
+      </if>
+      <if test="seriesNo != null">
+        series_no,
+      </if>
+      <if test="qualityType != null">
+        quality_type,
+      </if>
+      <if test="issueCategoryL1Name != null">
+        issue_category_l1_name,
+      </if>
+      <if test="issueCategoryL1 != null">
+        issue_category_l1,
+      </if>
+      <if test="issueCategoryL2Name != null">
+        issue_category_l2_name,
+      </if>
+      <if test="issueCategoryL2 != null">
+        issue_category_l2,
+      </if>
+      <if test="issueCategoryL3Name != null">
+        issue_category_l3_name,
+      </if>
+      <if test="issueCategoryL3 != null">
+        issue_category_l3,
+      </if>
+      <if test="failureLocation != null">
+        failure_location,
+      </if>
+      <if test="esn != null">
+        esn,
+      </if>
+      <if test="so != null">
+        so,
+      </if>
+      <if test="projectNo != null">
+        project_no,
+      </if>
+      <if test="engineType != null">
+        engine_type,
+      </if>
+      <if test="engineSeries != null">
+        engine_series,
+      </if>
+      <if test="issueType != null">
+        issue_type,
+      </if>
+      <if test="partNo != null">
+        part_no,
+      </if>
+      <if test="partName != null">
+        part_name,
+      </if>
+      <if test="vendorCode != null">
+        vendor_code,
+      </if>
+      <if test="vendorName != null">
+        vendor_name,
+      </if>
+      <if test="qty != null">
+        qty,
+      </if>
+      <if test="comments != null">
+        comments,
+      </if>
+      <if test="isRft != null">
+        is_rft,
+      </if>
+      <if test="isEqr != null">
+        is_eqr,
+      </if>
+      <if test="isCarry != null">
+        is_carry,
+      </if>
+      <if test="isClaim != null">
+        is_claim,
+      </if>
+      <if test="isCountindex != null">
+        is_countIndex,
+      </if>
+      <if test="inputTime != null">
+        input_time,
+      </if>
+      <if test="inputPerson != null">
+        input_person,
+      </if>
+      <if test="inputPresonName != null">
+        input_preson_name,
+      </if>
+      <if test="inputPersonAccount != null">
+        input_person_account,
+      </if>
+      <if test="delflag != null">
+        delflag,
+      </if>
+      <if test="subSource != null">
+        sub_source,
+      </if>
+      <if test="processStatus != null">
+        process_status,
+      </if>
+      <if test="processPerson != null">
+        process_person,
+      </if>
+      <if test="processPersonName != null">
+        process_person_name,
+      </if>
+      <if test="processPersonAccount != null">
+        process_person_account,
+      </if>
+      <if test="processTime != null">
+        process_time,
+      </if>
+      <if test="processMethod != null">
+        process_method,
+      </if>
+      <if test="reviewPerson != null">
+        review_person,
+      </if>
+      <if test="reviewPersonName != null">
+        review_person_name,
+      </if>
+      <if test="reviewPersonAccount != null">
+        review_person_account,
+      </if>
+      <if test="reviewTime != null">
+        review_time,
+      </if>
+      <if test="closeTime != null">
+        close_time,
+      </if>
+      <if test="attach != null">
+        attach,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="issueDesc != null">
+        #{issueDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="plant != null">
+        #{plant,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="issueStation != null">
+        #{issueStation,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesNo != null">
+        #{seriesNo,jdbcType=VARCHAR},
+      </if>
+      <if test="qualityType != null">
+        #{qualityType,jdbcType=VARCHAR},
+      </if>
+      <if test="issueCategoryL1Name != null">
+        #{issueCategoryL1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="issueCategoryL1 != null">
+        #{issueCategoryL1,jdbcType=VARCHAR},
+      </if>
+      <if test="issueCategoryL2Name != null">
+        #{issueCategoryL2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="issueCategoryL2 != null">
+        #{issueCategoryL2,jdbcType=VARCHAR},
+      </if>
+      <if test="issueCategoryL3Name != null">
+        #{issueCategoryL3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="issueCategoryL3 != null">
+        #{issueCategoryL3,jdbcType=VARCHAR},
+      </if>
+      <if test="failureLocation != null">
+        #{failureLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="esn != null">
+        #{esn,jdbcType=VARCHAR},
+      </if>
+      <if test="so != null">
+        #{so,jdbcType=VARCHAR},
+      </if>
+      <if test="projectNo != null">
+        #{projectNo,jdbcType=VARCHAR},
+      </if>
+      <if test="engineType != null">
+        #{engineType,jdbcType=VARCHAR},
+      </if>
+      <if test="engineSeries != null">
+        #{engineSeries,jdbcType=VARCHAR},
+      </if>
+      <if test="issueType != null">
+        #{issueType,jdbcType=VARCHAR},
+      </if>
+      <if test="partNo != null">
+        #{partNo,jdbcType=VARCHAR},
+      </if>
+      <if test="partName != null">
+        #{partName,jdbcType=VARCHAR},
+      </if>
+      <if test="vendorCode != null">
+        #{vendorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vendorName != null">
+        #{vendorName,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null">
+        #{qty,jdbcType=INTEGER},
+      </if>
+      <if test="comments != null">
+        #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="isRft != null">
+        #{isRft,jdbcType=VARCHAR},
+      </if>
+      <if test="isEqr != null">
+        #{isEqr,jdbcType=VARCHAR},
+      </if>
+      <if test="isCarry != null">
+        #{isCarry,jdbcType=VARCHAR},
+      </if>
+      <if test="isClaim != null">
+        #{isClaim,jdbcType=VARCHAR},
+      </if>
+      <if test="isCountindex != null">
+        #{isCountindex,jdbcType=VARCHAR},
+      </if>
+      <if test="inputTime != null">
+        #{inputTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inputPerson != null">
+        #{inputPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="inputPresonName != null">
+        #{inputPresonName,jdbcType=VARCHAR},
+      </if>
+      <if test="inputPersonAccount != null">
+        #{inputPersonAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null">
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="subSource != null">
+        #{subSource,jdbcType=VARCHAR},
+      </if>
+      <if test="processStatus != null">
+        #{processStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="processPerson != null">
+        #{processPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="processPersonName != null">
+        #{processPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="processPersonAccount != null">
+        #{processPersonAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="processTime != null">
+        #{processTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processMethod != null">
+        #{processMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewPerson != null">
+        #{reviewPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewPersonName != null">
+        #{reviewPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewPersonAccount != null">
+        #{reviewPersonAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewTime != null">
+        #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeTime != null">
+        #{closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attach != null">
+        #{attach,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cummins.bims.dto.IssueCriteria" resultType="java.lang.Long">
+    select count(*) from t_issue
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_issue
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.number != null">
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueDesc != null">
+        issue_desc = #{record.issueDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plant != null">
+        plant = #{record.plant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueStation != null">
+        issue_station = #{record.issueStation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seriesNo != null">
+        series_no = #{record.seriesNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qualityType != null">
+        quality_type = #{record.qualityType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueCategoryL1Name != null">
+        issue_category_l1_name = #{record.issueCategoryL1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueCategoryL1 != null">
+        issue_category_l1 = #{record.issueCategoryL1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueCategoryL2Name != null">
+        issue_category_l2_name = #{record.issueCategoryL2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueCategoryL2 != null">
+        issue_category_l2 = #{record.issueCategoryL2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueCategoryL3Name != null">
+        issue_category_l3_name = #{record.issueCategoryL3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueCategoryL3 != null">
+        issue_category_l3 = #{record.issueCategoryL3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.failureLocation != null">
+        failure_location = #{record.failureLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.esn != null">
+        esn = #{record.esn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.so != null">
+        so = #{record.so,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectNo != null">
+        project_no = #{record.projectNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.engineType != null">
+        engine_type = #{record.engineType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.engineSeries != null">
+        engine_series = #{record.engineSeries,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueType != null">
+        issue_type = #{record.issueType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partNo != null">
+        part_no = #{record.partNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partName != null">
+        part_name = #{record.partName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vendorCode != null">
+        vendor_code = #{record.vendorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vendorName != null">
+        vendor_name = #{record.vendorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qty != null">
+        qty = #{record.qty,jdbcType=INTEGER},
+      </if>
+      <if test="record.comments != null">
+        comments = #{record.comments,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isRft != null">
+        is_rft = #{record.isRft,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isEqr != null">
+        is_eqr = #{record.isEqr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isCarry != null">
+        is_carry = #{record.isCarry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isClaim != null">
+        is_claim = #{record.isClaim,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isCountindex != null">
+        is_countIndex = #{record.isCountindex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputTime != null">
+        input_time = #{record.inputTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.inputPerson != null">
+        input_person = #{record.inputPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputPresonName != null">
+        input_preson_name = #{record.inputPresonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputPersonAccount != null">
+        input_person_account = #{record.inputPersonAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delflag != null">
+        delflag = #{record.delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subSource != null">
+        sub_source = #{record.subSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processStatus != null">
+        process_status = #{record.processStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processPerson != null">
+        process_person = #{record.processPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processPersonName != null">
+        process_person_name = #{record.processPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processPersonAccount != null">
+        process_person_account = #{record.processPersonAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processTime != null">
+        process_time = #{record.processTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.processMethod != null">
+        process_method = #{record.processMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewPerson != null">
+        review_person = #{record.reviewPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewPersonName != null">
+        review_person_name = #{record.reviewPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewPersonAccount != null">
+        review_person_account = #{record.reviewPersonAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewTime != null">
+        review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.closeTime != null">
+        close_time = #{record.closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.attach != null">
+        attach = #{record.attach,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_issue
+    set id = #{record.id,jdbcType=INTEGER},
+      number = #{record.number,jdbcType=VARCHAR},
+      issue_desc = #{record.issueDesc,jdbcType=VARCHAR},
+      plant = #{record.plant,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR},
+      issue_station = #{record.issueStation,jdbcType=VARCHAR},
+      series_no = #{record.seriesNo,jdbcType=VARCHAR},
+      quality_type = #{record.qualityType,jdbcType=VARCHAR},
+      issue_category_l1_name = #{record.issueCategoryL1Name,jdbcType=VARCHAR},
+      issue_category_l1 = #{record.issueCategoryL1,jdbcType=VARCHAR},
+      issue_category_l2_name = #{record.issueCategoryL2Name,jdbcType=VARCHAR},
+      issue_category_l2 = #{record.issueCategoryL2,jdbcType=VARCHAR},
+      issue_category_l3_name = #{record.issueCategoryL3Name,jdbcType=VARCHAR},
+      issue_category_l3 = #{record.issueCategoryL3,jdbcType=VARCHAR},
+      failure_location = #{record.failureLocation,jdbcType=VARCHAR},
+      esn = #{record.esn,jdbcType=VARCHAR},
+      so = #{record.so,jdbcType=VARCHAR},
+      project_no = #{record.projectNo,jdbcType=VARCHAR},
+      engine_type = #{record.engineType,jdbcType=VARCHAR},
+      engine_series = #{record.engineSeries,jdbcType=VARCHAR},
+      issue_type = #{record.issueType,jdbcType=VARCHAR},
+      part_no = #{record.partNo,jdbcType=VARCHAR},
+      part_name = #{record.partName,jdbcType=VARCHAR},
+      vendor_code = #{record.vendorCode,jdbcType=VARCHAR},
+      vendor_name = #{record.vendorName,jdbcType=VARCHAR},
+      qty = #{record.qty,jdbcType=INTEGER},
+      comments = #{record.comments,jdbcType=VARCHAR},
+      is_rft = #{record.isRft,jdbcType=VARCHAR},
+      is_eqr = #{record.isEqr,jdbcType=VARCHAR},
+      is_carry = #{record.isCarry,jdbcType=VARCHAR},
+      is_claim = #{record.isClaim,jdbcType=VARCHAR},
+      is_countIndex = #{record.isCountindex,jdbcType=VARCHAR},
+      input_time = #{record.inputTime,jdbcType=TIMESTAMP},
+      input_person = #{record.inputPerson,jdbcType=VARCHAR},
+      input_preson_name = #{record.inputPresonName,jdbcType=VARCHAR},
+      input_person_account = #{record.inputPersonAccount,jdbcType=VARCHAR},
+      delflag = #{record.delflag,jdbcType=VARCHAR},
+      sub_source = #{record.subSource,jdbcType=VARCHAR},
+      process_status = #{record.processStatus,jdbcType=VARCHAR},
+      process_person = #{record.processPerson,jdbcType=VARCHAR},
+      process_person_name = #{record.processPersonName,jdbcType=VARCHAR},
+      process_person_account = #{record.processPersonAccount,jdbcType=VARCHAR},
+      process_time = #{record.processTime,jdbcType=TIMESTAMP},
+      process_method = #{record.processMethod,jdbcType=VARCHAR},
+      review_person = #{record.reviewPerson,jdbcType=VARCHAR},
+      review_person_name = #{record.reviewPersonName,jdbcType=VARCHAR},
+      review_person_account = #{record.reviewPersonAccount,jdbcType=VARCHAR},
+      review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
+      close_time = #{record.closeTime,jdbcType=TIMESTAMP},
+      attach = #{record.attach,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cummins.bims.dto.Issue">
+    update t_issue
+    <set>
+      <if test="number != null">
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="issueDesc != null">
+        issue_desc = #{issueDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="plant != null">
+        plant = #{plant,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="issueStation != null">
+        issue_station = #{issueStation,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesNo != null">
+        series_no = #{seriesNo,jdbcType=VARCHAR},
+      </if>
+      <if test="qualityType != null">
+        quality_type = #{qualityType,jdbcType=VARCHAR},
+      </if>
+      <if test="issueCategoryL1Name != null">
+        issue_category_l1_name = #{issueCategoryL1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="issueCategoryL1 != null">
+        issue_category_l1 = #{issueCategoryL1,jdbcType=VARCHAR},
+      </if>
+      <if test="issueCategoryL2Name != null">
+        issue_category_l2_name = #{issueCategoryL2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="issueCategoryL2 != null">
+        issue_category_l2 = #{issueCategoryL2,jdbcType=VARCHAR},
+      </if>
+      <if test="issueCategoryL3Name != null">
+        issue_category_l3_name = #{issueCategoryL3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="issueCategoryL3 != null">
+        issue_category_l3 = #{issueCategoryL3,jdbcType=VARCHAR},
+      </if>
+      <if test="failureLocation != null">
+        failure_location = #{failureLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="esn != null">
+        esn = #{esn,jdbcType=VARCHAR},
+      </if>
+      <if test="so != null">
+        so = #{so,jdbcType=VARCHAR},
+      </if>
+      <if test="projectNo != null">
+        project_no = #{projectNo,jdbcType=VARCHAR},
+      </if>
+      <if test="engineType != null">
+        engine_type = #{engineType,jdbcType=VARCHAR},
+      </if>
+      <if test="engineSeries != null">
+        engine_series = #{engineSeries,jdbcType=VARCHAR},
+      </if>
+      <if test="issueType != null">
+        issue_type = #{issueType,jdbcType=VARCHAR},
+      </if>
+      <if test="partNo != null">
+        part_no = #{partNo,jdbcType=VARCHAR},
+      </if>
+      <if test="partName != null">
+        part_name = #{partName,jdbcType=VARCHAR},
+      </if>
+      <if test="vendorCode != null">
+        vendor_code = #{vendorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vendorName != null">
+        vendor_name = #{vendorName,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null">
+        qty = #{qty,jdbcType=INTEGER},
+      </if>
+      <if test="comments != null">
+        comments = #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="isRft != null">
+        is_rft = #{isRft,jdbcType=VARCHAR},
+      </if>
+      <if test="isEqr != null">
+        is_eqr = #{isEqr,jdbcType=VARCHAR},
+      </if>
+      <if test="isCarry != null">
+        is_carry = #{isCarry,jdbcType=VARCHAR},
+      </if>
+      <if test="isClaim != null">
+        is_claim = #{isClaim,jdbcType=VARCHAR},
+      </if>
+      <if test="isCountindex != null">
+        is_countIndex = #{isCountindex,jdbcType=VARCHAR},
+      </if>
+      <if test="inputTime != null">
+        input_time = #{inputTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inputPerson != null">
+        input_person = #{inputPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="inputPresonName != null">
+        input_preson_name = #{inputPresonName,jdbcType=VARCHAR},
+      </if>
+      <if test="inputPersonAccount != null">
+        input_person_account = #{inputPersonAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null">
+        delflag = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="subSource != null">
+        sub_source = #{subSource,jdbcType=VARCHAR},
+      </if>
+      <if test="processStatus != null">
+        process_status = #{processStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="processPerson != null">
+        process_person = #{processPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="processPersonName != null">
+        process_person_name = #{processPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="processPersonAccount != null">
+        process_person_account = #{processPersonAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="processTime != null">
+        process_time = #{processTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processMethod != null">
+        process_method = #{processMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewPerson != null">
+        review_person = #{reviewPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewPersonName != null">
+        review_person_name = #{reviewPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewPersonAccount != null">
+        review_person_account = #{reviewPersonAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewTime != null">
+        review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeTime != null">
+        close_time = #{closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attach != null">
+        attach = #{attach,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cummins.bims.dto.Issue">
+    update t_issue
+    set number = #{number,jdbcType=VARCHAR},
+      issue_desc = #{issueDesc,jdbcType=VARCHAR},
+      plant = #{plant,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      issue_station = #{issueStation,jdbcType=VARCHAR},
+      series_no = #{seriesNo,jdbcType=VARCHAR},
+      quality_type = #{qualityType,jdbcType=VARCHAR},
+      issue_category_l1_name = #{issueCategoryL1Name,jdbcType=VARCHAR},
+      issue_category_l1 = #{issueCategoryL1,jdbcType=VARCHAR},
+      issue_category_l2_name = #{issueCategoryL2Name,jdbcType=VARCHAR},
+      issue_category_l2 = #{issueCategoryL2,jdbcType=VARCHAR},
+      issue_category_l3_name = #{issueCategoryL3Name,jdbcType=VARCHAR},
+      issue_category_l3 = #{issueCategoryL3,jdbcType=VARCHAR},
+      failure_location = #{failureLocation,jdbcType=VARCHAR},
+      esn = #{esn,jdbcType=VARCHAR},
+      so = #{so,jdbcType=VARCHAR},
+      project_no = #{projectNo,jdbcType=VARCHAR},
+      engine_type = #{engineType,jdbcType=VARCHAR},
+      engine_series = #{engineSeries,jdbcType=VARCHAR},
+      issue_type = #{issueType,jdbcType=VARCHAR},
+      part_no = #{partNo,jdbcType=VARCHAR},
+      part_name = #{partName,jdbcType=VARCHAR},
+      vendor_code = #{vendorCode,jdbcType=VARCHAR},
+      vendor_name = #{vendorName,jdbcType=VARCHAR},
+      qty = #{qty,jdbcType=INTEGER},
+      comments = #{comments,jdbcType=VARCHAR},
+      is_rft = #{isRft,jdbcType=VARCHAR},
+      is_eqr = #{isEqr,jdbcType=VARCHAR},
+      is_carry = #{isCarry,jdbcType=VARCHAR},
+      is_claim = #{isClaim,jdbcType=VARCHAR},
+      is_countIndex = #{isCountindex,jdbcType=VARCHAR},
+      input_time = #{inputTime,jdbcType=TIMESTAMP},
+      input_person = #{inputPerson,jdbcType=VARCHAR},
+      input_preson_name = #{inputPresonName,jdbcType=VARCHAR},
+      input_person_account = #{inputPersonAccount,jdbcType=VARCHAR},
+      delflag = #{delflag,jdbcType=VARCHAR},
+      sub_source = #{subSource,jdbcType=VARCHAR},
+      process_status = #{processStatus,jdbcType=VARCHAR},
+      process_person = #{processPerson,jdbcType=VARCHAR},
+      process_person_name = #{processPersonName,jdbcType=VARCHAR},
+      process_person_account = #{processPersonAccount,jdbcType=VARCHAR},
+      process_time = #{processTime,jdbcType=TIMESTAMP},
+      process_method = #{processMethod,jdbcType=VARCHAR},
+      review_person = #{reviewPerson,jdbcType=VARCHAR},
+      review_person_name = #{reviewPersonName,jdbcType=VARCHAR},
+      review_person_account = #{reviewPersonAccount,jdbcType=VARCHAR},
+      review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      close_time = #{closeTime,jdbcType=TIMESTAMP},
+      attach = #{attach,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectById" parameterType="java.lang.Integer" resultType="map">
+    SELECT
+        t.id,
+        t.number,
+        t.issue_desc,
+        t.plant,
+        t.area,
+        t.issue_station,
+        t.series_no,
+        t.quality_type,
+        t.issue_category_l1_name,
+        t.issue_category_l1,
+        t.issue_category_l2_name,
+        t.issue_category_l2,
+        t.issue_category_l3_name,
+        t.issue_category_l3,
+        t.failure_location,
+        t.esn,
+        t.so,
+        t.project_no,
+        t.engine_type,
+        t.engine_series,
+        t.issue_type,
+        t.part_no,
+        t.part_name,
+        t.vendor_code,
+        t.vendor_name,
+        t.qty,
+        t.comments,
+        t.is_rft,
+        t.is_eqr,
+        t.is_carry,
+        t.is_claim,
+        t.is_countIndex,
+        t.input_time,
+        t.input_person,
+        t.input_preson_name,
+        t.input_person_account,
+        t.delflag,
+        t.sub_source,
+        t.process_status,
+        t.process_person,
+        t.process_person_name,
+        t.process_person_account,
+        t.process_time,
+        t.process_method,
+        t.review_person,
+        t.review_person_name,
+        t.review_person_account,
+        t.review_time,
+        t.close_time,
+        t.attach,
+        p.NAME AS plantname,
+        a.NAME AS areaname,
+        l1.NAME AS l1name,
+        f.NAME AS locationname,
+        l2.NAME AS l2name,
+        l3.NAME AS l3name
+    FROM
+        t_issue t
+        LEFT JOIN dict p ON t.plant = p.id
+        LEFT JOIN dict a ON t.area = a.id
+        LEFT JOIN dict f ON t.failure_location = f.id
+        LEFT JOIN dict l1 ON t.issue_category_l1 = l1.id
+        LEFT JOIN dict l2 ON t.issue_category_l2 = l2.id
+        LEFT JOIN dict l3 ON t.issue_category_l3 = l3.id
+    WHERE
+        t.id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="getList" parameterType="com.cummins.model.SearchParam" resultMap="IssueResultMap">
+    SELECT t.* FROM (SELECT DISTINCT
+        t.id,
+        t.number,
+        t.issue_desc,
+        t.plant,
+        t.area,
+        t.issue_station,
+        t.series_no,
+        t.quality_type,
+        t.issue_category_l1_name,
+        t.issue_category_l1,
+        t.issue_category_l2_name,
+        t.issue_category_l2,
+        t.issue_category_l3_name,
+        t.issue_category_l3,
+        t.failure_location,
+        t.esn,
+        t.so,
+        t.project_no,
+        t.engine_type,
+        t.engine_series,
+        t.issue_type,
+        t.part_no,
+        t.part_name,
+        t.vendor_code,
+        t.vendor_name,
+        t.qty,
+        t.comments,
+        t.is_rft,
+        t.is_eqr,
+        t.is_carry,
+        t.is_claim,
+        t.is_countIndex,
+        t.input_time,
+        t.input_person,
+        t.input_preson_name,
+        t.input_person_account,
+        t.delflag,
+        t.sub_source,
+        t.process_status,
+        t.process_person,
+        t.process_person_name,
+        t.process_person_account,
+        t.process_time,
+        t.process_method,
+        t.review_person,
+        t.review_person_name,
+        t.review_person_account,
+        t.review_time,
+        t.close_time,
+        t.attach,
+        p.NAME AS plantname,
+        a.NAME AS areaname,
+        l1.NAME AS l1name,
+        f.NAME AS locationname,
+        l2.NAME AS l2name,
+        l3.NAME AS l3name,
+        sh.id AS shId,
+        d.process_person_account as person_account
+    FROM
+        t_issue t
+        LEFT JOIN dict p ON t.plant = p.id
+        LEFT JOIN dict a ON t.area = a.id
+        LEFT JOIN dict f ON t.failure_location = f.id
+        LEFT JOIN dict l1 ON t.issue_category_l1 = l1.id
+        LEFT JOIN dict l2 ON t.issue_category_l2 = l2.id
+        LEFT JOIN dict l3 ON t.issue_category_l3 = l3.id
+        LEFT JOIN issue_after_sale sh ON t.id = sh.back1
+        LEFT JOIN deal_tool_person d ON t.id = d.issue_id
+    WHERE
+        1=1
+      <if test="searchParam.plant != null and searchParam.plant !=''">
+          AND t.plant = #{searchParam.plant}
+      </if>
+    <if test="searchParam.area != null and searchParam.area !=''">
+      AND t.area = #{searchParam.area}
+    </if>
+
+    <if test="searchParam.subSource != null and searchParam.subSource !=''">
+      AND t.sub_source = #{searchParam.subSource}
+    </if>
+    <if test="searchParam.isEqr != null and searchParam.isEqr !=''">
+      AND t.is_eqr = #{searchParam.isEqr}
+    </if>
+    <if test="searchParam.processStatus != null and searchParam.processStatus !=''">
+      AND t.process_status in
+        <foreach collection="searchParam.processStatus.split(',')" item="status"
+                 index="index" open="(" close=")" separator=",">
+            (#{status})
+        </foreach>
+    </if>
+    <if test="searchParam.issueCategoryL1 != null and searchParam.issueCategoryL1 !=''">
+      AND t.issue_category_l1 = #{searchParam.issueCategoryL1}
+    </if>
+    <if test="searchParam.content != null and searchParam.content !=''">
+      AND CONCAT(IFNULL(t.number,''),IFNULL(t.issue_desc,''),IFNULL(t.plant,''),IFNULL( t.so, '' ) ,
+      IFNULL( t.esn, '' ) ,
+      IFNULL( t.vendor_code, '' ) ,
+      IFNULL( t.engine_type, '' ) ,
+      IFNULL( t.part_no, '' ) ) LIKE CONCAT('%',#{searchParam.content},'%')
+    </if>
+    <if test="searchParam.number != null and searchParam.number !=''">
+      AND t.number LIKE CONCAT('%',#{searchParam.number},'%')
+    </if>
+    <if test="searchParam.processPerson != null and searchParam.processPerson !=''">
+      AND t.process_person = #{searchParam.processPerson}
+    </if>
+      <if test="searchParam.processPersonAccount != null and searchParam.processPersonAccount !=''">
+          AND t.input_person_account = #{searchParam.processPersonAccount}
+      </if>
+    <if test="searchParam.processPersonName != null and searchParam.processPersonName !=''">
+      AND t.process_person_name LIKE CONCAT('%',#{searchParam.processPersonName},'%')
+    </if>
+    <!--<if test="searchParam.processPersonAccount != null and searchParam.processPersonAccount !=''">
+      or t.process_person_account = #{searchParam.processPersonAccount}
+      or #{searchParam.processPersonAccount} IN (SELECT d.process_person_account FROM deal_tool_person d WHERE d.issue_area LIKE CONCAT( '%', #{searchParam.qualityType}, '%' ) )
+    </if>-->
+    <if test="searchParam.isRft != null and searchParam.isRft !=''">
+      AND t.is_rft = #{searchParam.isRft}
+    </if>
+    <if test="searchParam.isClaim != null and searchParam.isClaim !=''">
+      AND t.is_claim = #{searchParam.isClaim}
+    </if>
+    <!--<if test="searchParam.startTime != null and searchParam.startTime != '' and searchParam.endTime != null and searchParam.endTime != ''">
+      AND t.input_time BETWEEN #{searchParam.startTime}" 00:00:00" AND #{searchParam.endTime}" 23:59:59"
+    </if>-->
+    <!--<if test="searchParam.startTime != null and searchParam.startTime != ''">AND t.input_time <![CDATA[>=]]> DATE_FORMAT(#{searchParam.startTime},'%Y-%m-%d 00:00:00')</if>
+    <if test="searchParam.endTime != null and searchParam.endTime != ''">AND t.close_time <![CDATA[<=]]> DATE_FORMAT(#{searchParam.endTime},'%Y-%m-%d 23:59:59')</if>-->
+      AND t.delflag = 1
+    <if test="searchParam.processPersonAccount != null and searchParam.processPersonAccount !=''">
+      or t.process_person_account = #{searchParam.processPersonAccount}
+      or d.process_person_account = #{searchParam.processPersonAccount}
+    </if>
+    ORDER BY
+        id DESC ) t
+        where t.delflag = 1
+    <if test="searchParam.partNoOrEsn != null and searchParam.partNoOrEsn !=''">
+      AND t.esn LIKE CONCAT('%',#{searchParam.partNoOrEsn},'%')
+      OR t.part_no LIKE CONCAT('%',#{searchParam.partNoOrEsn},'%')
+    </if>
+    <if test="searchParam.qualityType != null and searchParam.qualityType !=''">
+      AND t.quality_type LIKE CONCAT('%',#{searchParam.qualityType},'%')
+    </if>
+    <if test="searchParam.issueCategoryL1Name != null and searchParam.issueCategoryL1Name !=''">
+      AND t.issue_category_l1_name LIKE CONCAT('%',#{searchParam.issueCategoryL1Name},'%')
+    </if>
+      <if test="searchParam.plant != null and searchParam.plant !=''">
+          AND t.plant = #{searchParam.plant}
+      </if>
+      <if test="searchParam.number != null and searchParam.number !=''">
+          AND t.number LIKE CONCAT('%',#{searchParam.number},'%')
+      </if>
+      <if test="searchParam.processPersonName != null and searchParam.processPersonName !=''">
+          AND t.process_person_name LIKE CONCAT('%',#{searchParam.processPersonName},'%')
+      </if>
+      <if test="searchParam.startTime != null and searchParam.startTime != ''">AND t.input_time <![CDATA[>=]]> DATE_FORMAT(#{searchParam.startTime},'%Y-%m-%d 00:00:00')</if>
+      <if test="searchParam.endTime != null and searchParam.endTime != ''">AND t.close_time <![CDATA[<=]]> DATE_FORMAT(#{searchParam.endTime},'%Y-%m-%d 23:59:59')</if>
+    <if test="searchParam.processStatus != null and searchParam.processStatus !=''">
+      AND t.process_status in
+      <foreach collection="searchParam.processStatus.split(',')" item="status"
+               index="index" open="(" close=")" separator=",">
+        (#{status})
+      </foreach>
+    </if>
+    <if test="searchParam.isEqr != null and searchParam.isEqr !=''">
+      AND t.is_eqr = #{searchParam.isEqr}
+    </if>
+    <if test="searchParam.content != null and searchParam.content != ''">
+      OR t.so LIKE CONCAT('%',#{searchParam.content},'%')
+      OR t.esn LIKE CONCAT('%',#{searchParam.content},'%')
+      OR t.part_no LIKE CONCAT('%',#{searchParam.content},'%')
+      OR t.vendor_code LIKE CONCAT('%',#{searchParam.content},'%')
+      OR t.engine_type LIKE CONCAT('%',#{searchParam.content},'%')
+      OR t.issue_desc LIKE CONCAT('%',#{searchParam.content},'%')
+    </if>
+    GROUP BY t.id
+    ORDER BY
+    id DESC
+  </select>
+
+  <select id="selectMaxSn" parameterType="String" resultType="String">
+          SELECT
+        max( substring( t.number, 10, 5 ) ) number
+    FROM
+        (
+    SELECT
+        a.id AS id,
+        a.number AS number
+    FROM
+        t_issue a WHERE a.delflag = 1 UNION ALL
+    SELECT
+        b.id AS id,
+        b.number AS number
+    FROM
+        issue_after_sale b
+        ) t
+    WHERE
+        t.number LIKE concat( '%', #{number}, '%' )
+    ORDER BY
+        t.id DESC
+  </select>
+
+
+  <select id="getIssueAmount" parameterType="com.cummins.model.SearchParam" resultType="map">
+    SELECT quality_type,count(*) AS counts from t_issue WHERE process_status = 0 AND delflag = 1 GROUP BY quality_type
+  </select>
+
+
+  <select id="getMyDeskAmount" parameterType="com.cummins.bims.dto.IssueParam" resultType="map">
+    SELECT
+    t.process_status,
+    t.process_person,
+    t.counts
+    FROM
+    (
+    (
+    SELECT
+    process_status,
+    process_person,
+    process_person_account,
+    COUNT( * ) AS counts
+    FROM
+    t_issue t
+    WHERE
+    t.process_person_account = #{issueParam.processPersonAccount}
+    AND t.delflag = 1
+    AND t.process_status IN ( 1, 2, 3, 4, 5, 6, 7, 8 )
+    GROUP BY
+    t.process_person_account
+    ) UNION
+    (
+    SELECT
+    process_status,
+    process_person,
+    process_person_account,
+    COUNT( * ) AS counts
+    FROM
+    t_issue t
+    WHERE
+    t.process_person_account = #{issueParam.processPersonAccount}
+    AND t.delflag = 1
+    AND t.process_status IN ( 9 )
+    GROUP BY
+    t.process_status
+    )
+    ) t
+    <!--SELECT
+    process_status,
+    process_person,
+    count( * ) AS counts
+    FROM
+    t_issue t
+     WHERE 1=1
+    AND t.delflag = 1
+    <if test="issueParam.processPerson != null and issueParam.processPerson !=''">
+      AND t.process_person = #{issueParam.processPerson}
+    </if>
+    <if test="issueParam.processStatus != null and issueParam.processStatus !=''">
+      AND t.process_status = #{issueParam.processStatus}
+    </if>GROUP BY t.process_status-->
+  </select>
+
+  <!-- pad端分页查询begin -->
+  <select id="selectByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select t.id,t.number,t.issue_desc,t.issue_category_l3,t.input_time,t.process_status,t.quality_type from t_issue t
+    where t.quality_type=#{map.temp} and t.input_person=#{map.personId} and delflag=1
+    <if test="map.searchText != null and map.searchText != ''">
+      AND (t.esn LIKE CONCAT('%',#{map.searchText},'%')
+      OR t.part_no LIKE CONCAT('%',#{map.searchText},'%') )
+    </if>
+    order by input_time desc
+    limit #{map.num},#{map.size}
+  </select>
+  <!-- pad端分页查询end -->
+
+
+  <select id="selectbyrole" parameterType="java.util.Map" resultType="Integer">
+
+  select count(id) FROM  t_issue where   process_status = '0' AND delflag = '1' and quality_type =#{map.area}
+    <if test="map.isRft != null and map.isRft != ''">
+      and is_rft=#{map.isRft}
+    </if>
+    <if test="map.plant != null and map.plant != ''">
+      and plant=#{map.plant}
+    </if>
+    <if test="map.account != null and map.account != ''">
+      AND process_person_account = #{map.account}
+    </if>
+  </select>
+
+  <!-- 各区条件查询 -->
+  <select id="getIssueListByArea" parameterType="com.cummins.model.SearchParam" resultMap="MyIssueMap">
+    SELECT
+    t.*
+    FROM
+    (
+    SELECT
+        t1.area,
+        t1.id,
+        d1.NAME AS plantname,
+        t1.number,
+        t1.issue_desc,
+        t1.part_no,
+        t1.esn,
+        t1.so,
+        t1.engine_type,
+        t1.vendor_code,
+        t1.issue_category_l1,
+        d2.NAME AS issue_category_l1_name,
+        t1.issue_category_l1_name AS l1name,
+        t1.input_time,
+        t1.close_time,
+        t1.input_preson_name,
+        t1.process_person_name,
+        t1.is_eqr,
+        t1.process_status,
+        t1.quality_type,
+        t1.is_rft,
+        t1.sub_source,
+        t1.delflag,
+        t1.issue_station
+    FROM
+        (
+        (
+    SELECT
+        i1.*
+    FROM
+        t_issue i1
+        RIGHT JOIN deal_tool_person p ON i1.id = p.issue_id
+    WHERE
+        p.status != 0
+        <if test="param.account != null and param.account != ''">
+            AND p.process_person_account = #{param.account}
+        </if>
+        ) UNION
+        ( SELECT i2.* FROM t_issue i2
+        WHERE i2.id > 0
+        <if test="param.account != null and param.account != ''">
+            AND i2.process_person_account = #{param.account}
+        </if>
+        )
+        ) t1,
+        dict d1,
+        dict d2
+    WHERE
+        t1.plant = d1.id
+        AND t1.issue_category_l1 = d2.id
+        <if test="param.qualityType != null and param.qualityType != ''">
+            AND t1.quality_type = #{param.qualityType}
+        </if>
+        <if test="param.plant != null and param.plant != ''">
+            AND t1.plant = #{param.plant}
+        </if>
+        <if test="param.area != null and param.area != ''">
+            AND t1.area = #{param.area}
+        </if>
+        <if test="param.isEqr != null and param.isEqr != ''">
+            AND t1.is_eqr = #{param.isEqr}
+        </if>
+        <if test="param.processStatus != null and param.processStatus != ''">
+            AND t1.process_status IN (#{param.processStatus})
+        </if>
+        <if test="param.processPersonName != null and param.processPersonName != ''">
+            AND t1.process_person_name LIKE "%"#{param.processPersonName}"%"
+        </if>
+        <if test="param.number != null and param.number != ''">
+            AND t1.number LIKE "%"#{param.number}"%"
+        </if>
+        <if test="param.startTime != null and param.startTime != '' and param.endTime != null and param.endTime != ''">
+            AND t1.input_time BETWEEN #{param.startTime}" 00:00:00" AND #{param.endTime}" 23:59:59"
+        </if>
+        <if test="param.isRft != null and param.isRft != ''">
+          AND t1.is_rft = #{param.isRft}
+        </if>
+        <if test="param.issueCategoryL1Name != null and param.issueCategoryL1Name !=''">
+          AND t1.issue_category_l1_name LIKE CONCAT('%',#{param.issueCategoryL1Name},'%')
+        </if>
+    ORDER BY t1.id DESC) t
+    WHERE
+    1 = 1
+    AND t.delflag = 1
+    <if test="param.content != null and param.content != ''">
+      AND t.so LIKE CONCAT('%',#{param.content},'%')
+      OR t.esn LIKE CONCAT('%',#{param.content},'%')
+      OR t.part_no LIKE CONCAT('%',#{param.content},'%')
+      OR t.vendor_code LIKE CONCAT('%',#{param.content},'%')
+      OR t.engine_type LIKE CONCAT('%',#{param.content},'%')
+      OR t.issue_desc LIKE CONCAT('%',#{param.content},'%')
+    </if>
+    GROUP BY t.id
+  </select>
+
+  <!-- 工作台查询问题列表 -->
+  <select id="getIssueListByStatus" parameterType="java.util.Map" resultMap="MyIssueMap">
+    SELECT
+        t1.id,
+        d1.NAME AS plantname,
+        t1.number,
+        t1.issue_desc,
+        d2.NAME AS issue_category_l1,
+        t1.input_time,
+        t1.close_time,
+        t1.input_preson_name,
+        t1.process_person_name,
+        t1.is_eqr,
+        t1.process_status,
+        t1.quality_type,
+        t1.is_rft,
+        t1.sub_source
+    FROM
+        (
+        (
+    SELECT
+        i1.*
+    FROM
+        t_issue i1
+        RIGHT JOIN deal_tool_person p ON i1.id = p.issue_id
+    WHERE p.status != 0
+        <if test="map.account != null and map.account != ''">
+            AND p.process_person_account = #{map.account}
+        </if>
+        <!--<if test="map.status == null or map.status != 7">
+            AND p.STATUS = 1
+        </if>
+        <if test="map.status != null and map.status == 7">
+            AND p.STATUS > 1
+        </if>-->
+        ) UNION
+        ( SELECT i2.* FROM t_issue i2
+        WHERE i2.id > 0
+        <if test="map.account != null and map.account != ''">
+            AND i2.process_person_account = #{map.account}
+            AND i2.process_status != '0'
+        </if>
+        <!--<if test="map.status == null or map.status != 7">
+            AND i2.process_status != '7'
+        </if>
+        <if test="map.status != null and map.status == 7">
+            AND i2.process_status = '7'
+        </if>-->
+        )
+        ) t1,
+        dict d1,
+        dict d2
+    WHERE
+        t1.plant = d1.id
+        AND t1.issue_category_l1 = d2.id
+        <if test="map.status == null or map.status != 7">
+            AND t1.process_status != '7'
+        </if>
+        <if test="map.status != null and map.status == 7">
+            AND t1.process_status = '7'
+        </if>
+    ORDER BY t1.input_time DESC
+  </select>
+
+  <!--查询待处理标签数据-->
+  <select id="getIssueById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+      SELECT
+        t.id,
+        t.number,
+        t.input_time,
+        t.engine_type,
+        t.part_no,
+        t.esn,
+        t.part_name,
+        t.series_no,
+        d.NAME AS area,
+        t.issue_desc,
+        t.input_preson_name,
+        t.vendor_code,
+        t.vendor_name,
+        t.qty
+      FROM
+        t_issue t
+      LEFT JOIN dict d ON t.area = d.id
+      WHERE
+        <if test="id != null and id != ''">
+          t.id = #{id}
+        </if>
+  </select>
+</mapper>

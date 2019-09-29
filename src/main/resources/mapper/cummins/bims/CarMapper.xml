@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cummins.bims.dao.CarMapper">
+  <resultMap id="BaseResultMap" type="com.cummins.bims.dto.Car">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="issue_id" jdbcType="INTEGER" property="issueId" />
+    <result column="tool_id" jdbcType="INTEGER" property="toolId" />
+    <result column="car_no" jdbcType="VARCHAR" property="carNo" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="sponsor" jdbcType="VARCHAR" property="sponsor" />
+    <result column="sponsor_name" jdbcType="VARCHAR" property="sponsorName" />
+    <result column="duty_dept" jdbcType="VARCHAR" property="dutyDept" />
+    <result column="duty_person" jdbcType="VARCHAR" property="dutyPerson" />
+    <result column="duty_person_name" jdbcType="VARCHAR" property="dutyPersonName" />
+    <result column="confirm_person" jdbcType="VARCHAR" property="confirmPerson" />
+    <result column="confirm_person_name" jdbcType="VARCHAR" property="confirmPersonName" />
+    <result column="car_type" jdbcType="VARCHAR" property="carType" />
+    <result column="issue_title" jdbcType="VARCHAR" property="issueTitle" />
+    <result column="happen_area" jdbcType="VARCHAR" property="happenArea" />
+    <result column="step_one" jdbcType="VARCHAR" property="stepOne" />
+    <result column="amount" jdbcType="INTEGER" property="amount" />
+    <result column="email_receive" jdbcType="VARCHAR" property="emailReceive" />
+    <result column="aim_close_date" jdbcType="TIMESTAMP" property="aimCloseDate" />
+    <result column="step_two" jdbcType="VARCHAR" property="stepTwo" />
+    <result column="breakpoint" jdbcType="VARCHAR" property="breakpoint" />
+    <result column="improve" jdbcType="VARCHAR" property="improve" />
+    <result column="update_file" jdbcType="VARCHAR" property="updateFile" />
+    <result column="rac" jdbcType="VARCHAR" property="rac" />
+    <result column="check_file" jdbcType="VARCHAR" property="checkFile" />
+    <result column="esn_form" jdbcType="VARCHAR" property="esnForm" />
+    <result column="esn_to" jdbcType="VARCHAR" property="esnTo" />
+    <result column="esn_form_ncm_qt" jdbcType="INTEGER" property="esnFormNcmQt" />
+    <result column="date_form" jdbcType="VARCHAR" property="dateForm" />
+    <result column="date_to" jdbcType="VARCHAR" property="dateTo" />
+    <result column="date_form_ncm_qty" jdbcType="INTEGER" property="dateFormNcmQty" />
+    <result column="mqv" jdbcType="VARCHAR" property="mqv" />
+    <result column="complete_date" jdbcType="TIMESTAMP" property="completeDate" />
+    <result column="review_status" jdbcType="INTEGER" property="reviewStatus" />
+    <result column="review_person" jdbcType="VARCHAR" property="reviewPerson" />
+    <result column="review_person_name" jdbcType="VARCHAR" property="reviewPersonName" />
+    <result column="review_date" jdbcType="TIMESTAMP" property="reviewDate" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="attachment" jdbcType="VARCHAR" property="attachment" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, issue_id, tool_id, car_no, create_date, sponsor, sponsor_name, duty_dept, duty_person, 
+    duty_person_name, confirm_person, confirm_person_name, car_type, issue_title, happen_area, 
+    step_one, amount, email_receive, aim_close_date, step_two, breakpoint, improve, update_file, 
+    rac, check_file, esn_form, esn_to, esn_form_ncm_qt, date_form, date_to, date_form_ncm_qty, 
+    mqv, complete_date, review_status, review_person, review_person_name, review_date, 
+    picture, attachment
+  </sql>
+  <select id="selectByExample" parameterType="com.cummins.bims.dto.CarCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from car
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from car
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cummins.bims.dto.CarCriteria">
+    delete from car
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cummins.bims.dto.Car" useGeneratedKeys="true" keyProperty="id">
+    insert into car (id, issue_id, tool_id, 
+      car_no, create_date, sponsor, 
+      sponsor_name, duty_dept, duty_person, 
+      duty_person_name, confirm_person, confirm_person_name, 
+      car_type, issue_title, happen_area, 
+      step_one, amount, email_receive, 
+      aim_close_date, step_two, breakpoint, 
+      improve, update_file, rac, 
+      check_file, esn_form, esn_to, 
+      esn_form_ncm_qt, date_form, date_to, 
+      date_form_ncm_qty, mqv, complete_date, 
+      review_status, review_person, review_person_name, 
+      review_date, picture, attachment
+      )
+    values (#{id,jdbcType=INTEGER}, #{issueId,jdbcType=INTEGER}, #{toolId,jdbcType=INTEGER}, 
+      #{carNo,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{sponsor,jdbcType=VARCHAR}, 
+      #{sponsorName,jdbcType=VARCHAR}, #{dutyDept,jdbcType=VARCHAR}, #{dutyPerson,jdbcType=VARCHAR}, 
+      #{dutyPersonName,jdbcType=VARCHAR}, #{confirmPerson,jdbcType=VARCHAR}, #{confirmPersonName,jdbcType=VARCHAR}, 
+      #{carType,jdbcType=VARCHAR}, #{issueTitle,jdbcType=VARCHAR}, #{happenArea,jdbcType=VARCHAR},
+      #{stepOne,jdbcType=VARCHAR}, #{amount,jdbcType=INTEGER}, #{emailReceive,jdbcType=VARCHAR}, 
+      #{aimCloseDate,jdbcType=TIMESTAMP}, #{stepTwo,jdbcType=VARCHAR}, #{breakpoint,jdbcType=VARCHAR}, 
+      #{improve,jdbcType=VARCHAR}, #{updateFile,jdbcType=VARCHAR}, #{rac,jdbcType=VARCHAR}, 
+      #{checkFile,jdbcType=VARCHAR}, #{esnForm,jdbcType=VARCHAR}, #{esnTo,jdbcType=VARCHAR}, 
+      #{esnFormNcmQt,jdbcType=INTEGER}, #{dateForm,jdbcType=VARCHAR}, #{dateTo,jdbcType=VARCHAR}, 
+      #{dateFormNcmQty,jdbcType=INTEGER}, #{mqv,jdbcType=VARCHAR}, #{completeDate,jdbcType=TIMESTAMP}, 
+      #{reviewStatus,jdbcType=INTEGER}, #{reviewPerson,jdbcType=VARCHAR}, #{reviewPersonName,jdbcType=VARCHAR}, 
+      #{reviewDate,jdbcType=TIMESTAMP}, #{picture,jdbcType=VARCHAR}, #{attachment,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cummins.bims.dto.Car" useGeneratedKeys="true" keyProperty="id">
+    insert into car
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="issueId != null">
+        issue_id,
+      </if>
+      <if test="toolId != null">
+        tool_id,
+      </if>
+      <if test="carNo != null">
+        car_no,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="sponsor != null">
+        sponsor,
+      </if>
+      <if test="sponsorName != null">
+        sponsor_name,
+      </if>
+      <if test="dutyDept != null">
+        duty_dept,
+      </if>
+      <if test="dutyPerson != null">
+        duty_person,
+      </if>
+      <if test="dutyPersonName != null">
+        duty_person_name,
+      </if>
+      <if test="confirmPerson != null">
+        confirm_person,
+      </if>
+      <if test="confirmPersonName != null">
+        confirm_person_name,
+      </if>
+      <if test="carType != null">
+        car_type,
+      </if>
+      <if test="issueTitle != null">
+        issue_title,
+      </if>
+      <if test="happenArea != null">
+        happen_area,
+      </if>
+      <if test="stepOne != null">
+        step_one,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="emailReceive != null">
+        email_receive,
+      </if>
+      <if test="aimCloseDate != null">
+        aim_close_date,
+      </if>
+      <if test="stepTwo != null">
+        step_two,
+      </if>
+      <if test="breakpoint != null">
+        breakpoint,
+      </if>
+      <if test="improve != null">
+        improve,
+      </if>
+      <if test="updateFile != null">
+        update_file,
+      </if>
+      <if test="rac != null">
+        rac,
+      </if>
+      <if test="checkFile != null">
+        check_file,
+      </if>
+      <if test="esnForm != null">
+        esn_form,
+      </if>
+      <if test="esnTo != null">
+        esn_to,
+      </if>
+      <if test="esnFormNcmQt != null">
+        esn_form_ncm_qt,
+      </if>
+      <if test="dateForm != null">
+        date_form,
+      </if>
+      <if test="dateTo != null">
+        date_to,
+      </if>
+      <if test="dateFormNcmQty != null">
+        date_form_ncm_qty,
+      </if>
+      <if test="mqv != null">
+        mqv,
+      </if>
+      <if test="completeDate != null">
+        complete_date,
+      </if>
+      <if test="reviewStatus != null">
+        review_status,
+      </if>
+      <if test="reviewPerson != null">
+        review_person,
+      </if>
+      <if test="reviewPersonName != null">
+        review_person_name,
+      </if>
+      <if test="reviewDate != null">
+        review_date,
+      </if>
+      <if test="picture != null">
+        picture,
+      </if>
+      <if test="attachment != null">
+        attachment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="issueId != null">
+        #{issueId,jdbcType=INTEGER},
+      </if>
+      <if test="toolId != null">
+        #{toolId,jdbcType=INTEGER},
+      </if>
+      <if test="carNo != null">
+        #{carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sponsor != null">
+        #{sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="sponsorName != null">
+        #{sponsorName,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyDept != null">
+        #{dutyDept,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyPerson != null">
+        #{dutyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyPersonName != null">
+        #{dutyPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmPerson != null">
+        #{confirmPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmPersonName != null">
+        #{confirmPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="carType != null">
+        #{carType,jdbcType=VARCHAR},
+      </if>
+      <if test="issueTitle != null">
+        #{issueTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="happenArea != null">
+        #{happenArea,jdbcType=VARCHAR},
+      </if>
+      <if test="stepOne != null">
+        #{stepOne,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="emailReceive != null">
+        #{emailReceive,jdbcType=VARCHAR},
+      </if>
+      <if test="aimCloseDate != null">
+        #{aimCloseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stepTwo != null">
+        #{stepTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="breakpoint != null">
+        #{breakpoint,jdbcType=VARCHAR},
+      </if>
+      <if test="improve != null">
+        #{improve,jdbcType=VARCHAR},
+      </if>
+      <if test="updateFile != null">
+        #{updateFile,jdbcType=VARCHAR},
+      </if>
+      <if test="rac != null">
+        #{rac,jdbcType=VARCHAR},
+      </if>
+      <if test="checkFile != null">
+        #{checkFile,jdbcType=VARCHAR},
+      </if>
+      <if test="esnForm != null">
+        #{esnForm,jdbcType=VARCHAR},
+      </if>
+      <if test="esnTo != null">
+        #{esnTo,jdbcType=VARCHAR},
+      </if>
+      <if test="esnFormNcmQt != null">
+        #{esnFormNcmQt,jdbcType=INTEGER},
+      </if>
+      <if test="dateForm != null">
+        #{dateForm,jdbcType=VARCHAR},
+      </if>
+      <if test="dateTo != null">
+        #{dateTo,jdbcType=VARCHAR},
+      </if>
+      <if test="dateFormNcmQty != null">
+        #{dateFormNcmQty,jdbcType=INTEGER},
+      </if>
+      <if test="mqv != null">
+        #{mqv,jdbcType=VARCHAR},
+      </if>
+      <if test="completeDate != null">
+        #{completeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewStatus != null">
+        #{reviewStatus,jdbcType=INTEGER},
+      </if>
+      <if test="reviewPerson != null">
+        #{reviewPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewPersonName != null">
+        #{reviewPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewDate != null">
+        #{reviewDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="attachment != null">
+        #{attachment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cummins.bims.dto.CarCriteria" resultType="java.lang.Long">
+    select count(*) from car
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update car
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.issueId != null">
+        issue_id = #{record.issueId,jdbcType=INTEGER},
+      </if>
+      <if test="record.toolId != null">
+        tool_id = #{record.toolId,jdbcType=INTEGER},
+      </if>
+      <if test="record.carNo != null">
+        car_no = #{record.carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sponsor != null">
+        sponsor = #{record.sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sponsorName != null">
+        sponsor_name = #{record.sponsorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dutyDept != null">
+        duty_dept = #{record.dutyDept,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dutyPerson != null">
+        duty_person = #{record.dutyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dutyPersonName != null">
+        duty_person_name = #{record.dutyPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.confirmPerson != null">
+        confirm_person = #{record.confirmPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.confirmPersonName != null">
+        confirm_person_name = #{record.confirmPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carType != null">
+        car_type = #{record.carType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueTitle != null">
+        issue_title = #{record.issueTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.happenArea != null">
+        happen_area = #{record.happenArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stepOne != null">
+        step_one = #{record.stepOne,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null">
+        amount = #{record.amount,jdbcType=INTEGER},
+      </if>
+      <if test="record.emailReceive != null">
+        email_receive = #{record.emailReceive,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aimCloseDate != null">
+        aim_close_date = #{record.aimCloseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.stepTwo != null">
+        step_two = #{record.stepTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.breakpoint != null">
+        breakpoint = #{record.breakpoint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.improve != null">
+        improve = #{record.improve,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateFile != null">
+        update_file = #{record.updateFile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rac != null">
+        rac = #{record.rac,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkFile != null">
+        check_file = #{record.checkFile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.esnForm != null">
+        esn_form = #{record.esnForm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.esnTo != null">
+        esn_to = #{record.esnTo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.esnFormNcmQt != null">
+        esn_form_ncm_qt = #{record.esnFormNcmQt,jdbcType=INTEGER},
+      </if>
+      <if test="record.dateForm != null">
+        date_form = #{record.dateForm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dateTo != null">
+        date_to = #{record.dateTo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dateFormNcmQty != null">
+        date_form_ncm_qty = #{record.dateFormNcmQty,jdbcType=INTEGER},
+      </if>
+      <if test="record.mqv != null">
+        mqv = #{record.mqv,jdbcType=VARCHAR},
+      </if>
+      <if test="record.completeDate != null">
+        complete_date = #{record.completeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reviewStatus != null">
+        review_status = #{record.reviewStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.reviewPerson != null">
+        review_person = #{record.reviewPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewPersonName != null">
+        review_person_name = #{record.reviewPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewDate != null">
+        review_date = #{record.reviewDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.picture != null">
+        picture = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachment != null">
+        attachment = #{record.attachment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update car
+    set id = #{record.id,jdbcType=INTEGER},
+      issue_id = #{record.issueId,jdbcType=INTEGER},
+      tool_id = #{record.toolId,jdbcType=INTEGER},
+      car_no = #{record.carNo,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      sponsor = #{record.sponsor,jdbcType=VARCHAR},
+      sponsor_name = #{record.sponsorName,jdbcType=VARCHAR},
+      duty_dept = #{record.dutyDept,jdbcType=VARCHAR},
+      duty_person = #{record.dutyPerson,jdbcType=VARCHAR},
+      duty_person_name = #{record.dutyPersonName,jdbcType=VARCHAR},
+      confirm_person = #{record.confirmPerson,jdbcType=VARCHAR},
+      confirm_person_name = #{record.confirmPersonName,jdbcType=VARCHAR},
+      car_type = #{record.carType,jdbcType=VARCHAR},
+      issue_title = #{record.issueTitle,jdbcType=VARCHAR},
+      happen_area = #{record.happenArea,jdbcType=VARCHAR},
+      step_one = #{record.stepOne,jdbcType=VARCHAR},
+      amount = #{record.amount,jdbcType=INTEGER},
+      email_receive = #{record.emailReceive,jdbcType=VARCHAR},
+      aim_close_date = #{record.aimCloseDate,jdbcType=TIMESTAMP},
+      step_two = #{record.stepTwo,jdbcType=VARCHAR},
+      breakpoint = #{record.breakpoint,jdbcType=VARCHAR},
+      improve = #{record.improve,jdbcType=VARCHAR},
+      update_file = #{record.updateFile,jdbcType=VARCHAR},
+      rac = #{record.rac,jdbcType=VARCHAR},
+      check_file = #{record.checkFile,jdbcType=VARCHAR},
+      esn_form = #{record.esnForm,jdbcType=VARCHAR},
+      esn_to = #{record.esnTo,jdbcType=VARCHAR},
+      esn_form_ncm_qt = #{record.esnFormNcmQt,jdbcType=INTEGER},
+      date_form = #{record.dateForm,jdbcType=VARCHAR},
+      date_to = #{record.dateTo,jdbcType=VARCHAR},
+      date_form_ncm_qty = #{record.dateFormNcmQty,jdbcType=INTEGER},
+      mqv = #{record.mqv,jdbcType=VARCHAR},
+      complete_date = #{record.completeDate,jdbcType=TIMESTAMP},
+      review_status = #{record.reviewStatus,jdbcType=INTEGER},
+      review_person = #{record.reviewPerson,jdbcType=VARCHAR},
+      review_person_name = #{record.reviewPersonName,jdbcType=VARCHAR},
+      review_date = #{record.reviewDate,jdbcType=TIMESTAMP},
+      picture = #{record.picture,jdbcType=VARCHAR},
+      attachment = #{record.attachment,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cummins.bims.dto.Car">
+    update car
+    <set>
+      <if test="issueId != null">
+        issue_id = #{issueId,jdbcType=INTEGER},
+      </if>
+      <if test="toolId != null">
+        tool_id = #{toolId,jdbcType=INTEGER},
+      </if>
+      <if test="carNo != null">
+        car_no = #{carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sponsor != null">
+        sponsor = #{sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="sponsorName != null">
+        sponsor_name = #{sponsorName,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyDept != null">
+        duty_dept = #{dutyDept,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyPerson != null">
+        duty_person = #{dutyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyPersonName != null">
+        duty_person_name = #{dutyPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmPerson != null">
+        confirm_person = #{confirmPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmPersonName != null">
+        confirm_person_name = #{confirmPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="carType != null">
+        car_type = #{carType,jdbcType=VARCHAR},
+      </if>
+      <if test="issueTitle != null">
+        issue_title = #{issueTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="happenArea != null">
+        happen_area = #{happenArea,jdbcType=VARCHAR},
+      </if>
+      <if test="stepOne != null">
+        step_one = #{stepOne,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="emailReceive != null">
+        email_receive = #{emailReceive,jdbcType=VARCHAR},
+      </if>
+      <if test="aimCloseDate != null">
+        aim_close_date = #{aimCloseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stepTwo != null">
+        step_two = #{stepTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="breakpoint != null">
+        breakpoint = #{breakpoint,jdbcType=VARCHAR},
+      </if>
+      <if test="improve != null">
+        improve = #{improve,jdbcType=VARCHAR},
+      </if>
+      <if test="updateFile != null">
+        update_file = #{updateFile,jdbcType=VARCHAR},
+      </if>
+      <if test="rac != null">
+        rac = #{rac,jdbcType=VARCHAR},
+      </if>
+      <if test="checkFile != null">
+        check_file = #{checkFile,jdbcType=VARCHAR},
+      </if>
+      <if test="esnForm != null">
+        esn_form = #{esnForm,jdbcType=VARCHAR},
+      </if>
+      <if test="esnTo != null">
+        esn_to = #{esnTo,jdbcType=VARCHAR},
+      </if>
+      <if test="esnFormNcmQt != null">
+        esn_form_ncm_qt = #{esnFormNcmQt,jdbcType=INTEGER},
+      </if>
+      <if test="dateForm != null">
+        date_form = #{dateForm,jdbcType=VARCHAR},
+      </if>
+      <if test="dateTo != null">
+        date_to = #{dateTo,jdbcType=VARCHAR},
+      </if>
+      <if test="dateFormNcmQty != null">
+        date_form_ncm_qty = #{dateFormNcmQty,jdbcType=INTEGER},
+      </if>
+      <if test="mqv != null">
+        mqv = #{mqv,jdbcType=VARCHAR},
+      </if>
+      <if test="completeDate != null">
+        complete_date = #{completeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewStatus != null">
+        review_status = #{reviewStatus,jdbcType=INTEGER},
+      </if>
+      <if test="reviewPerson != null">
+        review_person = #{reviewPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewPersonName != null">
+        review_person_name = #{reviewPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewDate != null">
+        review_date = #{reviewDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="attachment != null">
+        attachment = #{attachment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cummins.bims.dto.Car">
+    update car
+    set issue_id = #{issueId,jdbcType=INTEGER},
+      tool_id = #{toolId,jdbcType=INTEGER},
+      car_no = #{carNo,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      sponsor = #{sponsor,jdbcType=VARCHAR},
+      sponsor_name = #{sponsorName,jdbcType=VARCHAR},
+      duty_dept = #{dutyDept,jdbcType=VARCHAR},
+      duty_person = #{dutyPerson,jdbcType=VARCHAR},
+      duty_person_name = #{dutyPersonName,jdbcType=VARCHAR},
+      confirm_person = #{confirmPerson,jdbcType=VARCHAR},
+      confirm_person_name = #{confirmPersonName,jdbcType=VARCHAR},
+      car_type = #{carType,jdbcType=VARCHAR},
+      issue_title = #{issueTitle,jdbcType=VARCHAR},
+      happen_area = #{happenArea,jdbcType=VARCHAR},
+      step_one = #{stepOne,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=INTEGER},
+      email_receive = #{emailReceive,jdbcType=VARCHAR},
+      aim_close_date = #{aimCloseDate,jdbcType=TIMESTAMP},
+      step_two = #{stepTwo,jdbcType=VARCHAR},
+      breakpoint = #{breakpoint,jdbcType=VARCHAR},
+      improve = #{improve,jdbcType=VARCHAR},
+      update_file = #{updateFile,jdbcType=VARCHAR},
+      rac = #{rac,jdbcType=VARCHAR},
+      check_file = #{checkFile,jdbcType=VARCHAR},
+      esn_form = #{esnForm,jdbcType=VARCHAR},
+      esn_to = #{esnTo,jdbcType=VARCHAR},
+      esn_form_ncm_qt = #{esnFormNcmQt,jdbcType=INTEGER},
+      date_form = #{dateForm,jdbcType=VARCHAR},
+      date_to = #{dateTo,jdbcType=VARCHAR},
+      date_form_ncm_qty = #{dateFormNcmQty,jdbcType=INTEGER},
+      mqv = #{mqv,jdbcType=VARCHAR},
+      complete_date = #{completeDate,jdbcType=TIMESTAMP},
+      review_status = #{reviewStatus,jdbcType=INTEGER},
+      review_person = #{reviewPerson,jdbcType=VARCHAR},
+      review_person_name = #{reviewPersonName,jdbcType=VARCHAR},
+      review_date = #{reviewDate,jdbcType=TIMESTAMP},
+      picture = #{picture,jdbcType=VARCHAR},
+      attachment = #{attachment,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectMaxCarNo" parameterType="String" resultType="String">
+        SELECT
+            max( substring( t.catNo, 10, 4 ) ) number
+        FROM
+            ( SELECT a.id AS id, a.car_no AS catNo FROM car a ) t
+        WHERE
+            t.catNo LIKE concat( '%', #{number}, '%' )
+        ORDER BY
+	    t.id DESC
+  </select>
+</mapper>

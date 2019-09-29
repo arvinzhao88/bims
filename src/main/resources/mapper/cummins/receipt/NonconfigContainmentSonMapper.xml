@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cummins.receipt.dao.NonconfigContainmentSonMapper">
+  <resultMap id="BaseResultMap" type="com.cummins.receipt.model.NonconfigContainmentSon">
+    <result column="ncf_id" jdbcType="INTEGER" property="ncfId" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="qtty" jdbcType="VARCHAR" property="qtty" />
+    <result column="screend_qtty" jdbcType="VARCHAR" property="screendQtty" />
+    <result column="nok_qtty" jdbcType="VARCHAR" property="nokQtty" />
+    <result column="response" jdbcType="VARCHAR" property="response" />
+    <result column="verifier" jdbcType="VARCHAR" property="verifier" />
+    <result column="completion_date" jdbcType="VARCHAR" property="completionDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ncf_id, location, qtty, screend_qtty, nok_qtty, response, verifier, completion_date
+  </sql>
+  <select id="selectByExample" parameterType="com.cummins.receipt.model.NonconfigContainmentSonCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from nonconfig_containment_son
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.cummins.receipt.model.NonconfigContainmentSonCriteria">
+    delete from nonconfig_containment_son
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cummins.receipt.model.NonconfigContainmentSon">
+    insert into nonconfig_containment_son (ncf_id, location, qtty, 
+      screend_qtty, nok_qtty, response, 
+      verifier, completion_date)
+    values (#{ncfId,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}, #{qtty,jdbcType=VARCHAR}, 
+      #{screendQtty,jdbcType=VARCHAR}, #{nokQtty,jdbcType=VARCHAR}, #{response,jdbcType=VARCHAR}, 
+      #{verifier,jdbcType=VARCHAR}, #{completionDate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cummins.receipt.model.NonconfigContainmentSon"  useGeneratedKeys="true" keyProperty="id">
+    insert into nonconfig_containment_son
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ncfId != null">
+        ncf_id,
+      </if>
+      <if test="location != null">
+        location,
+      </if>
+      <if test="qtty != null">
+        qtty,
+      </if>
+      <if test="screendQtty != null">
+        screend_qtty,
+      </if>
+      <if test="nokQtty != null">
+        nok_qtty,
+      </if>
+      <if test="response != null">
+        response,
+      </if>
+      <if test="verifier != null">
+        verifier,
+      </if>
+      <if test="completionDate != null">
+        completion_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ncfId != null">
+        #{ncfId,jdbcType=INTEGER},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="qtty != null">
+        #{qtty,jdbcType=VARCHAR},
+      </if>
+      <if test="screendQtty != null">
+        #{screendQtty,jdbcType=VARCHAR},
+      </if>
+      <if test="nokQtty != null">
+        #{nokQtty,jdbcType=VARCHAR},
+      </if>
+      <if test="response != null">
+        #{response,jdbcType=VARCHAR},
+      </if>
+      <if test="verifier != null">
+        #{verifier,jdbcType=VARCHAR},
+      </if>
+      <if test="completionDate != null">
+        #{completionDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cummins.receipt.model.NonconfigContainmentSonCriteria" resultType="java.lang.Long">
+    select count(*) from nonconfig_containment_son
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update nonconfig_containment_son
+    <set>
+      <if test="record.ncfId != null">
+        ncf_id = #{record.ncfId,jdbcType=INTEGER},
+      </if>
+      <if test="record.location != null">
+        location = #{record.location,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qtty != null">
+        qtty = #{record.qtty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.screendQtty != null">
+        screend_qtty = #{record.screendQtty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nokQtty != null">
+        nok_qtty = #{record.nokQtty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.response != null">
+        response = #{record.response,jdbcType=VARCHAR},
+      </if>
+      <if test="record.verifier != null">
+        verifier = #{record.verifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.completionDate != null">
+        completion_date = #{record.completionDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update nonconfig_containment_son
+    set ncf_id = #{record.ncfId,jdbcType=INTEGER},
+      location = #{record.location,jdbcType=VARCHAR},
+      qtty = #{record.qtty,jdbcType=VARCHAR},
+      screend_qtty = #{record.screendQtty,jdbcType=VARCHAR},
+      nok_qtty = #{record.nokQtty,jdbcType=VARCHAR},
+      response = #{record.response,jdbcType=VARCHAR},
+      verifier = #{record.verifier,jdbcType=VARCHAR},
+      completion_date = #{record.completionDate,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <delete id="deleteByQuestionId" parameterType="integer">
+        delete from nonconfig_containment_son where  ncf_id=#{id}
+  </delete>
+  
+</mapper>

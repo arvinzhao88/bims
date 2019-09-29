@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cummins.bims.dao.NotificationMapper">
+  <resultMap id="BaseResultMap" type="com.cummins.bims.dto.Notification">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="issue_id" jdbcType="INTEGER" property="issueId" />
+    <result column="issue_desc" jdbcType="VARCHAR" property="issueDesc" />
+    <result column="issue_date" jdbcType="TIMESTAMP" property="issueDate" />
+    <result column="issue_area" jdbcType="VARCHAR" property="issueArea" />
+    <result column="station_no" jdbcType="VARCHAR" property="stationNo" />
+    <result column="engine_type" jdbcType="VARCHAR" property="engineType" />
+    <result column="engine_serial_no" jdbcType="VARCHAR" property="engineSerialNo" />
+    <result column="part_no" jdbcType="VARCHAR" property="partNo" />
+    <result column="part_name" jdbcType="VARCHAR" property="partName" />
+    <result column="containment_action" jdbcType="VARCHAR" property="containmentAction" />
+    <result column="supplier_name" jdbcType="VARCHAR" property="supplierName" />
+    <result column="ailure_qty" jdbcType="INTEGER" property="ailureQty" />
+    <result column="clean_point" jdbcType="VARCHAR" property="cleanPoint" />
+    <result column="effect_engine_amout" jdbcType="VARCHAR" property="effectEngineAmout" />
+    <result column="effect_scope" jdbcType="VARCHAR" property="effectScope" />
+    <result column="effect_to_delivery" jdbcType="VARCHAR" property="effectToDelivery" />
+    <result column="issue_sensor" jdbcType="VARCHAR" property="issueSensor" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="car_scar" jdbcType="VARCHAR" property="carScar" />
+    <result column="duty_person" jdbcType="VARCHAR" property="dutyPerson" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, issue_id, issue_desc, issue_date, issue_area, station_no, engine_type, engine_serial_no, 
+    part_no, part_name, containment_action, supplier_name, ailure_qty, clean_point, effect_engine_amout, 
+    effect_scope, effect_to_delivery, issue_sensor, image, car_scar, duty_person
+  </sql>
+  <select id="selectByExample" parameterType="com.cummins.bims.dto.NotificationCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from eqr_notification
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from eqr_notification
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from eqr_notification
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cummins.bims.dto.NotificationCriteria">
+    delete from eqr_notification
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cummins.bims.dto.Notification">
+    insert into eqr_notification (id, issue_id, issue_desc, 
+      issue_date, issue_area, station_no, 
+      engine_type, engine_serial_no, part_no, 
+      part_name, containment_action, supplier_name, 
+      ailure_qty, clean_point, effect_engine_amout, 
+      effect_scope, effect_to_delivery, issue_sensor, 
+      image, car_scar, duty_person
+      )
+    values (#{id,jdbcType=INTEGER}, #{issueId,jdbcType=INTEGER}, #{issueDesc,jdbcType=VARCHAR}, 
+      #{issueDate,jdbcType=TIMESTAMP}, #{issueArea,jdbcType=VARCHAR}, #{stationNo,jdbcType=VARCHAR}, 
+      #{engineType,jdbcType=VARCHAR}, #{engineSerialNo,jdbcType=VARCHAR}, #{partNo,jdbcType=VARCHAR}, 
+      #{partName,jdbcType=VARCHAR}, #{containmentAction,jdbcType=VARCHAR}, #{supplierName,jdbcType=VARCHAR}, 
+      #{ailureQty,jdbcType=INTEGER}, #{cleanPoint,jdbcType=VARCHAR}, #{effectEngineAmout,jdbcType=VARCHAR}, 
+      #{effectScope,jdbcType=VARCHAR}, #{effectToDelivery,jdbcType=VARCHAR}, #{issueSensor,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{carScar,jdbcType=VARCHAR}, #{dutyPerson,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cummins.bims.dto.Notification">
+    insert into eqr_notification
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="issueId != null">
+        issue_id,
+      </if>
+      <if test="issueDesc != null">
+        issue_desc,
+      </if>
+      <if test="issueDate != null">
+        issue_date,
+      </if>
+      <if test="issueArea != null">
+        issue_area,
+      </if>
+      <if test="stationNo != null">
+        station_no,
+      </if>
+      <if test="engineType != null">
+        engine_type,
+      </if>
+      <if test="engineSerialNo != null">
+        engine_serial_no,
+      </if>
+      <if test="partNo != null">
+        part_no,
+      </if>
+      <if test="partName != null">
+        part_name,
+      </if>
+      <if test="containmentAction != null">
+        containment_action,
+      </if>
+      <if test="supplierName != null">
+        supplier_name,
+      </if>
+      <if test="ailureQty != null">
+        ailure_qty,
+      </if>
+      <if test="cleanPoint != null">
+        clean_point,
+      </if>
+      <if test="effectEngineAmout != null">
+        effect_engine_amout,
+      </if>
+      <if test="effectScope != null">
+        effect_scope,
+      </if>
+      <if test="effectToDelivery != null">
+        effect_to_delivery,
+      </if>
+      <if test="issueSensor != null">
+        issue_sensor,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="carScar != null">
+        car_scar,
+      </if>
+      <if test="dutyPerson != null">
+        duty_person,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="issueId != null">
+        #{issueId,jdbcType=INTEGER},
+      </if>
+      <if test="issueDesc != null">
+        #{issueDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="issueDate != null">
+        #{issueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="issueArea != null">
+        #{issueArea,jdbcType=VARCHAR},
+      </if>
+      <if test="stationNo != null">
+        #{stationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="engineType != null">
+        #{engineType,jdbcType=VARCHAR},
+      </if>
+      <if test="engineSerialNo != null">
+        #{engineSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="partNo != null">
+        #{partNo,jdbcType=VARCHAR},
+      </if>
+      <if test="partName != null">
+        #{partName,jdbcType=VARCHAR},
+      </if>
+      <if test="containmentAction != null">
+        #{containmentAction,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null">
+        #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="ailureQty != null">
+        #{ailureQty,jdbcType=INTEGER},
+      </if>
+      <if test="cleanPoint != null">
+        #{cleanPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="effectEngineAmout != null">
+        #{effectEngineAmout,jdbcType=VARCHAR},
+      </if>
+      <if test="effectScope != null">
+        #{effectScope,jdbcType=VARCHAR},
+      </if>
+      <if test="effectToDelivery != null">
+        #{effectToDelivery,jdbcType=VARCHAR},
+      </if>
+      <if test="issueSensor != null">
+        #{issueSensor,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="carScar != null">
+        #{carScar,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyPerson != null">
+        #{dutyPerson,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cummins.bims.dto.NotificationCriteria" resultType="java.lang.Long">
+    select count(*) from eqr_notification
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update eqr_notification
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.issueId != null">
+        issue_id = #{record.issueId,jdbcType=INTEGER},
+      </if>
+      <if test="record.issueDesc != null">
+        issue_desc = #{record.issueDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueDate != null">
+        issue_date = #{record.issueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.issueArea != null">
+        issue_area = #{record.issueArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationNo != null">
+        station_no = #{record.stationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.engineType != null">
+        engine_type = #{record.engineType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.engineSerialNo != null">
+        engine_serial_no = #{record.engineSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partNo != null">
+        part_no = #{record.partNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partName != null">
+        part_name = #{record.partName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.containmentAction != null">
+        containment_action = #{record.containmentAction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierName != null">
+        supplier_name = #{record.supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ailureQty != null">
+        ailure_qty = #{record.ailureQty,jdbcType=INTEGER},
+      </if>
+      <if test="record.cleanPoint != null">
+        clean_point = #{record.cleanPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.effectEngineAmout != null">
+        effect_engine_amout = #{record.effectEngineAmout,jdbcType=VARCHAR},
+      </if>
+      <if test="record.effectScope != null">
+        effect_scope = #{record.effectScope,jdbcType=VARCHAR},
+      </if>
+      <if test="record.effectToDelivery != null">
+        effect_to_delivery = #{record.effectToDelivery,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueSensor != null">
+        issue_sensor = #{record.issueSensor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null">
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carScar != null">
+        car_scar = #{record.carScar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dutyPerson != null">
+        duty_person = #{record.dutyPerson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update eqr_notification
+    set id = #{record.id,jdbcType=INTEGER},
+      issue_id = #{record.issueId,jdbcType=INTEGER},
+      issue_desc = #{record.issueDesc,jdbcType=VARCHAR},
+      issue_date = #{record.issueDate,jdbcType=TIMESTAMP},
+      issue_area = #{record.issueArea,jdbcType=VARCHAR},
+      station_no = #{record.stationNo,jdbcType=VARCHAR},
+      engine_type = #{record.engineType,jdbcType=VARCHAR},
+      engine_serial_no = #{record.engineSerialNo,jdbcType=VARCHAR},
+      part_no = #{record.partNo,jdbcType=VARCHAR},
+      part_name = #{record.partName,jdbcType=VARCHAR},
+      containment_action = #{record.containmentAction,jdbcType=VARCHAR},
+      supplier_name = #{record.supplierName,jdbcType=VARCHAR},
+      ailure_qty = #{record.ailureQty,jdbcType=INTEGER},
+      clean_point = #{record.cleanPoint,jdbcType=VARCHAR},
+      effect_engine_amout = #{record.effectEngineAmout,jdbcType=VARCHAR},
+      effect_scope = #{record.effectScope,jdbcType=VARCHAR},
+      effect_to_delivery = #{record.effectToDelivery,jdbcType=VARCHAR},
+      issue_sensor = #{record.issueSensor,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      car_scar = #{record.carScar,jdbcType=VARCHAR},
+      duty_person = #{record.dutyPerson,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cummins.bims.dto.Notification">
+    update eqr_notification
+    <set>
+      <if test="issueId != null">
+        issue_id = #{issueId,jdbcType=INTEGER},
+      </if>
+      <if test="issueDesc != null">
+        issue_desc = #{issueDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="issueDate != null">
+        issue_date = #{issueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="issueArea != null">
+        issue_area = #{issueArea,jdbcType=VARCHAR},
+      </if>
+      <if test="stationNo != null">
+        station_no = #{stationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="engineType != null">
+        engine_type = #{engineType,jdbcType=VARCHAR},
+      </if>
+      <if test="engineSerialNo != null">
+        engine_serial_no = #{engineSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="partNo != null">
+        part_no = #{partNo,jdbcType=VARCHAR},
+      </if>
+      <if test="partName != null">
+        part_name = #{partName,jdbcType=VARCHAR},
+      </if>
+      <if test="containmentAction != null">
+        containment_action = #{containmentAction,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null">
+        supplier_name = #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="ailureQty != null">
+        ailure_qty = #{ailureQty,jdbcType=INTEGER},
+      </if>
+      <if test="cleanPoint != null">
+        clean_point = #{cleanPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="effectEngineAmout != null">
+        effect_engine_amout = #{effectEngineAmout,jdbcType=VARCHAR},
+      </if>
+      <if test="effectScope != null">
+        effect_scope = #{effectScope,jdbcType=VARCHAR},
+      </if>
+      <if test="effectToDelivery != null">
+        effect_to_delivery = #{effectToDelivery,jdbcType=VARCHAR},
+      </if>
+      <if test="issueSensor != null">
+        issue_sensor = #{issueSensor,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="carScar != null">
+        car_scar = #{carScar,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyPerson != null">
+        duty_person = #{dutyPerson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cummins.bims.dto.Notification">
+    update eqr_notification
+    set issue_id = #{issueId,jdbcType=INTEGER},
+      issue_desc = #{issueDesc,jdbcType=VARCHAR},
+      issue_date = #{issueDate,jdbcType=TIMESTAMP},
+      issue_area = #{issueArea,jdbcType=VARCHAR},
+      station_no = #{stationNo,jdbcType=VARCHAR},
+      engine_type = #{engineType,jdbcType=VARCHAR},
+      engine_serial_no = #{engineSerialNo,jdbcType=VARCHAR},
+      part_no = #{partNo,jdbcType=VARCHAR},
+      part_name = #{partName,jdbcType=VARCHAR},
+      containment_action = #{containmentAction,jdbcType=VARCHAR},
+      supplier_name = #{supplierName,jdbcType=VARCHAR},
+      ailure_qty = #{ailureQty,jdbcType=INTEGER},
+      clean_point = #{cleanPoint,jdbcType=VARCHAR},
+      effect_engine_amout = #{effectEngineAmout,jdbcType=VARCHAR},
+      effect_scope = #{effectScope,jdbcType=VARCHAR},
+      effect_to_delivery = #{effectToDelivery,jdbcType=VARCHAR},
+      issue_sensor = #{issueSensor,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      car_scar = #{carScar,jdbcType=VARCHAR},
+      duty_person = #{dutyPerson,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

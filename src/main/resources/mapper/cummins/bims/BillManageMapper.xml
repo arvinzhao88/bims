@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cummins.bims.dao.BillManageMapper">
+  <resultMap id="BaseResultMap" type="com.cummins.bims.dto.BillManage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="issue_id" jdbcType="VARCHAR" property="issueId" />
+    <result column="issue_area" jdbcType="VARCHAR" property="issueArea" />
+    <result column="temp_measures" jdbcType="VARCHAR" property="tempMeasures" />
+    <result column="bill_name" jdbcType="VARCHAR" property="billName" />
+    <result column="duty_person" jdbcType="VARCHAR" property="dutyPerson" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, issue_id, issue_area, temp_measures, bill_name, duty_person
+  </sql>
+  <select id="selectByExample" parameterType="com.cummins.bims.dto.BillManageCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bill_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bill_manage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bill_manage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cummins.bims.dto.BillManageCriteria">
+    delete from bill_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cummins.bims.dto.BillManage">
+    insert into bill_manage (id, issue_id, issue_area, 
+      temp_measures, bill_name, duty_person
+      )
+    values (#{id,jdbcType=INTEGER}, #{issueId,jdbcType=VARCHAR}, #{issueArea,jdbcType=VARCHAR}, 
+      #{tempMeasures,jdbcType=VARCHAR}, #{billName,jdbcType=VARCHAR}, #{dutyPerson,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cummins.bims.dto.BillManage">
+    insert into bill_manage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="issueId != null">
+        issue_id,
+      </if>
+      <if test="issueArea != null">
+        issue_area,
+      </if>
+      <if test="tempMeasures != null">
+        temp_measures,
+      </if>
+      <if test="billName != null">
+        bill_name,
+      </if>
+      <if test="dutyPerson != null">
+        duty_person,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="issueId != null">
+        #{issueId,jdbcType=VARCHAR},
+      </if>
+      <if test="issueArea != null">
+        #{issueArea,jdbcType=VARCHAR},
+      </if>
+      <if test="tempMeasures != null">
+        #{tempMeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="billName != null">
+        #{billName,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyPerson != null">
+        #{dutyPerson,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cummins.bims.dto.BillManageCriteria" resultType="java.lang.Long">
+    select count(*) from bill_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bill_manage
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.issueId != null">
+        issue_id = #{record.issueId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueArea != null">
+        issue_area = #{record.issueArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tempMeasures != null">
+        temp_measures = #{record.tempMeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billName != null">
+        bill_name = #{record.billName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dutyPerson != null">
+        duty_person = #{record.dutyPerson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bill_manage
+    set id = #{record.id,jdbcType=INTEGER},
+      issue_id = #{record.issueId,jdbcType=VARCHAR},
+      issue_area = #{record.issueArea,jdbcType=VARCHAR},
+      temp_measures = #{record.tempMeasures,jdbcType=VARCHAR},
+      bill_name = #{record.billName,jdbcType=VARCHAR},
+      duty_person = #{record.dutyPerson,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cummins.bims.dto.BillManage">
+    update bill_manage
+    <set>
+      <if test="issueId != null">
+        issue_id = #{issueId,jdbcType=VARCHAR},
+      </if>
+      <if test="issueArea != null">
+        issue_area = #{issueArea,jdbcType=VARCHAR},
+      </if>
+      <if test="tempMeasures != null">
+        temp_measures = #{tempMeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="billName != null">
+        bill_name = #{billName,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyPerson != null">
+        duty_person = #{dutyPerson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cummins.bims.dto.BillManage">
+    update bill_manage
+    set issue_id = #{issueId,jdbcType=VARCHAR},
+      issue_area = #{issueArea,jdbcType=VARCHAR},
+      temp_measures = #{tempMeasures,jdbcType=VARCHAR},
+      bill_name = #{billName,jdbcType=VARCHAR},
+      duty_person = #{dutyPerson,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

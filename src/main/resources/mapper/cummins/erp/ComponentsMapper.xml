@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cummins.erp.dao.ComponentsMapper">
+    <resultMap id="BaseResultMap" type="com.cummins.erp.model.Components">
+        <result column="part_number" jdbcType="VARCHAR" property="partNumber"/>
+        <result column="part_name" jdbcType="VARCHAR" property="partName"/>
+    </resultMap>
+
+    <select id="findComponents" resultMap="BaseResultMap">
+    select part_number,part_name from v_block_head_view
+    </select>
+
+    <select id="fuzzyQueryComponents" parameterType="string" resultType="java.lang.String">
+    select part_number  from v_block_head_view  where part_number  like   concat(concat('%',#{name}),'%')
+    </select>
+
+    <select id="getPartNameByPartNumber" parameterType="string" resultMap="BaseResultMap">
+        select part_number,part_name from v_block_head_view where part_number = #{name}
+    </select>
+</mapper>

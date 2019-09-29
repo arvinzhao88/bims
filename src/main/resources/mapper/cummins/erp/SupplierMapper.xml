@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cummins.erp.dao.SupplierMapper">
+    <resultMap id="BaseResultMap" type="com.cummins.erp.model.Supplier">
+        <result column="supplier_code" jdbcType="VARCHAR" property="supplierCode"/>
+        <result column="supplier_name" jdbcType="VARCHAR" property="supplierName"/>
+        <result column="item_number" jdbcType="VARCHAR" property="partNumber"/>
+        <result column="item_name" jdbcType="VARCHAR" property="partName"/>
+        <result column="ppap_status" jdbcType="VARCHAR" property="ppap"/>
+    </resultMap>
+
+    <select id="getSupplierNameBycode"  parameterType="string" resultMap="BaseResultMap">
+    select supplier_code,supplier_name from v_item_custom_view where supplier_code =#{name} and rownum='1'
+    </select>
+
+    <select id="queryVendorCodeByPartNumber"  parameterType="string" resultType="string">
+    select distinct supplier_code   from  v_item_custom_view where item_number=#{partName}
+    </select>
+    
+    <select id="partNumberSupplierCodeBringsOutPpap" parameterType="map" resultType="string">
+      select ppap_status  from v_item_custom_view where item_number =#{params.partNumber} and supplier_code=#{params.supplierCode}
+    </select>
+
+    <!-- 零件号模糊查询 -->
+    <select id="partNumberlike" parameterType="java.lang.String" resultType="java.lang.String">
+        select distinct item_number
+        from v_item_custom_view
+        where item_number like concat(concat('%',#{partNo}),'%')
+    </select>
+
+    <!-- 通过零件号查询零件名称、供应商列表-->
+    <select id="getSupplierByPartNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select distinct item_number,item_name,supplier_code,supplier_name
+        from v_item_custom_view
+        where item_number=#{partNo}
+    </select>
+</mapper>

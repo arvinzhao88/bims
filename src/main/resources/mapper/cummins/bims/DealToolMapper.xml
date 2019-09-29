@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cummins.bims.dao.DealToolMapper">
+  <resultMap id="BaseResultMap" type="com.cummins.bims.dto.DealTool">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="tool_no" jdbcType="VARCHAR" property="toolNo" />
+    <result column="issue_id" jdbcType="INTEGER" property="issueId" />
+    <result column="issue_area" jdbcType="VARCHAR" property="issueArea" />
+    <result column="notification_id" jdbcType="VARCHAR" property="notificationId" />
+    <result column="apply_person_name" jdbcType="VARCHAR" property="applyPersonName" />
+    <result column="apply_person" jdbcType="VARCHAR" property="applyPerson" />
+    <result column="process_tool" jdbcType="VARCHAR" property="processTool" />
+    <result column="process_tool_name" jdbcType="VARCHAR" property="processToolName" />
+    <result column="tool_duty_person" jdbcType="VARCHAR" property="toolDutyPerson" />
+    <result column="tool_duty_person_name" jdbcType="VARCHAR" property="toolDutyPersonName" />
+    <result column="review_person" jdbcType="VARCHAR" property="reviewPerson" />
+    <result column="review_person_name" jdbcType="VARCHAR" property="reviewPersonName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, tool_no, issue_id, issue_area, notification_id, apply_person_name, apply_person, 
+    process_tool, process_tool_name, tool_duty_person, tool_duty_person_name, review_person, 
+    review_person_name
+  </sql>
+  <select id="selectByExample" parameterType="com.cummins.bims.dto.DealToolCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from deal_tool
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from deal_tool
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from deal_tool
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cummins.bims.dto.DealToolCriteria">
+    delete from deal_tool
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cummins.bims.dto.DealTool" useGeneratedKeys="true" keyProperty="id">
+    insert into deal_tool (id, tool_no, issue_id, 
+      issue_area, notification_id, apply_person_name, 
+      apply_person, process_tool, process_tool_name, 
+      tool_duty_person, tool_duty_person_name, review_person, 
+      review_person_name)
+    values (#{id,jdbcType=INTEGER}, #{toolNo,jdbcType=VARCHAR}, #{issueId,jdbcType=INTEGER}, 
+      #{issueArea,jdbcType=VARCHAR}, #{notificationId,jdbcType=VARCHAR}, #{applyPersonName,jdbcType=VARCHAR}, 
+      #{applyPerson,jdbcType=VARCHAR}, #{processTool,jdbcType=VARCHAR}, #{processToolName,jdbcType=VARCHAR}, 
+      #{toolDutyPerson,jdbcType=VARCHAR}, #{toolDutyPersonName,jdbcType=VARCHAR}, #{reviewPerson,jdbcType=VARCHAR}, 
+      #{reviewPersonName,jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 批量新增 -->
+  <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+    insert into deal_tool (id, tool_no, issue_id,
+      issue_area, notification_id, apply_person_name,
+      apply_person, process_tool, process_tool_name,
+      tool_duty_person, tool_duty_person_name, review_person,
+      review_person_name)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.toolNo,jdbcType=VARCHAR}, #{item.issueId,jdbcType=INTEGER},
+      #{item.issueArea,jdbcType=VARCHAR}, #{item.notificationId,jdbcType=VARCHAR}, #{item.applyPersonName,jdbcType=VARCHAR},
+      #{item.applyPerson,jdbcType=VARCHAR}, #{item.processTool,jdbcType=VARCHAR}, #{item.processToolName,jdbcType=VARCHAR},
+      #{item.toolDutyPerson,jdbcType=VARCHAR}, #{item.toolDutyPersonName,jdbcType=VARCHAR}, #{item.reviewPerson,jdbcType=VARCHAR},
+      #{item.reviewPersonName,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.cummins.bims.dto.DealTool" useGeneratedKeys="true" keyProperty="id">
+    insert into deal_tool
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="toolNo != null">
+        tool_no,
+      </if>
+      <if test="issueId != null">
+        issue_id,
+      </if>
+      <if test="issueArea != null">
+        issue_area,
+      </if>
+      <if test="notificationId != null">
+        notification_id,
+      </if>
+      <if test="applyPersonName != null">
+        apply_person_name,
+      </if>
+      <if test="applyPerson != null">
+        apply_person,
+      </if>
+      <if test="processTool != null">
+        process_tool,
+      </if>
+      <if test="processToolName != null">
+        process_tool_name,
+      </if>
+      <if test="toolDutyPerson != null">
+        tool_duty_person,
+      </if>
+      <if test="toolDutyPersonName != null">
+        tool_duty_person_name,
+      </if>
+      <if test="reviewPerson != null">
+        review_person,
+      </if>
+      <if test="reviewPersonName != null">
+        review_person_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="toolNo != null">
+        #{toolNo,jdbcType=VARCHAR},
+      </if>
+      <if test="issueId != null">
+        #{issueId,jdbcType=INTEGER},
+      </if>
+      <if test="issueArea != null">
+        #{issueArea,jdbcType=VARCHAR},
+      </if>
+      <if test="notificationId != null">
+        #{notificationId,jdbcType=VARCHAR},
+      </if>
+      <if test="applyPersonName != null">
+        #{applyPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="applyPerson != null">
+        #{applyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="processTool != null">
+        #{processTool,jdbcType=VARCHAR},
+      </if>
+      <if test="processToolName != null">
+        #{processToolName,jdbcType=VARCHAR},
+      </if>
+      <if test="toolDutyPerson != null">
+        #{toolDutyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="toolDutyPersonName != null">
+        #{toolDutyPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewPerson != null">
+        #{reviewPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewPersonName != null">
+        #{reviewPersonName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cummins.bims.dto.DealToolCriteria" resultType="java.lang.Long">
+    select count(*) from deal_tool
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update deal_tool
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.toolNo != null">
+        tool_no = #{record.toolNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueId != null">
+        issue_id = #{record.issueId,jdbcType=INTEGER},
+      </if>
+      <if test="record.issueArea != null">
+        issue_area = #{record.issueArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notificationId != null">
+        notification_id = #{record.notificationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyPersonName != null">
+        apply_person_name = #{record.applyPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyPerson != null">
+        apply_person = #{record.applyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processTool != null">
+        process_tool = #{record.processTool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processToolName != null">
+        process_tool_name = #{record.processToolName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.toolDutyPerson != null">
+        tool_duty_person = #{record.toolDutyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.toolDutyPersonName != null">
+        tool_duty_person_name = #{record.toolDutyPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewPerson != null">
+        review_person = #{record.reviewPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewPersonName != null">
+        review_person_name = #{record.reviewPersonName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update deal_tool
+    set id = #{record.id,jdbcType=INTEGER},
+      tool_no = #{record.toolNo,jdbcType=VARCHAR},
+      issue_id = #{record.issueId,jdbcType=INTEGER},
+      issue_area = #{record.issueArea,jdbcType=VARCHAR},
+      notification_id = #{record.notificationId,jdbcType=VARCHAR},
+      apply_person_name = #{record.applyPersonName,jdbcType=VARCHAR},
+      apply_person = #{record.applyPerson,jdbcType=VARCHAR},
+      process_tool = #{record.processTool,jdbcType=VARCHAR},
+      process_tool_name = #{record.processToolName,jdbcType=VARCHAR},
+      tool_duty_person = #{record.toolDutyPerson,jdbcType=VARCHAR},
+      tool_duty_person_name = #{record.toolDutyPersonName,jdbcType=VARCHAR},
+      review_person = #{record.reviewPerson,jdbcType=VARCHAR},
+      review_person_name = #{record.reviewPersonName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cummins.bims.dto.DealTool">
+    update deal_tool
+    <set>
+      <if test="toolNo != null">
+        tool_no = #{toolNo,jdbcType=VARCHAR},
+      </if>
+      <if test="issueId != null">
+        issue_id = #{issueId,jdbcType=INTEGER},
+      </if>
+      <if test="issueArea != null">
+        issue_area = #{issueArea,jdbcType=VARCHAR},
+      </if>
+      <if test="notificationId != null">
+        notification_id = #{notificationId,jdbcType=VARCHAR},
+      </if>
+      <if test="applyPersonName != null">
+        apply_person_name = #{applyPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="applyPerson != null">
+        apply_person = #{applyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="processTool != null">
+        process_tool = #{processTool,jdbcType=VARCHAR},
+      </if>
+      <if test="processToolName != null">
+        process_tool_name = #{processToolName,jdbcType=VARCHAR},
+      </if>
+      <if test="toolDutyPerson != null">
+        tool_duty_person = #{toolDutyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="toolDutyPersonName != null">
+        tool_duty_person_name = #{toolDutyPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewPerson != null">
+        review_person = #{reviewPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewPersonName != null">
+        review_person_name = #{reviewPersonName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cummins.bims.dto.DealTool">
+    update deal_tool
+    set tool_no = #{toolNo,jdbcType=VARCHAR},
+      issue_id = #{issueId,jdbcType=INTEGER},
+      issue_area = #{issueArea,jdbcType=VARCHAR},
+      notification_id = #{notificationId,jdbcType=VARCHAR},
+      apply_person_name = #{applyPersonName,jdbcType=VARCHAR},
+      apply_person = #{applyPerson,jdbcType=VARCHAR},
+      process_tool = #{processTool,jdbcType=VARCHAR},
+      process_tool_name = #{processToolName,jdbcType=VARCHAR},
+      tool_duty_person = #{toolDutyPerson,jdbcType=VARCHAR},
+      tool_duty_person_name = #{toolDutyPersonName,jdbcType=VARCHAR},
+      review_person = #{reviewPerson,jdbcType=VARCHAR},
+      review_person_name = #{reviewPersonName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getToolTabs" parameterType="com.cummins.bims.dto.DealTool" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from deal_tool
+    where issue_id = #{record.issueId}
+    group by process_tool
+  </select>
+
+  <select id="selectByIssueId" parameterType="com.cummins.bims.dto.DealTool" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from deal_tool
+    where issue_id = #{issueId}
+  </select>
+
+</mapper>

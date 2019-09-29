@@ -1,0 +1,146 @@
+body {
+  height:100%;
+  width:100%;
+  background-size:cover;
+  font-family:arial, verdana, sans-serif;
+  font-size:16px;
+  color:#CCCCCC;
+  margin:0px;
+  overflow:hidden;
+  }
+
+header {display:block;width:100%;height:60px;position:absolute;z-index:5;top:0;text-align:center;background-image:url(../images/di_hei.png);border-bottom:#555555 1px solid;}
+#main {display:block;width:100%;top:61px;position:absolute;z-index:10;bottom:81px;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+footer {display:block;bottom:0;width:100%;height:80px;border-top:#555555 1px solid;position:absolute;z-index:100; background-image:url(../images/di_hei.png);}
+
+
+.butt{
+background-image:url(../images/butt1.png);
+padding:10px 0 0 40px ;
+text-align:center;
+width:90px;
+height:55px;
+line-height:25px;
+color:#FFF;
+font-size:14px;
+font-family:Arial;
+font-weight: bold;
+}
+.butt:active{
+background-image:url(../images/butt2.png);
+text-align:center;
+color:#4A4A4A;
+font-weight: bold;
+}
+.butt_on{
+background-image:url(../images/butt2.png);
+height:55px;
+width:195px;
+line-height:55px;
+color:#4A4A4A;
+font-size:16px;
+font-family:Arial, Helvetica, sans-serif,"����";
+cursor:pointer;
+}
+
+.home{
+background-image:url(../images/home.png);
+height:32px;
+width:32px;
+float:right;
+margin:8px 18px 0 0;
+}
+.home:active{
+background-image:url(../images/home1.png);
+}
+
+.name{font-size:28px; color:#FFF; line-height:30px; font-family:Arial, Helvetica, sans-serif; font-weight:normal;text-shadow:5px 2px 6px #000;}
+
+.t{ height:35px; line-height:35px; border-bottom:1px #666666 solid;}
+.t_iss_
+.t1{ height:40px; line-height:40px; border-bottom:2px #666666 solid; font-weight:bold;text-shadow:3px 2px 3px #000;}
+.t_s{ height:25px;line-height:18px;border-bottom:1px #666666 solid; font-size:12px;}
+.t1_s{ height:32px; border-bottom:2px #666666 solid; font-weight:bold;text-shadow:3px 2px 3px #000;font-size:12px;}
+
+.ppt1{background-image:url(../images/ppt.png);width:150px;height:55px;line-height:55px; margin-top:12px;font-weight:bold;text-align:center;}
+.ppt1:active{background-image:url(../images/ppt1.png);width:150px;height:55px; margin-top:12px;line-height:55px; font-weight:bold;text-align:center; color:#333333;}
+.ppt1_on{background-image:url(../images/ppt1.png);width:150px;height:55px;line-height:55px; margin-top:12px;font-weight:bold;text-align:center; color:#333333;}
+
+.table{ width:100%;height:auto; margin:10px 0; padding-left:20px;}
+.biao{ width:100%;height:auto; line-height:26px; font-size:14px; font-family:Arial; color:#CCCCCC; margin-bottom:15px;}
+.biao_l{ width:50%;float:left;}
+.biao_2{ width:100%;float:left;}
+.na1{ width:100%; float:left; line-height:16px; text-align: left; line-height:20px; margin-top:10px;}
+.na2{ width:100%; float:left; height:35px; text-align:left;}
+.input{ width:255px;height:22px;line-height:22px; padding:5px;font-size:16px;font-family:Arial; color:#333333;background-color: #DDDCDC; border: #DDDCDC;}
+.input_scan{ width:210px;height:22px;line-height:22px; padding:5px;font-size:16px;font-family:Arial; color:#333333;background-color: #DDDCDC; border: #DDDCDC; float:left;}
+.select{ width:265px;height:32px;padding:1px;font-size:16px;font-family:Arial; color:#333333; background-color: #DDDCDC; border: #DDDCDC;}
+.input1{ width:585px;height:22px;line-height:22px; padding:5px;font-size:16px;font-family:Arial; color:#333333;background-color: #DDDCDC; border: #DDDCDC;}
+.input2{ width:562px;height:50px;line-height:22px; padding:5px;font-size:16px;font-family:Arial; color:#333333;background-color: #DDDCDC; border: #DDDCDC;}
+
+
+
+.ok{ width:120px;height:40px;line-height:40px;text-align:center;background-color:#FF5450;border-radius:10px;color:#FFFFFF;display:inline-block; margin:40px;}
+.ok:active{ width:120px; height:40px; line-height:40px; text-align:center; background-color:#435255;border-radius:10px;display:inline-block; margin:40px;}
+
+.ok1{ width:80px; height:40px; line-height:40px;text-align:center;background-color:#FF5450;border-radius:10px;color:#FFFFFF;display:inline-block;}
+.ok1:active{ width:80px; height:40px; line-height:40px;text-align:center; background-color:#435255;border-radius:10px;display:inline-block;}
+
+.scan{width:40px;height:32px;background-size:40px 32px;background-image:url(../images/scan1.png); float:left; margin-left:5px;}
+.scan:active{width:40px;height:32px;background-size:40px 32px;background-image:url(../images/scan2.png); float:left; margin-left:5px;}
+
+.cancel{ width:120px;height:40px;line-height:40px;text-align:center;background-color: #999999;border-radius:10px;color:#FFFFFF;display:inline-block; margin:40px;}
+.cancel:active{ width:120px; height:40px; line-height:40px;text-align:center; background-color:#435255;border-radius:10px;display:inline-block; margin:40px;}
+.print{ width:120px;height:40px;line-height:40px;text-align:center;background-color: #666666;border-radius:10px;color:#FFFFFF;display:inline-block; margin:40px;}
+.print:active{ width:120px; height:40px; line-height:40px;text-align:center;background-color:#435255;border-radius:10px;display:inline-block; margin:40px;}
+
+
+.fujian{width:80px; height:30px;line-height:30px; text-align:center; background-color:#999999;color:#FFFFFF;border-radius:5px; float:left;margin-right:10px;}
+.fujian:active{width:80px; height:30px;line-height:30px; text-align:center; background-color:#435255;color:#FFFFFF;border-radius:5px; float:left;margin-right:10px;}
+
+.main{}
+.blink{
+    color: #FC504B;
+    animation: blink 1s linear infinite;  
+    /* 其它浏览器兼容性前缀 */
+    -webkit-animation: blink 1s linear infinite;
+    -moz-animation: blink 1s linear infinite;
+    -ms-animation: blink 1s linear infinite;
+    -o-animation: blink 1s linear infinite;
+}
+
+
+ .image-item {
+        width: 60px;
+        height: 60px;
+
+        background-size: 100% 100%; float:left;
+        position: relative;
+        border-radius: 5px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        border: solid 1px #e8e8e8;
+		margin-right:10px;
+    }
+    .image-item .image-close {
+        position: absolute;
+        display: inline-block;
+        right: -6px;
+        top: -6px;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        line-height: 20px;
+        border-radius: 12px;
+        background-color: #FF5053;
+        color: #f3f3f3;
+        border: solid 1px #FF5053;
+        font-size: 10px;
+        font-weight: 200;
+        z-index:100;
+    }
+    .image-item.space .image-close {
+        display: none;
+    }
+
+

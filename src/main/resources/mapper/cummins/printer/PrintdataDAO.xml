@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cummins.printer.dao.PrintdataDAO">
+  <resultMap id="BaseResultMap" type="com.cummins.printer.model.Printdata">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="No" jdbcType="VARCHAR" property="no" />
+    <result column="data" jdbcType="VARCHAR" property="data" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="partNo" jdbcType="VARCHAR" property="partno" />
+    <result column="quantity" jdbcType="VARCHAR" property="quantity" />
+    <result column="partName" jdbcType="VARCHAR" property="partname" />
+    <result column="traceability" jdbcType="VARCHAR" property="traceability" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="defectDesc" jdbcType="VARCHAR" property="defectdesc" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="requester" jdbcType="VARCHAR" property="requester" />
+    <result column="supplierCode" jdbcType="VARCHAR" property="suppliercode" />
+    <result column="supplierName" jdbcType="VARCHAR" property="suppliername" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="AddTime" jdbcType="TIMESTAMP" property="addtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, `No`, `data`, `type`, partNo, quantity, partName, traceability, area, defectDesc, 
+    requester, supplierCode, supplierName, ip, `status`, AddTime
+  </sql>
+  <select id="selectByExample" parameterType="com.cummins.printer.model.PrintdataExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from PrintData
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PrintData
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from PrintData
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cummins.printer.model.PrintdataExample">
+    delete from PrintData
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cummins.printer.model.Printdata">
+    insert into PrintData (id, `No`, `data`,
+      `type`, partNo, quantity, 
+      partName, traceability, area, 
+      defectDesc, remark, requester, supplierCode,
+      supplierName, ip, `status`, 
+      AddTime)
+    values (#{id,jdbcType=INTEGER}, #{no,jdbcType=VARCHAR}, #{data,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{partno,jdbcType=VARCHAR}, #{quantity,jdbcType=VARCHAR}, 
+      #{partname,jdbcType=VARCHAR}, #{traceability,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+      #{defectdesc,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},#{requester,jdbcType=VARCHAR}, #{suppliercode,jdbcType=VARCHAR},
+      #{suppliername,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{addtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cummins.printer.model.Printdata">
+    insert into PrintData
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="no != null">
+        `No`,
+      </if>
+      <if test="data != null">
+        `data`,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="partno != null">
+        partNo,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="partname != null">
+        partName,
+      </if>
+      <if test="traceability != null">
+        traceability,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="defectdesc != null">
+        defectDesc,
+      </if>
+      <if test="requester != null">
+        requester,
+      </if>
+      <if test="suppliercode != null">
+        supplierCode,
+      </if>
+      <if test="suppliername != null">
+        supplierName,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="addtime != null">
+        AddTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="no != null">
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null">
+        #{data,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="partno != null">
+        #{partno,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=VARCHAR},
+      </if>
+      <if test="partname != null">
+        #{partname,jdbcType=VARCHAR},
+      </if>
+      <if test="traceability != null">
+        #{traceability,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="defectdesc != null">
+        #{defectdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="requester != null">
+        #{requester,jdbcType=VARCHAR},
+      </if>
+      <if test="suppliercode != null">
+        #{suppliercode,jdbcType=VARCHAR},
+      </if>
+      <if test="suppliername != null">
+        #{suppliername,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cummins.printer.model.PrintdataExample" resultType="java.lang.Long">
+    select count(*) from PrintData
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PrintData
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.no != null">
+        `No` = #{record.no,jdbcType=VARCHAR},
+      </if>
+      <if test="record.data != null">
+        `data` = #{record.data,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        `type` = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partno != null">
+        partNo = #{record.partno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null">
+        quantity = #{record.quantity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partname != null">
+        partName = #{record.partname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.traceability != null">
+        traceability = #{record.traceability,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defectdesc != null">
+        defectDesc = #{record.defectdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requester != null">
+        requester = #{record.requester,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suppliercode != null">
+        supplierCode = #{record.suppliercode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suppliername != null">
+        supplierName = #{record.suppliername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null">
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addtime != null">
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PrintData
+    set id = #{record.id,jdbcType=INTEGER},
+      `No` = #{record.no,jdbcType=VARCHAR},
+      `data` = #{record.data,jdbcType=VARCHAR},
+      `type` = #{record.type,jdbcType=VARCHAR},
+      partNo = #{record.partno,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=VARCHAR},
+      partName = #{record.partname,jdbcType=VARCHAR},
+      traceability = #{record.traceability,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR},
+      defectDesc = #{record.defectdesc,jdbcType=VARCHAR},
+      requester = #{record.requester,jdbcType=VARCHAR},
+      supplierCode = #{record.suppliercode,jdbcType=VARCHAR},
+      supplierName = #{record.suppliername,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=VARCHAR},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cummins.printer.model.Printdata">
+    update PrintData
+    <set>
+      <if test="no != null">
+        `No` = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null">
+        `data` = #{data,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="partno != null">
+        partNo = #{partno,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=VARCHAR},
+      </if>
+      <if test="partname != null">
+        partName = #{partname,jdbcType=VARCHAR},
+      </if>
+      <if test="traceability != null">
+        traceability = #{traceability,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="defectdesc != null">
+        defectDesc = #{defectdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="requester != null">
+        requester = #{requester,jdbcType=VARCHAR},
+      </if>
+      <if test="suppliercode != null">
+        supplierCode = #{suppliercode,jdbcType=VARCHAR},
+      </if>
+      <if test="suppliername != null">
+        supplierName = #{suppliername,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        AddTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cummins.printer.model.Printdata">
+    update PrintData
+    set `No` = #{no,jdbcType=VARCHAR},
+      `data` = #{data,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR},
+      partNo = #{partno,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=VARCHAR},
+      partName = #{partname,jdbcType=VARCHAR},
+      traceability = #{traceability,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      defectDesc = #{defectdesc,jdbcType=VARCHAR},
+      requester = #{requester,jdbcType=VARCHAR},
+      supplierCode = #{suppliercode,jdbcType=VARCHAR},
+      supplierName = #{suppliername,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      AddTime = #{addtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!-- 查询最后一条打印信息 -->
+  <select id="getLastPrintDataByIp" parameterType="com.cummins.printer.model.Printdata" resultMap="BaseResultMap">
+    select t.id,t.status from PrintData t
+    where t.No=#{no} and t.ip=#{ip}
+    order by t.AddTime desc
+    limit 0,1
+  </select>
+</mapper>

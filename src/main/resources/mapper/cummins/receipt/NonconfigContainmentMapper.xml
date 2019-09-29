@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cummins.receipt.dao.NonconfigContainmentMapper">
+  <resultMap id="BaseResultMap" type="com.cummins.receipt.model.NonconfigContainment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="question_id" jdbcType="INTEGER" property="questionId" />
+    <result column="part_no" jdbcType="VARCHAR" property="partNo" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="customer_supplier" jdbcType="VARCHAR" property="customerSupplier" />
+    <result column="issue_description" jdbcType="VARCHAR" property="issueDescription" />
+    <result column="spec" jdbcType="VARCHAR" property="spec" />
+    <result column="wi" jdbcType="INTEGER" property="wi" />
+    <result column="belong_area" jdbcType="VARCHAR" property="belongArea" />
+    <result column="create_account" jdbcType="VARCHAR" property="createAccount" />
+    <result column="update_account" jdbcType="VARCHAR" property="updateAccount" />
+    <result column="statue" jdbcType="INTEGER" property="statue" />
+    <result column="createtime" jdbcType="DATE" property="createtime" />
+    <result column="updatetime" jdbcType="DATE" property="updatetime" />
+    <result column="back1" jdbcType="VARCHAR" property="back1" />
+    <result column="back2" jdbcType="VARCHAR" property="back2" />
+    <result column="back3" jdbcType="VARCHAR" property="back3" />
+    <result column="back4" jdbcType="INTEGER" property="back4" />
+    <result column="back5" jdbcType="INTEGER" property="back5" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, question_id, part_no, description, customer_supplier, issue_description, spec, 
+    wi, belong_area, create_account, update_account, statue, createtime, updatetime, 
+    back1, back2, back3, back4, back5
+  </sql>
+  <select id="selectByExample" parameterType="com.cummins.receipt.model.NonconfigContainmentCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from nonconfig_containment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from nonconfig_containment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from nonconfig_containment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cummins.receipt.model.NonconfigContainmentCriteria">
+    delete from nonconfig_containment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cummins.receipt.model.NonconfigContainment"  useGeneratedKeys="true" keyProperty="id">
+    insert into nonconfig_containment (id, question_id, part_no, 
+      description, customer_supplier, issue_description, 
+      spec, wi, belong_area, 
+      create_account, update_account, statue, 
+      createtime, updatetime, back1, 
+      back2, back3, back4, 
+      back5)
+    values (#{id,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{partNo,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{customerSupplier,jdbcType=VARCHAR}, #{issueDescription,jdbcType=VARCHAR}, 
+      #{spec,jdbcType=VARCHAR}, #{wi,jdbcType=INTEGER}, #{belongArea,jdbcType=VARCHAR}, 
+      #{createAccount,jdbcType=VARCHAR}, #{updateAccount,jdbcType=VARCHAR}, #{statue,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=DATE}, #{updatetime,jdbcType=DATE}, #{back1,jdbcType=VARCHAR}, 
+      #{back2,jdbcType=VARCHAR}, #{back3,jdbcType=VARCHAR}, #{back4,jdbcType=INTEGER}, 
+      #{back5,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cummins.receipt.model.NonconfigContainment">
+    insert into nonconfig_containment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="questionId != null">
+        question_id,
+      </if>
+      <if test="partNo != null">
+        part_no,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="customerSupplier != null">
+        customer_supplier,
+      </if>
+      <if test="issueDescription != null">
+        issue_description,
+      </if>
+      <if test="spec != null">
+        spec,
+      </if>
+      <if test="wi != null">
+        wi,
+      </if>
+      <if test="belongArea != null">
+        belong_area,
+      </if>
+      <if test="createAccount != null">
+        create_account,
+      </if>
+      <if test="updateAccount != null">
+        update_account,
+      </if>
+      <if test="statue != null">
+        statue,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="back1 != null">
+        back1,
+      </if>
+      <if test="back2 != null">
+        back2,
+      </if>
+      <if test="back3 != null">
+        back3,
+      </if>
+      <if test="back4 != null">
+        back4,
+      </if>
+      <if test="back5 != null">
+        back5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="questionId != null">
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="partNo != null">
+        #{partNo,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="customerSupplier != null">
+        #{customerSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="issueDescription != null">
+        #{issueDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="spec != null">
+        #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="wi != null">
+        #{wi,jdbcType=INTEGER},
+      </if>
+      <if test="belongArea != null">
+        #{belongArea,jdbcType=VARCHAR},
+      </if>
+      <if test="createAccount != null">
+        #{createAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="updateAccount != null">
+        #{updateAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="statue != null">
+        #{statue,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="back1 != null">
+        #{back1,jdbcType=VARCHAR},
+      </if>
+      <if test="back2 != null">
+        #{back2,jdbcType=VARCHAR},
+      </if>
+      <if test="back3 != null">
+        #{back3,jdbcType=VARCHAR},
+      </if>
+      <if test="back4 != null">
+        #{back4,jdbcType=INTEGER},
+      </if>
+      <if test="back5 != null">
+        #{back5,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cummins.receipt.model.NonconfigContainmentCriteria" resultType="java.lang.Long">
+    select count(*) from nonconfig_containment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update nonconfig_containment
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.questionId != null">
+        question_id = #{record.questionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.partNo != null">
+        part_no = #{record.partNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerSupplier != null">
+        customer_supplier = #{record.customerSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueDescription != null">
+        issue_description = #{record.issueDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spec != null">
+        spec = #{record.spec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi != null">
+        wi = #{record.wi,jdbcType=INTEGER},
+      </if>
+      <if test="record.belongArea != null">
+        belong_area = #{record.belongArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createAccount != null">
+        create_account = #{record.createAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateAccount != null">
+        update_account = #{record.updateAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.statue != null">
+        statue = #{record.statue,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=DATE},
+      </if>
+      <if test="record.updatetime != null">
+        updatetime = #{record.updatetime,jdbcType=DATE},
+      </if>
+      <if test="record.back1 != null">
+        back1 = #{record.back1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.back2 != null">
+        back2 = #{record.back2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.back3 != null">
+        back3 = #{record.back3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.back4 != null">
+        back4 = #{record.back4,jdbcType=INTEGER},
+      </if>
+      <if test="record.back5 != null">
+        back5 = #{record.back5,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update nonconfig_containment
+    set id = #{record.id,jdbcType=INTEGER},
+      question_id = #{record.questionId,jdbcType=INTEGER},
+      part_no = #{record.partNo,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      customer_supplier = #{record.customerSupplier,jdbcType=VARCHAR},
+      issue_description = #{record.issueDescription,jdbcType=VARCHAR},
+      spec = #{record.spec,jdbcType=VARCHAR},
+      wi = #{record.wi,jdbcType=INTEGER},
+      belong_area = #{record.belongArea,jdbcType=VARCHAR},
+      create_account = #{record.createAccount,jdbcType=VARCHAR},
+      update_account = #{record.updateAccount,jdbcType=VARCHAR},
+      statue = #{record.statue,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=DATE},
+      updatetime = #{record.updatetime,jdbcType=DATE},
+      back1 = #{record.back1,jdbcType=VARCHAR},
+      back2 = #{record.back2,jdbcType=VARCHAR},
+      back3 = #{record.back3,jdbcType=VARCHAR},
+      back4 = #{record.back4,jdbcType=INTEGER},
+      back5 = #{record.back5,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cummins.receipt.model.NonconfigContainment">
+    update nonconfig_containment
+    <set>
+      <if test="questionId != null">
+        question_id = #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="partNo != null">
+        part_no = #{partNo,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="customerSupplier != null">
+        customer_supplier = #{customerSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="issueDescription != null">
+        issue_description = #{issueDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="spec != null">
+        spec = #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="wi != null">
+        wi = #{wi,jdbcType=INTEGER},
+      </if>
+      <if test="belongArea != null">
+        belong_area = #{belongArea,jdbcType=VARCHAR},
+      </if>
+      <if test="createAccount != null">
+        create_account = #{createAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="updateAccount != null">
+        update_account = #{updateAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="statue != null">
+        statue = #{statue,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="back1 != null">
+        back1 = #{back1,jdbcType=VARCHAR},
+      </if>
+      <if test="back2 != null">
+        back2 = #{back2,jdbcType=VARCHAR},
+      </if>
+      <if test="back3 != null">
+        back3 = #{back3,jdbcType=VARCHAR},
+      </if>
+      <if test="back4 != null">
+        back4 = #{back4,jdbcType=INTEGER},
+      </if>
+      <if test="back5 != null">
+        back5 = #{back5,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cummins.receipt.model.NonconfigContainment">
+    update nonconfig_containment
+    set question_id = #{questionId,jdbcType=INTEGER},
+      part_no = #{partNo,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      customer_supplier = #{customerSupplier,jdbcType=VARCHAR},
+      issue_description = #{issueDescription,jdbcType=VARCHAR},
+      spec = #{spec,jdbcType=VARCHAR},
+      wi = #{wi,jdbcType=INTEGER},
+      belong_area = #{belongArea,jdbcType=VARCHAR},
+      create_account = #{createAccount,jdbcType=VARCHAR},
+      update_account = #{updateAccount,jdbcType=VARCHAR},
+      statue = #{statue,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=DATE},
+      updatetime = #{updatetime,jdbcType=DATE},
+      back1 = #{back1,jdbcType=VARCHAR},
+      back2 = #{back2,jdbcType=VARCHAR},
+      back3 = #{back3,jdbcType=VARCHAR},
+      back4 = #{back4,jdbcType=INTEGER},
+      back5 = #{back5,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

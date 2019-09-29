@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cummins.sevenstepscar.dao.ToolsSevenStepsMapper">
+    <resultMap id="BaseResultMap" type="com.cummins.sevenstepscar.model.ToolsSevenSteps">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="issue_id" jdbcType="INTEGER" property="issueId"/>
+        <result column="issue_number" jdbcType="VARCHAR" property="issueNumber"/>
+        <result column="sevenstep_desc" jdbcType="VARCHAR" property="sevenstepDesc"/>
+        <result column="attment_two" jdbcType="VARCHAR" property="attmentTwo"/>
+        <result column="attment_three" jdbcType="VARCHAR" property="attmentThree"/>
+        <result column="attment_seven" jdbcType="VARCHAR" property="attmentSeven"/>
+        <result column="check_file" jdbcType="VARCHAR" property="checkFile"/>
+        <result column="esn_from" jdbcType="VARCHAR" property="esnFrom"/>
+        <result column="To1" jdbcType="VARCHAR" property="to1"/>
+        <result column="To2" jdbcType="VARCHAR" property="to2"/>
+        <result column="num_qty" jdbcType="VARCHAR" property="numQty"/>
+        <result column="num_qty2" jdbcType="VARCHAR" property="numQty2"/>
+        <result column="datefrom" jdbcType="VARCHAR" property="datefrom"/>
+        <result column="mqv" jdbcType="VARCHAR" property="mqv"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="over_time" jdbcType="TIMESTAMP" property="overTime"/>
+        <result column="targetdate1" jdbcType="TIMESTAMP" property="targetdate1"/>
+        <result column="completedate1" jdbcType="TIMESTAMP" property="completedate1"/>
+        <result column="targetdate2" jdbcType="TIMESTAMP" property="targetdate2"/>
+        <result column="completedate2" jdbcType="TIMESTAMP" property="completedate2"/>
+        <result column="targetdate3" jdbcType="TIMESTAMP" property="targetdate3"/>
+        <result column="completedate3" jdbcType="TIMESTAMP" property="completedate3"/>
+        <result column="back1" jdbcType="VARCHAR" property="back1"/>
+        <result column="back2" jdbcType="VARCHAR" property="back2"/>
+        <result column="back3" jdbcType="VARCHAR" property="back3"/>
+        <result column="back4" jdbcType="VARCHAR" property="back4"/>
+        <result column="back5" jdbcType="VARCHAR" property="back5"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, issue_id, issue_number, sevenstep_desc, attment_two, attment_three, attment_seven, 
+    check_file, esn_from, To1,To2, num_qty,num_qty2, datefrom, mqv, create_time, type, over_time,
+    targetdate1,completedate1,targetdate2,completedate2,targetdate3,completedate3,
+    back1, back2, back3, back4, back5
+  </sql>
+    <select id="selectByExample" parameterType="com.cummins.sevenstepscar.model.ToolsSevenStepsCriteria"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from tools_seven_steps
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tools_seven_steps
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tools_seven_steps
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.cummins.sevenstepscar.model.ToolsSevenStepsCriteria">
+        delete from tools_seven_steps
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.cummins.sevenstepscar.model.ToolsSevenSteps" useGeneratedKeys="true" keyProperty="id">
+    insert into tools_seven_steps (id, issue_id, issue_number, 
+      sevenstep_desc, attment_two, attment_three, 
+      attment_seven, check_file, esn_from, 
+      To1, num_qty, datefrom, 
+      mqv, create_time, type, 
+      over_time, back1, back2, 
+      back3, back4, back5
+      )
+    values (#{id,jdbcType=INTEGER}, #{issueId,jdbcType=INTEGER}, #{issueNumber,jdbcType=VARCHAR}, 
+      #{sevenstepDesc,jdbcType=VARCHAR}, #{attmentTwo,jdbcType=VARCHAR}, #{attmentThree,jdbcType=VARCHAR}, 
+      #{attmentSeven,jdbcType=VARCHAR}, #{checkFile,jdbcType=VARCHAR}, #{esnFrom,jdbcType=VARCHAR}, 
+      #{to1,jdbcType=VARCHAR}, #{numQty,jdbcType=VARCHAR}, #{datefrom,jdbcType=VARCHAR}, 
+      #{mqv,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, 
+      #{overTime,jdbcType=TIMESTAMP}, #{back1,jdbcType=VARCHAR}, #{back2,jdbcType=VARCHAR}, 
+      #{back3,jdbcType=VARCHAR}, #{back4,jdbcType=VARCHAR}, #{back5,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.cummins.sevenstepscar.model.ToolsSevenSteps" useGeneratedKeys="true" keyProperty="id">
+        insert into tools_seven_steps
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="issueId != null">
+                issue_id,
+            </if>
+            <if test="issueNumber != null">
+                issue_number,
+            </if>
+            <if test="sevenstepDesc != null">
+                sevenstep_desc,
+            </if>
+            <if test="attmentTwo != null">
+                attment_two,
+            </if>
+            <if test="attmentThree != null">
+                attment_three,
+            </if>
+            <if test="attmentSeven != null">
+                attment_seven,
+            </if>
+            <if test="checkFile != null">
+                check_file,
+            </if>
+            <if test="esnFrom != null">
+                esn_from,
+            </if>
+            <if test="to1 != null">
+                To1,
+            </if>
+            <if test="numQty != null">
+                num_qty,
+            </if>
+            <if test="datefrom != null">
+                datefrom,
+            </if>
+            <if test="mqv != null">
+                mqv,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="overTime != null">
+                over_time,
+            </if>
+            <if test="back1 != null">
+                back1,
+            </if>
+            <if test="back2 != null">
+                back2,
+            </if>
+            <if test="back3 != null">
+                back3,
+            </if>
+            <if test="back4 != null">
+                back4,
+            </if>
+            <if test="back5 != null">
+                back5,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="issueId != null">
+                #{issueId,jdbcType=INTEGER},
+            </if>
+            <if test="issueNumber != null">
+                #{issueNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="sevenstepDesc != null">
+                #{sevenstepDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="attmentTwo != null">
+                #{attmentTwo,jdbcType=VARCHAR},
+            </if>
+            <if test="attmentThree != null">
+                #{attmentThree,jdbcType=VARCHAR},
+            </if>
+            <if test="attmentSeven != null">
+                #{attmentSeven,jdbcType=VARCHAR},
+            </if>
+            <if test="checkFile != null">
+                #{checkFile,jdbcType=VARCHAR},
+            </if>
+            <if test="esnFrom != null">
+                #{esnFrom,jdbcType=VARCHAR},
+            </if>
+            <if test="to1 != null">
+                #{to1,jdbcType=VARCHAR},
+            </if>
+            <if test="numQty != null">
+                #{numQty,jdbcType=VARCHAR},
+            </if>
+            <if test="datefrom != null">
+                #{datefrom,jdbcType=VARCHAR},
+            </if>
+            <if test="mqv != null">
+                #{mqv,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="overTime != null">
+                #{overTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="back1 != null">
+                #{back1,jdbcType=VARCHAR},
+            </if>
+            <if test="back2 != null">
+                #{back2,jdbcType=VARCHAR},
+            </if>
+            <if test="back3 != null">
+                #{back3,jdbcType=VARCHAR},
+            </if>
+            <if test="back4 != null">
+                #{back4,jdbcType=VARCHAR},
+            </if>
+            <if test="back5 != null">
+                #{back5,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.cummins.sevenstepscar.model.ToolsSevenStepsCriteria"
+            resultType="java.lang.Long">
+        select count(*) from tools_seven_steps
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update tools_seven_steps
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.issueId != null">
+                issue_id = #{record.issueId,jdbcType=INTEGER},
+            </if>
+            <if test="record.issueNumber != null">
+                issue_number = #{record.issueNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sevenstepDesc != null">
+                sevenstep_desc = #{record.sevenstepDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.attmentTwo != null">
+                attment_two = #{record.attmentTwo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.attmentThree != null">
+                attment_three = #{record.attmentThree,jdbcType=VARCHAR},
+            </if>
+            <if test="record.attmentSeven != null">
+                attment_seven = #{record.attmentSeven,jdbcType=VARCHAR},
+            </if>
+            <if test="record.checkFile != null">
+                check_file = #{record.checkFile,jdbcType=VARCHAR},
+            </if>
+            <if test="record.esnFrom != null">
+                esn_from = #{record.esnFrom,jdbcType=VARCHAR},
+            </if>
+            <if test="record.to1 != null">
+                To1 = #{record.to1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.numQty != null">
+                num_qty = #{record.numQty,jdbcType=VARCHAR},
+            </if>
+            <if test="record.datefrom != null">
+                datefrom = #{record.datefrom,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mqv != null">
+                mqv = #{record.mqv,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.type != null">
+                type = #{record.type,jdbcType=INTEGER},
+            </if>
+            <if test="record.overTime != null">
+                over_time = #{record.overTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.back1 != null">
+                back1 = #{record.back1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.back2 != null">
+                back2 = #{record.back2,jdbcType=VARCHAR},
+            </if>
+            <if test="record.back3 != null">
+                back3 = #{record.back3,jdbcType=VARCHAR},
+            </if>
+            <if test="record.back4 != null">
+                back4 = #{record.back4,jdbcType=VARCHAR},
+            </if>
+            <if test="record.back5 != null">
+                back5 = #{record.back5,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update tools_seven_steps
+        set id = #{record.id,jdbcType=INTEGER},
+        issue_id = #{record.issueId,jdbcType=INTEGER},
+        issue_number = #{record.issueNumber,jdbcType=VARCHAR},
+        sevenstep_desc = #{record.sevenstepDesc,jdbcType=VARCHAR},
+        attment_two = #{record.attmentTwo,jdbcType=VARCHAR},
+        attment_three = #{record.attmentThree,jdbcType=VARCHAR},
+        attment_seven = #{record.attmentSeven,jdbcType=VARCHAR},
+        check_file = #{record.checkFile,jdbcType=VARCHAR},
+        esn_from = #{record.esnFrom,jdbcType=VARCHAR},
+        To1 = #{record.to1,jdbcType=VARCHAR},
+        num_qty = #{record.numQty,jdbcType=VARCHAR},
+        datefrom = #{record.datefrom,jdbcType=VARCHAR},
+        mqv = #{record.mqv,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        type = #{record.type,jdbcType=INTEGER},
+        over_time = #{record.overTime,jdbcType=TIMESTAMP},
+        back1 = #{record.back1,jdbcType=VARCHAR},
+        back2 = #{record.back2,jdbcType=VARCHAR},
+        back3 = #{record.back3,jdbcType=VARCHAR},
+        back4 = #{record.back4,jdbcType=VARCHAR},
+        back5 = #{record.back5,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cummins.sevenstepscar.model.ToolsSevenSteps">
+        update tools_seven_steps
+        <set>
+            <if test="issueId != null and issueId !=''">
+                issue_id = #{issueId,jdbcType=INTEGER},
+            </if>
+            <if test="issueNumber != null  and issueNumber !=''">
+                issue_number = #{issueNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="sevenstepDesc != null and sevenstepDesc!=''">
+                sevenstep_desc = #{sevenstepDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="attmentTwo != null and attmentTwo!=''">
+                attment_two = #{attmentTwo,jdbcType=VARCHAR},
+            </if>
+            <if test="attmentThree != null and attmentThree!=''">
+                attment_three = #{attmentThree,jdbcType=VARCHAR},
+            </if>
+            <if test="attmentSeven != null and attmentSeven!=''">
+                attment_seven = #{attmentSeven,jdbcType=VARCHAR},
+            </if>
+            <if test="checkFile != null and checkFile!=''">
+                check_file = #{checkFile,jdbcType=VARCHAR},
+            </if>
+            <if test="esnFrom != null and esnFrom!=''">
+                esn_from = #{esnFrom,jdbcType=VARCHAR},
+            </if>
+            <if test="to1 != null and to1!=''">
+                To1 = #{to1,jdbcType=VARCHAR},
+            </if>
+            <if test="to2 != null and to2!=''">
+                To2 = #{to2,jdbcType=VARCHAR},
+            </if>
+            <if test="numQty != null and numQty!=''">
+                num_qty = #{numQty,jdbcType=VARCHAR},
+            </if>
+            <if test="numQty2 != null and numQty2!=''">
+                num_qty2 = #{numQty2,jdbcType=VARCHAR},
+            </if>
+            <if test="datefrom != null and datefrom!=''">
+                datefrom = #{datefrom,jdbcType=VARCHAR},
+            </if>
+            <if test="mqv != null and mqv!=''">
+                mqv = #{mqv,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null and createTime!=''">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="type != null and type!=''">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="overTime != null">
+                over_time = #{overTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="targetdate1 != null ">
+                targetdate1 = #{targetdate1,jdbcType=TIMESTAMP},
+            </if>
+            <if test="completedate1 != null">
+                completedate1 = #{completedate1,jdbcType=TIMESTAMP},
+            </if>
+            <if test="targetdate2 != null">
+                targetdate2 = #{targetdate2,jdbcType=TIMESTAMP},
+            </if>
+            <if test="completedate2 != null ">
+                completedate2 = #{completedate2,jdbcType=TIMESTAMP},
+            </if>
+            <if test="targetdate3 != null ">
+                targetdate3 = #{targetdate3,jdbcType=TIMESTAMP},
+            </if>
+            <if test="completedate3 != null ">
+                completedate3 = #{completedate3,jdbcType=TIMESTAMP},
+            </if>
+            <if test="back1 != null and back1!=''">
+                back1 = #{back1,jdbcType=VARCHAR},
+            </if>
+            <if test="back2 != null and back2!=''">
+                back2 = #{back2,jdbcType=VARCHAR},
+            </if>
+            <if test="back3 != null and back3!=''">
+                back3 = #{back3,jdbcType=VARCHAR},
+            </if>
+            <if test="back4 != null  and back4!=''">
+                back4 = #{back4,jdbcType=VARCHAR},
+            </if>
+            <if test="back5 != null and back5!=''">
+                back5 = #{back5,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cummins.sevenstepscar.model.ToolsSevenSteps">
+    update tools_seven_steps
+    set issue_id = #{issueId,jdbcType=INTEGER},
+      issue_number = #{issueNumber,jdbcType=VARCHAR},
+      sevenstep_desc = #{sevenstepDesc,jdbcType=VARCHAR},
+      attment_two = #{attmentTwo,jdbcType=VARCHAR},
+      attment_three = #{attmentThree,jdbcType=VARCHAR},
+      attment_seven = #{attmentSeven,jdbcType=VARCHAR},
+      check_file = #{checkFile,jdbcType=VARCHAR},
+      esn_from = #{esnFrom,jdbcType=VARCHAR},
+      To1 = #{to1,jdbcType=VARCHAR},
+      num_qty = #{numQty,jdbcType=VARCHAR},
+      datefrom = #{datefrom,jdbcType=VARCHAR},
+      mqv = #{mqv,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=INTEGER},
+      over_time = #{overTime,jdbcType=TIMESTAMP},
+      back1 = #{back1,jdbcType=VARCHAR},
+      back2 = #{back2,jdbcType=VARCHAR},
+      back3 = #{back3,jdbcType=VARCHAR},
+      back4 = #{back4,jdbcType=VARCHAR},
+      back5 = #{back5,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="selectSevensteptwo" parameterType="map" resultType="com.cummins.sevenstepscar.model.ToolsSevenSteps">
+        select
+        t.id id,t.issue_id issue_id ,t.sevenstep_desc sevenstep_desc,t.issue_number issue_number,t.create_time
+        create_time
+        from tools_seven_steps t ,deal_tool_person p where t.issue_id =p.issue_id and t.id=p.tool_no
+        <if test="params.questionId !=null and params.questionId !=''">
+            and p.issue_id =#{params.questionId}
+        </if>
+        <if test="params.account !=null and params.account !=''">
+            and p.process_person_account=#{params.account}
+        </if>
+        <if test="params.toolsId !=null and params.toolsId !=''">
+            and p.tool_no =#{params.toolsId}
+        </if>
+        <if test="params.toolstype !=null and params.toolstype !=''">
+            and t.type=#{params.toolstype}
+        </if>
+        <!-- <if test="params.back3 !=null and params.back3 !=''">
+           and t.back3=#{params.back3}  第几步
+         </if>-->
+        <if test="params.state !=null and params.state !=''">
+            and p.status=#{params.state}
+        </if>
+         limit 0,1
+
+    </select>
+
+
+
+
+
+
+</mapper>

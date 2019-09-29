@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cummins.bims.dao.IssueJobReviewMapper">
+  <resultMap id="BaseResultMap" type="com.cummins.bims.dto.IssueJobReview">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="issue_id" jdbcType="INTEGER" property="issueId" />
+    <result column="handler_dept_id" jdbcType="INTEGER" property="handlerDeptId" />
+    <result column="handler_dept_name" jdbcType="VARCHAR" property="handlerDeptName" />
+    <result column="handler_person_id" jdbcType="INTEGER" property="handlerPersonId" />
+    <result column="handler_person_account" jdbcType="VARCHAR" property="handlerPersonAccount" />
+    <result column="handler_person_name" jdbcType="VARCHAR" property="handlerPersonName" />
+    <result column="attment" jdbcType="VARCHAR" property="attment" />
+    <result column="measure_attment" jdbcType="VARCHAR" property="measureAttment" />
+    <result column="measure_text" jdbcType="VARCHAR" property="measureText" />
+    <result column="review_person" jdbcType="VARCHAR" property="reviewPerson" />
+    <result column="review_date" jdbcType="TIMESTAMP" property="reviewDate" />
+    <result column="conclusion" jdbcType="VARCHAR" property="conclusion" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, issue_id, handler_dept_id, handler_dept_name, handler_person_id, handler_person_account, 
+    handler_person_name, attment, measure_attment, measure_text, review_person, review_date, 
+    conclusion
+  </sql>
+  <select id="selectByExample" parameterType="com.cummins.bims.dto.IssueJobReviewCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from issue_job_review
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from issue_job_review
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from issue_job_review
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cummins.bims.dto.IssueJobReviewCriteria">
+    delete from issue_job_review
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cummins.bims.dto.IssueJobReview">
+    insert into issue_job_review (id, issue_id, handler_dept_id, 
+      handler_dept_name, handler_person_id, handler_person_account, 
+      handler_person_name, attment, measure_attment, 
+      measure_text, review_person, review_date, 
+      conclusion)
+    values (#{id,jdbcType=INTEGER}, #{issueId,jdbcType=INTEGER}, #{handlerDeptId,jdbcType=INTEGER}, 
+      #{handlerDeptName,jdbcType=VARCHAR}, #{handlerPersonId,jdbcType=INTEGER}, #{handlerPersonAccount,jdbcType=VARCHAR}, 
+      #{handlerPersonName,jdbcType=VARCHAR}, #{attment,jdbcType=VARCHAR}, #{measureAttment,jdbcType=VARCHAR}, 
+      #{measureText,jdbcType=VARCHAR}, #{reviewPerson,jdbcType=VARCHAR}, #{reviewDate,jdbcType=TIMESTAMP}, 
+      #{conclusion,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cummins.bims.dto.IssueJobReview">
+    insert into issue_job_review
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="issueId != null">
+        issue_id,
+      </if>
+      <if test="handlerDeptId != null">
+        handler_dept_id,
+      </if>
+      <if test="handlerDeptName != null">
+        handler_dept_name,
+      </if>
+      <if test="handlerPersonId != null">
+        handler_person_id,
+      </if>
+      <if test="handlerPersonAccount != null">
+        handler_person_account,
+      </if>
+      <if test="handlerPersonName != null">
+        handler_person_name,
+      </if>
+      <if test="attment != null">
+        attment,
+      </if>
+      <if test="measureAttment != null">
+        measure_attment,
+      </if>
+      <if test="measureText != null">
+        measure_text,
+      </if>
+      <if test="reviewPerson != null">
+        review_person,
+      </if>
+      <if test="reviewDate != null">
+        review_date,
+      </if>
+      <if test="conclusion != null">
+        conclusion,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="issueId != null">
+        #{issueId,jdbcType=INTEGER},
+      </if>
+      <if test="handlerDeptId != null">
+        #{handlerDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="handlerDeptName != null">
+        #{handlerDeptName,jdbcType=VARCHAR},
+      </if>
+      <if test="handlerPersonId != null">
+        #{handlerPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="handlerPersonAccount != null">
+        #{handlerPersonAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="handlerPersonName != null">
+        #{handlerPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="attment != null">
+        #{attment,jdbcType=VARCHAR},
+      </if>
+      <if test="measureAttment != null">
+        #{measureAttment,jdbcType=VARCHAR},
+      </if>
+      <if test="measureText != null">
+        #{measureText,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewPerson != null">
+        #{reviewPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewDate != null">
+        #{reviewDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="conclusion != null">
+        #{conclusion,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cummins.bims.dto.IssueJobReviewCriteria" resultType="java.lang.Long">
+    select count(*) from issue_job_review
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update issue_job_review
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.issueId != null">
+        issue_id = #{record.issueId,jdbcType=INTEGER},
+      </if>
+      <if test="record.handlerDeptId != null">
+        handler_dept_id = #{record.handlerDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="record.handlerDeptName != null">
+        handler_dept_name = #{record.handlerDeptName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handlerPersonId != null">
+        handler_person_id = #{record.handlerPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="record.handlerPersonAccount != null">
+        handler_person_account = #{record.handlerPersonAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handlerPersonName != null">
+        handler_person_name = #{record.handlerPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attment != null">
+        attment = #{record.attment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.measureAttment != null">
+        measure_attment = #{record.measureAttment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.measureText != null">
+        measure_text = #{record.measureText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewPerson != null">
+        review_person = #{record.reviewPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewDate != null">
+        review_date = #{record.reviewDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.conclusion != null">
+        conclusion = #{record.conclusion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update issue_job_review
+    set id = #{record.id,jdbcType=INTEGER},
+      issue_id = #{record.issueId,jdbcType=INTEGER},
+      handler_dept_id = #{record.handlerDeptId,jdbcType=INTEGER},
+      handler_dept_name = #{record.handlerDeptName,jdbcType=VARCHAR},
+      handler_person_id = #{record.handlerPersonId,jdbcType=INTEGER},
+      handler_person_account = #{record.handlerPersonAccount,jdbcType=VARCHAR},
+      handler_person_name = #{record.handlerPersonName,jdbcType=VARCHAR},
+      attment = #{record.attment,jdbcType=VARCHAR},
+      measure_attment = #{record.measureAttment,jdbcType=VARCHAR},
+      measure_text = #{record.measureText,jdbcType=VARCHAR},
+      review_person = #{record.reviewPerson,jdbcType=VARCHAR},
+      review_date = #{record.reviewDate,jdbcType=TIMESTAMP},
+      conclusion = #{record.conclusion,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cummins.bims.dto.IssueJobReview">
+    update issue_job_review
+    <set>
+      <if test="issueId != null">
+        issue_id = #{issueId,jdbcType=INTEGER},
+      </if>
+      <if test="handlerDeptId != null">
+        handler_dept_id = #{handlerDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="handlerDeptName != null">
+        handler_dept_name = #{handlerDeptName,jdbcType=VARCHAR},
+      </if>
+      <if test="handlerPersonId != null">
+        handler_person_id = #{handlerPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="handlerPersonAccount != null">
+        handler_person_account = #{handlerPersonAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="handlerPersonName != null">
+        handler_person_name = #{handlerPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="attment != null">
+        attment = #{attment,jdbcType=VARCHAR},
+      </if>
+      <if test="measureAttment != null">
+        measure_attment = #{measureAttment,jdbcType=VARCHAR},
+      </if>
+      <if test="measureText != null">
+        measure_text = #{measureText,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewPerson != null">
+        review_person = #{reviewPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewDate != null">
+        review_date = #{reviewDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="conclusion != null">
+        conclusion = #{conclusion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cummins.bims.dto.IssueJobReview">
+    update issue_job_review
+    set issue_id = #{issueId,jdbcType=INTEGER},
+      handler_dept_id = #{handlerDeptId,jdbcType=INTEGER},
+      handler_dept_name = #{handlerDeptName,jdbcType=VARCHAR},
+      handler_person_id = #{handlerPersonId,jdbcType=INTEGER},
+      handler_person_account = #{handlerPersonAccount,jdbcType=VARCHAR},
+      handler_person_name = #{handlerPersonName,jdbcType=VARCHAR},
+      attment = #{attment,jdbcType=VARCHAR},
+      measure_attment = #{measureAttment,jdbcType=VARCHAR},
+      measure_text = #{measureText,jdbcType=VARCHAR},
+      review_person = #{reviewPerson,jdbcType=VARCHAR},
+      review_date = #{reviewDate,jdbcType=TIMESTAMP},
+      conclusion = #{conclusion,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

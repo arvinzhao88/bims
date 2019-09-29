@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cummins.erp.dao.SqIMapper">
+    <resultMap id="BaseResultMap" type="com.cummins.erp.model.SqI">
+        <result column="vendor_name" jdbcType="VARCHAR" property="vendorName"/>
+        <result column="vendor_code" jdbcType="VARCHAR" property="vendorCode"/>
+        <result column="vendor_site_code" jdbcType="VARCHAR" property="vendorSiteCode"/>
+        <result column="sqie_number" jdbcType="VARCHAR" property="sqieNumber"/>
+        <result column="sqie_name" jdbcType="VARCHAR" property="sqieName"/>
+    </resultMap>
+
+    <select id="querySqI"  parameterType="string" resultMap="BaseResultMap">
+     select vendor_name,vendor_code,vendor_site_code,sqie_number,sqie_name from v_vendor_sqi_view  where vendor_code=#{SupplierCode}
+    </select>
+
+</mapper>

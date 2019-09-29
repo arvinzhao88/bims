@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cummins.receipt.dao.ScrapTicketMapper">
+    <resultMap id="BaseResultMap" type="com.cummins.receipt.model.ScrapTicket">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="questiond_id" jdbcType="INTEGER" property="questiondId"/>
+        <result column="in_plant_customers" jdbcType="INTEGER" property="inPlantCustomers"/>
+        <result column="number" jdbcType="VARCHAR" property="number"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="parts_engine_number" jdbcType="VARCHAR" property="partsEngineNumber"/>
+        <result column="so" jdbcType="VARCHAR" property="so"/>
+        <result column="quantity" jdbcType="DOUBLE" property="quantity"/>
+        <result column="part_name" jdbcType="VARCHAR" property="partName"/>
+        <result column="supplier_code" jdbcType="VARCHAR" property="supplierCode"/>
+        <result column="traceability_id" jdbcType="VARCHAR" property="traceabilityId"/>
+        <result column="defect_description" jdbcType="VARCHAR" property="defectDescription"/>
+        <result column="item_number" jdbcType="VARCHAR" property="itemNumber"/>
+        <result column="requester" jdbcType="INTEGER" property="requester"/>
+        <result column="judgment" jdbcType="VARCHAR" property="judgment"/>
+        <result column="share_code" jdbcType="VARCHAR" property="shareCode"/>
+        <result column="associated_scrap_no" jdbcType="VARCHAR" property="associatedScrapNo"/>
+        <result column="quality_engineer" jdbcType="INTEGER" property="qualityEngineer"/>
+        <result column="options" jdbcType="VARCHAR" property="options"/>
+        <result column="other" jdbcType="VARCHAR" property="other"/>
+        <result column="belong_area" jdbcType="VARCHAR" property="belongArea"/>
+        <result column="create_account" jdbcType="VARCHAR" property="createAccount"/>
+        <result column="update_account" jdbcType="VARCHAR" property="updateAccount"/>
+        <result column="statue" jdbcType="INTEGER" property="statue"/>
+        <result column="updatetime" jdbcType="DATE" property="updatetime"/>
+        <result column="createtime" jdbcType="DATE" property="createtime"/>
+        <result column="back1" jdbcType="VARCHAR" property="back1"/>
+        <result column="back2" jdbcType="VARCHAR" property="back2"/>
+        <result column="back3" jdbcType="VARCHAR" property="back3"/>
+        <result column="back4" jdbcType="INTEGER" property="back4"/>
+        <result column="back5" jdbcType="INTEGER" property="back5"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, questiond_id, in_plant_customers, number, type, parts_engine_number, so, quantity, 
+    part_name, supplier_code, traceability_id, defect_description, item_number, requester, 
+    judgment, share_code, associated_scrap_no, quality_engineer, options, other, belong_area, 
+    create_account, update_account, statue, updatetime, createtime, back1, back2, back3, 
+    back4, back5
+  </sql>
+    <select id="selectByExample" parameterType="com.cummins.receipt.model.ScrapTicketCriteria"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from scrap_ticket
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from scrap_ticket
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from scrap_ticket
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.cummins.receipt.model.ScrapTicketCriteria">
+        delete from scrap_ticket
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.cummins.receipt.model.ScrapTicket"  useGeneratedKeys="true" keyProperty="id">
+    insert into scrap_ticket (id, questiond_id, in_plant_customers, 
+      number, type, parts_engine_number, 
+      so, quantity, part_name, 
+      supplier_code, traceability_id, defect_description, 
+      item_number, requester, judgment, 
+      share_code, associated_scrap_no, quality_engineer, 
+      options, other, belong_area, 
+      create_account, update_account, statue, 
+      updatetime, createtime, back1, 
+      back2, back3, back4, 
+      back5)
+    values (#{id,jdbcType=INTEGER}, #{questiondId,jdbcType=INTEGER}, #{inPlantCustomers,jdbcType=INTEGER}, 
+      #{number,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{partsEngineNumber,jdbcType=VARCHAR}, 
+      #{so,jdbcType=VARCHAR}, #{quantity,jdbcType=DOUBLE}, #{partName,jdbcType=VARCHAR}, 
+      #{supplierCode,jdbcType=VARCHAR}, #{traceabilityId,jdbcType=VARCHAR}, #{defectDescription,jdbcType=VARCHAR}, 
+      #{itemNumber,jdbcType=VARCHAR}, #{requester,jdbcType=INTEGER}, #{judgment,jdbcType=VARCHAR}, 
+      #{shareCode,jdbcType=VARCHAR}, #{associatedScrapNo,jdbcType=VARCHAR}, #{qualityEngineer,jdbcType=INTEGER}, 
+      #{options,jdbcType=VARCHAR}, #{other,jdbcType=VARCHAR}, #{belongArea,jdbcType=VARCHAR}, 
+      #{createAccount,jdbcType=VARCHAR}, #{updateAccount,jdbcType=VARCHAR}, #{statue,jdbcType=INTEGER}, 
+      #{updatetime,jdbcType=DATE}, #{createtime,jdbcType=DATE}, #{back1,jdbcType=VARCHAR}, 
+      #{back2,jdbcType=VARCHAR}, #{back3,jdbcType=VARCHAR}, #{back4,jdbcType=INTEGER}, 
+      #{back5,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.cummins.receipt.model.ScrapTicket">
+        insert into scrap_ticket
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="questiondId != null">
+                questiond_id,
+            </if>
+            <if test="inPlantCustomers != null">
+                in_plant_customers,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="partsEngineNumber != null">
+                parts_engine_number,
+            </if>
+            <if test="so != null">
+                so,
+            </if>
+            <if test="quantity != null">
+                quantity,
+            </if>
+            <if test="partName != null">
+                part_name,
+            </if>
+            <if test="supplierCode != null">
+                supplier_code,
+            </if>
+            <if test="traceabilityId != null">
+                traceability_id,
+            </if>
+            <if test="defectDescription != null">
+                defect_description,
+            </if>
+            <if test="itemNumber != null">
+                item_number,
+            </if>
+            <if test="requester != null">
+                requester,
+            </if>
+            <if test="judgment != null">
+                judgment,
+            </if>
+            <if test="shareCode != null">
+                share_code,
+            </if>
+            <if test="associatedScrapNo != null">
+                associated_scrap_no,
+            </if>
+            <if test="qualityEngineer != null">
+                quality_engineer,
+            </if>
+            <if test="options != null">
+                options,
+            </if>
+            <if test="other != null">
+                other,
+            </if>
+            <if test="belongArea != null">
+                belong_area,
+            </if>
+            <if test="createAccount != null">
+                create_account,
+            </if>
+            <if test="updateAccount != null">
+                update_account,
+            </if>
+            <if test="statue != null">
+                statue,
+            </if>
+            <if test="updatetime != null">
+                updatetime,
+            </if>
+            <if test="createtime != null">
+                createtime,
+            </if>
+            <if test="back1 != null">
+                back1,
+            </if>
+            <if test="back2 != null">
+                back2,
+            </if>
+            <if test="back3 != null">
+                back3,
+            </if>
+            <if test="back4 != null">
+                back4,
+            </if>
+            <if test="back5 != null">
+                back5,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="questiondId != null">
+                #{questiondId,jdbcType=INTEGER},
+            </if>
+            <if test="inPlantCustomers != null">
+                #{inPlantCustomers,jdbcType=INTEGER},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="partsEngineNumber != null">
+                #{partsEngineNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="so != null">
+                #{so,jdbcType=VARCHAR},
+            </if>
+            <if test="quantity != null">
+                #{quantity,jdbcType=DOUBLE},
+            </if>
+            <if test="partName != null">
+                #{partName,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierCode != null">
+                #{supplierCode,jdbcType=VARCHAR},
+            </if>
+            <if test="traceabilityId != null">
+                #{traceabilityId,jdbcType=VARCHAR},
+            </if>
+            <if test="defectDescription != null">
+                #{defectDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="itemNumber != null">
+                #{itemNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="requester != null">
+                #{requester,jdbcType=INTEGER},
+            </if>
+            <if test="judgment != null">
+                #{judgment,jdbcType=VARCHAR},
+            </if>
+            <if test="shareCode != null">
+                #{shareCode,jdbcType=VARCHAR},
+            </if>
+            <if test="associatedScrapNo != null">
+                #{associatedScrapNo,jdbcType=VARCHAR},
+            </if>
+            <if test="qualityEngineer != null">
+                #{qualityEngineer,jdbcType=INTEGER},
+            </if>
+            <if test="options != null">
+                #{options,jdbcType=VARCHAR},
+            </if>
+            <if test="other != null">
+                #{other,jdbcType=VARCHAR},
+            </if>
+            <if test="belongArea != null">
+                #{belongArea,jdbcType=VARCHAR},
+            </if>
+            <if test="createAccount != null">
+                #{createAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="updateAccount != null">
+                #{updateAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="statue != null">
+                #{statue,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime,jdbcType=DATE},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=DATE},
+            </if>
+            <if test="back1 != null">
+                #{back1,jdbcType=VARCHAR},
+            </if>
+            <if test="back2 != null">
+                #{back2,jdbcType=VARCHAR},
+            </if>
+            <if test="back3 != null">
+                #{back3,jdbcType=VARCHAR},
+            </if>
+            <if test="back4 != null">
+                #{back4,jdbcType=INTEGER},
+            </if>
+            <if test="back5 != null">
+                #{back5,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.cummins.receipt.model.ScrapTicketCriteria"
+            resultType="java.lang.Long">
+        select count(*) from scrap_ticket
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update scrap_ticket
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.questiondId != null">
+                questiond_id = #{record.questiondId,jdbcType=INTEGER},
+            </if>
+            <if test="record.inPlantCustomers != null">
+                in_plant_customers = #{record.inPlantCustomers,jdbcType=INTEGER},
+            </if>
+            <if test="record.number != null">
+                number = #{record.number,jdbcType=VARCHAR},
+            </if>
+            <if test="record.type != null">
+                type = #{record.type,jdbcType=VARCHAR},
+            </if>
+            <if test="record.partsEngineNumber != null">
+                parts_engine_number = #{record.partsEngineNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.so != null">
+                so = #{record.so,jdbcType=VARCHAR},
+            </if>
+            <if test="record.quantity != null">
+                quantity = #{record.quantity,jdbcType=DOUBLE},
+            </if>
+            <if test="record.partName != null">
+                part_name = #{record.partName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.supplierCode != null">
+                supplier_code = #{record.supplierCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.traceabilityId != null">
+                traceability_id = #{record.traceabilityId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.defectDescription != null">
+                defect_description = #{record.defectDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="record.itemNumber != null">
+                item_number = #{record.itemNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.requester != null">
+                requester = #{record.requester,jdbcType=INTEGER},
+            </if>
+            <if test="record.judgment != null">
+                judgment = #{record.judgment,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shareCode != null">
+                share_code = #{record.shareCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.associatedScrapNo != null">
+                associated_scrap_no = #{record.associatedScrapNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.qualityEngineer != null">
+                quality_engineer = #{record.qualityEngineer,jdbcType=INTEGER},
+            </if>
+            <if test="record.options != null">
+                options = #{record.options,jdbcType=VARCHAR},
+            </if>
+            <if test="record.other != null">
+                other = #{record.other,jdbcType=VARCHAR},
+            </if>
+            <if test="record.belongArea != null">
+                belong_area = #{record.belongArea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createAccount != null">
+                create_account = #{record.createAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.updateAccount != null">
+                update_account = #{record.updateAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.statue != null">
+                statue = #{record.statue,jdbcType=INTEGER},
+            </if>
+            <if test="record.updatetime != null">
+                updatetime = #{record.updatetime,jdbcType=DATE},
+            </if>
+            <if test="record.createtime != null">
+                createtime = #{record.createtime,jdbcType=DATE},
+            </if>
+            <if test="record.back1 != null">
+                back1 = #{record.back1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.back2 != null">
+                back2 = #{record.back2,jdbcType=VARCHAR},
+            </if>
+            <if test="record.back3 != null">
+                back3 = #{record.back3,jdbcType=VARCHAR},
+            </if>
+            <if test="record.back4 != null">
+                back4 = #{record.back4,jdbcType=INTEGER},
+            </if>
+            <if test="record.back5 != null">
+                back5 = #{record.back5,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update scrap_ticket
+        set id = #{record.id,jdbcType=INTEGER},
+        questiond_id = #{record.questiondId,jdbcType=INTEGER},
+        in_plant_customers = #{record.inPlantCustomers,jdbcType=INTEGER},
+        number = #{record.number,jdbcType=VARCHAR},
+        type = #{record.type,jdbcType=VARCHAR},
+        parts_engine_number = #{record.partsEngineNumber,jdbcType=VARCHAR},
+        so = #{record.so,jdbcType=VARCHAR},
+        quantity = #{record.quantity,jdbcType=DOUBLE},
+        part_name = #{record.partName,jdbcType=VARCHAR},
+        supplier_code = #{record.supplierCode,jdbcType=VARCHAR},
+        traceability_id = #{record.traceabilityId,jdbcType=VARCHAR},
+        defect_description = #{record.defectDescription,jdbcType=VARCHAR},
+        item_number = #{record.itemNumber,jdbcType=VARCHAR},
+        requester = #{record.requester,jdbcType=INTEGER},
+        judgment = #{record.judgment,jdbcType=VARCHAR},
+        share_code = #{record.shareCode,jdbcType=VARCHAR},
+        associated_scrap_no = #{record.associatedScrapNo,jdbcType=VARCHAR},
+        quality_engineer = #{record.qualityEngineer,jdbcType=INTEGER},
+        options = #{record.options,jdbcType=VARCHAR},
+        other = #{record.other,jdbcType=VARCHAR},
+        belong_area = #{record.belongArea,jdbcType=VARCHAR},
+        create_account = #{record.createAccount,jdbcType=VARCHAR},
+        update_account = #{record.updateAccount,jdbcType=VARCHAR},
+        statue = #{record.statue,jdbcType=INTEGER},
+        updatetime = #{record.updatetime,jdbcType=DATE},
+        createtime = #{record.createtime,jdbcType=DATE},
+        back1 = #{record.back1,jdbcType=VARCHAR},
+        back2 = #{record.back2,jdbcType=VARCHAR},
+        back3 = #{record.back3,jdbcType=VARCHAR},
+        back4 = #{record.back4,jdbcType=INTEGER},
+        back5 = #{record.back5,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cummins.receipt.model.ScrapTicket">
+        update scrap_ticket
+        <set>
+            <if test="questiondId != null">
+                questiond_id = #{questiondId,jdbcType=INTEGER},
+            </if>
+            <if test="inPlantCustomers != null">
+                in_plant_customers = #{inPlantCustomers,jdbcType=INTEGER},
+            </if>
+            <if test="number != null">
+                number = #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="partsEngineNumber != null">
+                parts_engine_number = #{partsEngineNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="so != null">
+                so = #{so,jdbcType=VARCHAR},
+            </if>
+            <if test="quantity != null">
+                quantity = #{quantity,jdbcType=DOUBLE},
+            </if>
+            <if test="partName != null">
+                part_name = #{partName,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierCode != null">
+                supplier_code = #{supplierCode,jdbcType=VARCHAR},
+            </if>
+            <if test="traceabilityId != null">
+                traceability_id = #{traceabilityId,jdbcType=VARCHAR},
+            </if>
+            <if test="defectDescription != null">
+                defect_description = #{defectDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="itemNumber != null">
+                item_number = #{itemNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="requester != null">
+                requester = #{requester,jdbcType=INTEGER},
+            </if>
+            <if test="judgment != null">
+                judgment = #{judgment,jdbcType=VARCHAR},
+            </if>
+            <if test="shareCode != null">
+                share_code = #{shareCode,jdbcType=VARCHAR},
+            </if>
+            <if test="associatedScrapNo != null">
+                associated_scrap_no = #{associatedScrapNo,jdbcType=VARCHAR},
+            </if>
+            <if test="qualityEngineer != null">
+                quality_engineer = #{qualityEngineer,jdbcType=INTEGER},
+            </if>
+            <if test="options != null">
+                options = #{options,jdbcType=VARCHAR},
+            </if>
+            <if test="other != null">
+                other = #{other,jdbcType=VARCHAR},
+            </if>
+            <if test="belongArea != null">
+                belong_area = #{belongArea,jdbcType=VARCHAR},
+            </if>
+            <if test="createAccount != null">
+                create_account = #{createAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="updateAccount != null">
+                update_account = #{updateAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="statue != null">
+                statue = #{statue,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null">
+                updatetime = #{updatetime,jdbcType=DATE},
+            </if>
+            <if test="createtime != null">
+                createtime = #{createtime,jdbcType=DATE},
+            </if>
+            <if test="back1 != null">
+                back1 = #{back1,jdbcType=VARCHAR},
+            </if>
+            <if test="back2 != null">
+                back2 = #{back2,jdbcType=VARCHAR},
+            </if>
+            <if test="back3 != null">
+                back3 = #{back3,jdbcType=VARCHAR},
+            </if>
+            <if test="back4 != null">
+                back4 = #{back4,jdbcType=INTEGER},
+            </if>
+            <if test="back5 != null">
+                back5 = #{back5,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cummins.receipt.model.ScrapTicket">
+    update scrap_ticket
+    set questiond_id = #{questiondId,jdbcType=INTEGER},
+      in_plant_customers = #{inPlantCustomers,jdbcType=INTEGER},
+      number = #{number,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      parts_engine_number = #{partsEngineNumber,jdbcType=VARCHAR},
+      so = #{so,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=DOUBLE},
+      part_name = #{partName,jdbcType=VARCHAR},
+      supplier_code = #{supplierCode,jdbcType=VARCHAR},
+      traceability_id = #{traceabilityId,jdbcType=VARCHAR},
+      defect_description = #{defectDescription,jdbcType=VARCHAR},
+      item_number = #{itemNumber,jdbcType=VARCHAR},
+      requester = #{requester,jdbcType=INTEGER},
+      judgment = #{judgment,jdbcType=VARCHAR},
+      share_code = #{shareCode,jdbcType=VARCHAR},
+      associated_scrap_no = #{associatedScrapNo,jdbcType=VARCHAR},
+      quality_engineer = #{qualityEngineer,jdbcType=INTEGER},
+      options = #{options,jdbcType=VARCHAR},
+      other = #{other,jdbcType=VARCHAR},
+      belong_area = #{belongArea,jdbcType=VARCHAR},
+      create_account = #{createAccount,jdbcType=VARCHAR},
+      update_account = #{updateAccount,jdbcType=VARCHAR},
+      statue = #{statue,jdbcType=INTEGER},
+      updatetime = #{updatetime,jdbcType=DATE},
+      createtime = #{createtime,jdbcType=DATE},
+      back1 = #{back1,jdbcType=VARCHAR},
+      back2 = #{back2,jdbcType=VARCHAR},
+      back3 = #{back3,jdbcType=VARCHAR},
+      back4 = #{back4,jdbcType=INTEGER},
+      back5 = #{back5,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="selectByPrimaryKeyOnlyShow" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from scrap_ticket
+        where id = #{id,jdbcType=INTEGER} and statue='2'
+    </select>
+
+
+</mapper>

@@ -1,0 +1,10 @@
+
+@media print{
+body{margin-top:-20px;padding:0px;font-family:Arial;transform: scale(0.8);vertical-align: top;}
+.tab{width:720px;font-size:12px;}
+.logo{width:150px;height:30px;}
+.biao{font-size:18px; font-weight:bold;}
+.input_f{width:96%;height:26px;border:0;border-bottom:1px solid #fff;background:#fff;}
+.input_0{width:96%;height:26px;border:0;border-bottom:1px solid #000;background:#fff;}
+.tab_font{ font-size:10px;}
+}
