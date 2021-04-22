@@ -27,7 +27,7 @@
 		<poi.version>3.9</poi.version>
 		<commons-beanutils.version>1.8.3</commons-beanutils.version>
 		<dozer.version>5.5.1</dozer.version>
-		<shiro.version>1.2.2</shiro.version>
+		<shiro.version>1.7.0</shiro.version>
 		<pagehelper.starter.version>1.2.5</pagehelper.starter.version>
 		<mapper.starter.version>2.0.3-beta1</mapper.starter.version>
 		<shiro.version>1.2.2</shiro.version>
